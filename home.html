@@ -210,6 +210,7 @@ body{
 
   <script src="/assets/scripts/main.js"></script>
 </body>
+    <section class="search-loader"><img src="/assets/images/20250918_223801.png" width="40" height="40" style="margin-top: 10px;animation:spin-bor 2s ease-in-out infinite;border-radius: 50%;border: 1px solid var(--primary-color);border-right: 0;"></section>
     <section class="loader">
   <img src="/assets/images/20250918_223801.png" alt="Loading...">
 </section>
@@ -247,11 +248,34 @@ body{
   50%  { transform: scale(1.1); opacity: 1; }
   100% { transform: scale(1);   opacity: 0.8; }
 }
+.search-loader{
+  position: fixed;
+  display: flex;
+  background: rgba(255 , 255, 255, 0.2);
+  z-index: 10000;
+  width: 99vw;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+}
+@keyframes spin-bor{
+  0%{ transform: rotateX(0);}
+  25%{transform: rotateX(360deg);}
+  50%{transform: rotateY(360deg);}
+  100%{transform: rotateY(0) rotateX(360deg);}
+}
     </style>
      <script>
+     document.querySelector(".search-loader").style.display='flex';
   window.addEventListener("load", () => {
+      
     const loader = document.querySelector(".loader");
-    setTimeout(()=>loader.classList.add("hidden"), 1500);
+    loader.classList.add("hidden")
+    setTimeout(()=>document.querySelector(".search-loader").style.display='none', 1500);
   });
      </script>
              </html>
