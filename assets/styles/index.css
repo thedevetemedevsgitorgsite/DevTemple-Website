@@ -4,7 +4,7 @@
   --milk: #F5F5DC;
   --light-blue: #1E3A8A;
   --gray: #B0B0B0;
-  --bg-img: radial-gradient(rgb(200, 200, 200), #469, #346), url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbAeAE2hbzD7xVqF2vFoDeg_CD69L1bmcb1IAORDSJBw&s=10);
+  --bg-img: radial-gradient(rgb(200, 200, 200), #469, #346), url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbAeAE2hbzD7xVqF2vFoDeg_CD69L1bmcb1IAORDSJBw&s=10), url(https://i.ibb.co/JDrRS3L/DevTemp.jpg);
 }
 
 
@@ -75,7 +75,7 @@ padding: 0;
 
 /* Hero Section */
 .hero {
-  background: #446 No-repeat center;
+  background: #239 No-repeat center;
     background-image: var(--bg-img);
     background-blend-mode: multiply;
     background-size: cover;
@@ -87,7 +87,11 @@ padding: 0;
   border: 0;
   border-bottom: 2px solid #06f;
 }
-
+.hero img{
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+}
 .hero h2 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
