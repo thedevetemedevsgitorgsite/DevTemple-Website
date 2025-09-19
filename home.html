@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>DevTemple Templates</title>
-  
-  <!--  -->
+   <link rel="icon" href="https://i.ibb.co/JDrRS3L/DevTemp.jpg">
+ <meta name="describe" content="Your one-stop hub for web templates, code snippets, and professional development services.">
+ <meta property="og:image" content="https://i.ibb.co/JDrRS3L/DevTemp.jpg">
+ <meta property="og:image:height" content="2000">
+ <meta property="og:image:width" content="2000">
   <script src="https://cdn.jsdelivr.net/npm/fscss@1.1.6" async></script>
 
   <!-- Custom Styles -->
@@ -22,6 +26,7 @@
         <input type="checkbox" id="toggle" class="toggle" hidden>
             <label for="toggle" class="toggle-btn">☰</label>
             <div class="side-menu">
+               
             <ul>
                 <strong>Code Cards</strong>
                 <li>Featured</li>
@@ -31,14 +36,15 @@
             </ul>
             <ul>
                 <strong>DevTemple</strong>
-                <li>Home</li>
-                <li>Templates</li>
-                <li>Dashboard</li>
-                <li>Terms</li>
-                <li>About</li>
-                <li>Contact</li>
+ <a href="/"><li>Home</li></a>
+             <a href="/home.html"><li>Templates</li></a>
+             <a href="/dashboard"><li>Dashboard</li></a>
+             <a href="/terms/index.html"><li>Terms</li></a>
+             <a href="#about"><li>About</li></a>
+             <a href="#contact"><li>Contact</li></a>
             </ul>
-            <ul>
+            
+                <img src="https://i.ibb.co/JDrRS3L/DevTemp.jpg" alt="DevTemple">
         </div>
         <form><input type="search" placeholder="Search templates..." required><button><i class="fas fa-search"></i></button></form>
          <button class="top-btn user"><i class="fas fa-user"></i></button>
@@ -166,6 +172,9 @@
 </footer>
 <style>
 /* @import(exec(_init themes)) */
+body{
+    -*-user-select: none;
+}
 .buttons button{
     width: 2em;
     height: 2em;
@@ -185,6 +194,14 @@
     border-bottom: 0;
     border-top: 1px solid #36f;
 }
+.top-menu .side-menu img{
+    width: 100%;
+    height: auto;
+    margin: 0;
+    border-radius: 10px;
+    opacity: 60;
+    filter: brightness(60%);
+}
 </style>
 <script>
     
@@ -192,4 +209,4 @@
 
   <script src="/assets/scripts/main.js"></script>
 </body>
-  </html>
+                                                      </html>
