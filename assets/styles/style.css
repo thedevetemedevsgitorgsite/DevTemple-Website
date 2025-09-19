@@ -145,8 +145,10 @@ margin-top: 20px;
     right: 5vw;
     max-width: 20em;
     height: auto;
+    max-height: 60vh;
     z-index: 102;
     top: -1.5vh;
+    overflow: auto;
     color: #ddd;
     padding: 0px 2px;
     padding-top: 1em;
@@ -179,6 +181,7 @@ margin-top: 20px;
     padding-top: 0;
     max-width: 10em;
     right: 45vw;
+    overflow: visible;
 }
 /* expanded = show everything */
 .cart-items .cart-item,
