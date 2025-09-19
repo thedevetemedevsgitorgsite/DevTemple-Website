@@ -1,3 +1,4 @@
+
 :root{
     --bg-img: radial-gradient(rgb(200,200,200), #469, #346), url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbAeAE2hbzD7xVqF2vFoDeg_CD69L1bmcb1IAORDSJBw&s=10);
 }
@@ -72,7 +73,7 @@ background-size: cover;
     width: 50vw;
     left: -54vw;
     top: 0;
-    height: auto;
+    height: 100dvh;
     color: #def;
     box-shadow: 0 0 4px #666;
     text-align: left;
