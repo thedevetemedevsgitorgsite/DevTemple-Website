@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ADLaM Display">
  
-    <script src="load/script.js" defer></script>
+    <script src="" defer></script>
     <script src="https://kit.fontawesome.com/a076d05399" crossorigin="anonymous"></script>
    
    
@@ -161,31 +161,29 @@
      <nav>
          <ul>
              <strong>Templates</strong>
-             <li>Best Deals</li>
-             <li>Available Offers</li>
+             <a href="/home.html#search?q=best"><li>Best Deals</li></a>
+             <a href="/home.html"><li>Available Offers</li></a>
          </ul>
          <ul>
              <strong>DevTemple</strong>
-             <li>Home</li>
-             <li>Templates</li>
-             <li>Dashboard</li>
-             <li>Terms</li>
-             <li>About</li>
-             <li>Contact</li>
+             <a href="/"><li>Home</li></a>
+             <a href="/home.html"><li>Templates</li></a>
+             <a href="/dashboard"><li>Dashboard</li></a>
+             <a href="/terms/index.html"><li>Terms</li></a>
+             <a href="#about"><li>About</li></a>
+             <a href="#contact"><li>Contact</li></a>
          </ul>
          <ul>
              <strong>Team Products</strong>
-             <li>Templates</li>
-             <li>FSCSS</li>
+             <a href="/home.html"><li>Templates</li></a>
+             <a href="//fscss.onrender.com"><li>FSCSS</li></a>
          </ul>
          <ul>
              <strong>Reach us</strong>
-             <li><i class="fab fa-facebook"></i> Facebook</li>
-             <li><i class="fab fa-tiktok"></i> TikTok</li>
-             <li><i class="fab fa-youtube"></i> YouTube</li>
-             <li><I class="fab fa-twitter"></i> X-Twitter</li>
-             <li><I class="fab fa-github"></I> GitHub</li>
-             <li><I class="fab fa-google"></i> Google</li>
+             <a href="https://www.facebook.com/share/1FB4GtT81U/"><li><i class="fab fa-facebook"></i> Facebook</li></a>
+             <a href="https://x.com/fscss_ttr"><li><I class="fab fa-twitter"></i> X-Twitter</li></a>
+             <a href="https://github.com/fscss-ttr/"><li><I class="fab fa-github"></I> GitHub</li></a>
+             <a href="https://codepen.io/David-Hux/"><li><I class="fab fa-codepen"></i> ConPen</li></a>
          </ul>
      </nav>
  </section>
@@ -202,7 +200,7 @@
     e.preventDefault();
     const f = e.target;
     const data = new FormData(f);try{
-    const r=await fetch("https://formspree.io/f/mqadoyyl",{method:"POST",body:data,headers:{ "Accept": "application/json" }});
+    const r=await fetch("https://formspree.io/f/xqadrken",{method:"POST",body:data,headers:{ "Accept": "application/json" }});
     if(r.ok){
     document.getElementById("msg").innerText="Thanks for reaching out! We’ll get back to you shortly.";
     f.reset();
@@ -221,6 +219,10 @@ schForm.querySelector("button").onclick = () => {
     schInput.style.display = schInput.style.display === "none" ? "inline-block" : "none";
     
 }
+document.querySelector(".navbar form").addEventListener("submit", (e) => {
+    e.preventDefault()
+    window.location.href=(`/home.html#search?q=${encodeURIComponent(document.querySelector(".navbar form input").value)}`);
+})
     </script>
 </body>
 </html>
