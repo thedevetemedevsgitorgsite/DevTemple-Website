@@ -260,6 +260,17 @@ background-size: cover;
   min-width: 20em;
   max-width: 30em;
   padding: 10px;
+  animation: display 0.5s ease-in-out 1;
+}
+@keyframes display{
+    from{
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 .card:hover{
     border-bottom: 2px solid #06f;
