@@ -1,4 +1,3 @@
-
 const starBtn = document.querySelectorAll(".buttons");
 
 starBtn.forEach(btnPar => {
@@ -57,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!noMatch) {
     noMatch = document.createElement("p");
     noMatch.id = "noMatch";
-    noMatch.innerHTML = `<a href=""><button>Refresh</button></a> No matching results found.`;
+    noMatch.innerHTML = `<img src="/assets/images/20250918_223801.png" width="40" height="40" style="margin-top: 10px;animation:spin-bor 2s ease-in-out infinite;border-radius: 50%;border: 1px solid var(--primary-color);border-right: 0;"><a href=""><button>Refresh</button></a> No matching results found.`;
     noMatch.style.display = "none";
     comm.appendChild(noMatch);
   }
@@ -82,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   
   function processSearchFromURL() {
+  document.querySelector(".search-loader").style.display='flex';
     setTimeout(() => {
       const params = new URLSearchParams(window.location.search);
       let value = params.get("q");
@@ -99,6 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
         schInp.value = decodeURIComponent(value);
         filterCrips(value.trim().toUpperCase());
       }
+      document.querySelector(".search-loader").style.display='none';
     }, 1500);
   }
   
@@ -153,6 +154,8 @@ checkoutBtn.style.cssText = `
 `;
 
 checkoutBtn.onclick = () => {
+document.querySelector(".search-loader").style.display='flex';
+setTimeout(() =>{
   if (cart.length === 0) {
     alert("Cart is empty!");
     return;
@@ -203,8 +206,9 @@ checkoutBtn.onclick = () => {
       alert("⚠️ Something went wrong with PayPal Checkout.");
     }
   }).render("#paypal-button-container");
+  document.querySelector(".search-loader").style.display='none';
+}, 1200);
 };
-
 function updateCartUI() {
   // clear old items
   cartBox.querySelectorAll(".cart-item").forEach(el => el.remove());
@@ -253,6 +257,8 @@ proCard.forEach(card => {
   addBtn.style.cursor = "pointer";
 
   addBtn.addEventListener("click", () => {
+  document.querySelector(".search-loader").style.display='flex';
+  setTimeout(() =>{
     const title = card.querySelector(".product-describe strong").textContent;
     const priceRaw = card.querySelector(".amount").innerText.split(" ").pop().replace("$", "");
     const price = parseFloat(priceRaw) || 0;
@@ -261,6 +267,8 @@ proCard.forEach(card => {
 
     cart.push({ title, price, img, seller });
     updateCartUI();
+  document.querySelector(".search-loader").style.display='none';
+  }, 1200);
   });
 });
 
