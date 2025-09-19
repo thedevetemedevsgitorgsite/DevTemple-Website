@@ -142,21 +142,62 @@ margin-top: 20px;
     border: 0;
     border-bottom: 2px solid snow;
     position: fixed;
-    right: 45vw;
-    max-width: 10em;
-    height: 1em;
+    right: 5vw;
+    max-width: 20em;
+    height: auto;
     z-index: 102;
     top: -1.5vh;
     color: #ddd;
     padding: 0px 2px;
+    padding-top: 1em;
     transition: all 0.5s ease-in-out;
+}
+.cart-items .cart-item{
+    background: #49f;
+    border-radius: 5px;
+    padding: 10px;
+}
+.cart-items .cart-item,.cart-items select,.cart-items button{
+    display: auto;
+    
+}
+.cart-items .remove{
+    background: transparent;
+    color: #f44;
+    border: 0;
+}
+
+/* collapsed state = only total price visible */
+.cart-items.collapsed .cart-item,
+.cart-items.collapsed select,
+.cart-items.collapsed button,
+.cart-items.collapsed #paypal-button-container {
+    display: none;
+}
+.cart-items.collapsed{
+    max-height: 1.3em;
+    padding-top: 0;
+    max-width: 10em;
+    right: 45vw;
+}
+/* expanded = show everything */
+.cart-items .cart-item,
+.cart-items select,
+.cart-items button,
+.cart-items #paypal-button-container {
+    display: auto;
 }
 .cart-items .pay{
     position: absolute;
     color: #bdfbdf;
     font-weight: 200;
     margin-left: 17px;
+    visibility: hidden;
 }
+.cart-items.collapsed .pay{
+    visibility: visible;
+}
+
 .cart-items:hover{
     top: 2vh;
     border-bottom: 0;
