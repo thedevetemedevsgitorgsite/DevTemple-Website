@@ -17,7 +17,7 @@ schInput.style.display="none";
 schForm.querySelector("button").onclick = ()=>{
   
   schInput.style.display=schInput.style.display==="none"? "inline-block":"none";
-  
+  document.querySelector(".cart-items").style.display=schInput.style.display==="none"? "block":"none";
 }
 const toggle = document.querySelector("#toggle");
 const toggleBtn = document.querySelector("[for='toggle']");
@@ -112,4 +112,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       processSearchFromURL();
       window.addEventListener("hashchange", processSearchFromURL)
+      document.querySelector(".top-menu form").addEventListener("submit", (e) =>{
+        e.preventDefault()
+        filterCrips(document.querySelector(".top-menu form input").value.toUpperCase());
+      })
 })
