@@ -80,6 +80,10 @@ main {
   padding: 2px;
   color: var(--text-light);
 }
+::placeholder{
+  color: var(--text-dim);
+  font-family: "ADLaM Display", monospace;
+}
 .top-menu form input {
   display: none;
   width: 35vw;
