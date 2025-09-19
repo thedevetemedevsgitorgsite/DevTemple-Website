@@ -1,3 +1,4 @@
+
 const starBtn = document.querySelectorAll(".buttons");
 
 starBtn.forEach(btnPar => {
@@ -7,8 +8,8 @@ starBtn.forEach(btnPar => {
   btn.addEventListener("click", (e) => {
     const starRaw = parseInt(starCount.textContent);
     
-    btn.style.background = btn.style.background === "blue" ? "#ddd" : "blue";
-    starCount.textContent = btn.style.background === "blue" ? starRaw + 1 : starRaw - 1;
+    btn.style.background = btn.style.background === "gold" ? "#ddd" : "gold";
+    starCount.textContent = btn.style.background === "gold" ? starRaw + 1 : starRaw - 1;
   })
 })
 const schForm = document.querySelector(".top-menu form");
