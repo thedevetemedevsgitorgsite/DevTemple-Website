@@ -1,3 +1,4 @@
+
 :root {
   --black: #000000;
   --dark-blue: #0B1E5B;
@@ -267,7 +268,8 @@ transition: all 0.3s ease-in-out;
   transform: scale(100%) skewY(0.5deg);
 }
 .contact form{
-  background: #36f;
+  background: var(--menu-bg);
+  color: var(--text-dim);
   padding: 10px;
   border-radius: 10px;
   display: flex;
@@ -278,11 +280,19 @@ transition: all 0.3s ease-in-out;
   margin: 10px;
   outline: 0;
   border-radius: 5px;
-  border: 0;
+  border: 1px solid var(--primary-color);
+  color: var(--text-light);
+  background: var(--card-bg);
+  transform: scale(96%);
   transition: all 0.5s ease-in-out;
+  
+}
+::placeholder{
+  color: var(--text-dim);
+  font-family: "ADLaM Display", monospace;
 }
 .contact input:focus, textarea:focus, button:focus{
-  transform: translateX(4px);
+  transform: scale(100%);
   box-shadow: 0 0 4px #fff;
   border-bottom: 2px solid #222;
 }
@@ -416,6 +426,5 @@ ul a {
  min-width: 200px;
 }
 }
-
 
 
