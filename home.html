@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,7 +68,8 @@
     <br>
         Product description goes here. Highlight the main features and benefits clearly. #portfolio #bestoffer
 #website    </p>
-        <div class="profile">
+        <div class="profile" data-name="@dena Doe"
+data-bio="Frontend Developer • Coffee Lover ☕">
         <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShFUWapAG8HRAwR7YX8tyeX7tAZnL1Ur9ObQ&s" alt="User-profile">
         <strong class="user-name">@dena Doe</strong> &nbsp; <sup class="report" style="color:#f50;">Report</sup></p>
     </div>
@@ -89,7 +91,7 @@
     <br>
         Product description goes here. Highlight the main features and benefits clearly. #html #bestoffer
     </p>
-        <div class="profile">
+        <div class="profile" data-bio="Frontend Developer • Coffee Lover ☕">
         <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShFUWapAG8HRAwR7YX8tyeX7tAZnL1Ur9ObQ&s" alt="User-profile">
         <strong class="user-name">@John Doe</strong> &nbsp; <sup class="report" style="color:#f50;">Report</sup></p>
     </div>
@@ -110,7 +112,7 @@
     <br>
         Concise description of this product. Explain its use and value briefly. #php #portfolio 
     </p>
-    <div class="profile">
+    <div class="profile" data-bio="Frontend Developer • Coffee Lover ☕">
         <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzCW8ayM9K_iNzX81NSjgpGcl30jDvsTSiIg&usqp=CAU" alt="User-profile">
         <strong class="user-name">@Jane Smith</strong> &nbsp; <sup class="report" style="color:#f50;">Report</sup></p>
     </div>
@@ -131,7 +133,7 @@
         <br>
         Short description of the template. Highlight what makes it unique.
     </p>
-        <div class="profile">
+        <div class="profile" data-bio="Frontend Developer • Coffee Lover ☕">
         <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx61y50nM8LedpPb-KPo8M2TUPKeVLVsHlNJuU_Mbnew&s=10" alt="User-profile">
         <strong class="user-name">@Michael Lee</strong> &nbsp; <sup class="report" style="color:#f50;">Report</sup></p>
     </div>
@@ -147,6 +149,8 @@
     <span class="pay">Pay</span>
     <h4><I class="fas fa-shopping-cart"></I> $<span class="">0.00</span></h4>
 </section>
+
+
 
     </main>
     
@@ -308,4 +312,177 @@ body{
     setTimeout(()=>document.querySelector(".search-loader").style.display='none', 1500);
   });
      </script>
+     <section class="user-view" id="userView">
+  <button class="close-btn" onclick="document.getElementById('userView').style.display='none'">
+    <i class="fas fa-times"></i>
+  </button>
+  
+  <div class="view">
+    <div class="profile-header">
+      <img id="popupImg" src="" alt="User-profile">
+      <div>
+        <strong class="user-name" id="popupName"></strong><a id="schUser"><sup><i class="fas fa-search"></i></sup></a><br>
+        <small class="user-bio" id="popupBio"></small>
+      </div>
+      <sup class="report" onclick="toggleReport()">Report</sup>
+    </div>
+
+    <!-- Report Form -->
+    <form class="report-form" id="reportForm">
+        <input type="hidden" name="report" value="User-reported" id="userToRe">
+      <textarea placeholder="Explain what happened..." name="message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</section>
+
+
+<style>
+.user-view {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  width: 320px;
+  padding: 20px;
+  z-index: 97;
+  display: none; /* initially hidden */
+  animation: fadeIn 0.3s ease;
+}
+
+.user-view .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #555;
+}
+
+.user-view .view {
+  margin-top: 10px;
+}
+
+.user-view .profile-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-view .profile-header img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-view .user-name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.user-view .user-bio {
+  font-size: 13px;
+  color: #666;
+}
+
+.user-view .report {
+  margin-left: auto;
+  color: #f50;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.user-view .report-form {
+  display: none;
+  margin-top: 15px;
+  flex-direction: column;
+}
+
+.user-view .report-form textarea {
+  width: 100%;
+  height: 70px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: none;
+  font-size: 13px;
+}
+
+.user-view .report-form button {
+  margin-top: 8px;
+  padding: 6px 12px;
+  background: #f50;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.user-view a{
+    color: #09f;
+}
+.user-view .report-form button:hover {
+  background: #d44000;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translate(-50%, -48%);}
+  to {opacity: 1; transform: translate(-50%, -50%);}
+}
+</style>
+
+<script>
+function toggleReport() {
+  const form = document.getElementById("reportForm");
+  form.style.display = form.style.display === "flex" ? "none" : "flex";
+}
+
+document.querySelectorAll(".card .profile").forEach(profile => {
+  profile.addEventListener("click", () => {
+    const name = profile.querySelector(".user-name").textContent;
+    const bio = profile.dataset.bio;
+    const img = profile.querySelector("img").src;
+
+    document.getElementById("popupName").textContent = name;
+    document.getElementById("schUser").href = `#search?q=${encodeURIComponent(name)}`;
+    document.getElementById("userToRe").value=`User reported: ${name}`;
+    document.getElementById("popupBio").textContent = bio;
+    document.getElementById("popupImg").src = img;
+    
+    document.getElementById("userView").style.display = "block";
+  });
+});
+
+// Toggle Report form
+function toggleReport() {
+  const form = document.getElementById("reportForm");
+  form.style.display = form.style.display === "flex" ? "none" : "flex";
+}
+
+document.getElementById("reportForm").addEventListener("submit",async function(e){
+    e.preventDefault();
+    const f = e.target;
+    const data = new FormData(f);try{
+    const r=await fetch("https://formspree.io/f/xqadrken",{method:"POST",body:data,headers:{ "Accept": "application/json" }});
+    if(r.ok){
+   alert("Report submitted for " + document.getElementById("popupName").textContent);
+    f.reset();
+    f.state.display='none';
+    }else{
+        alert("Sorry, we couldn’t send your message. Please try again in a moment.");
+    }
+    }catch(err){
+        alert("⚠️ Network error.");
+     }
+    
+   });
+   
+</script>
+     
              </html>
