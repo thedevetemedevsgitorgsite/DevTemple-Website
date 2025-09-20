@@ -1,4 +1,3 @@
-
 :root {
   --bg-img: radial-gradient(#1a2a4f, #0d1930, #081120),
              url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbAeAE2hbzD7xVqF2vFoDeg_CD69L1bmcb1IAORDSJBw&s=10);
@@ -14,11 +13,26 @@
   --shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
+:root {
+  --bg-img: #9db8c8;
+  --primary-color: #0af;         /* Bright aqua */
+  --secondary-color: #06c;       /* Deep blue */
+  --accent-color: #19d3ae;       /* Teal highlight */
+  --danger-color: #f55;
+  --text-light: #1a2a4f;
+  --text-dim: rgba(20, 40, 70, 0.85);
+  --card-bg: #eaf7ff;
+  --menu-bg: #afb9c9;
+  --hover-highlight: rgba(25, 211, 174, 0.2);
+  --shadow: 0 4px 12px #eaf7ff;
+}
+
+
 body {
   font-family: 'ADLaM Display', sans-serif;
-  background: #081120 no-repeat;
+  background: #fff no-repeat;
   background-image: var(--bg-img);
-  background-blend-mode: multiply;
+  background-blend-mode: darken;
   background-size: cover;
   color: var(--text-light);
   min-height: 100vh;
@@ -80,7 +94,7 @@ main {
   padding: 2px;
   color: var(--text-light);
 }
-::placeholder{
+::placeholder {
   color: var(--text-dim);
   font-family: "ADLaM Display", monospace;
 }
@@ -155,6 +169,7 @@ main {
   border-bottom: 2px solid var(--primary-color);
   box-shadow: var(--shadow);
   margin-block-end: 1em;
+  margin-block-start: -2em;
 }
 
 .product {
@@ -351,4 +366,4 @@ min-width: 200px;
     width: 80vw;
     left: -84vw;
   }
-}
+  }
