@@ -332,6 +332,39 @@ transition: all 0.3s ease-in-out;
   padding: 10px;
 }
 
+.bottom-cards {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+gap: 10px;
+overflow: scroll;
+}
+
+.bottom-cards .bcard {
+flex: 1 1 17em;
+min-width: 14em;
+max-width: 23em;
+padding: 10px;
+background: var(--menu-bg);
+border: 1px solid var(--primary-color);
+border-radius: 10px;
+display: inline-flex;
+justify-content: center;
+align-items: center;
+transform: scale(95%) skewY(20deg);
+transition: all 0.5s ease-in-out;
+}
+.bottom-cards .bcard:hover{
+  transform: scale(100%) skewY(0);
+}
+.bottom-cards .bcard a{
+  color: inherit;
+  
+}
+.bottom-cards .bcard a h2{
+  display: inline-block;
+  font-size: 2em;
+}
 /* Footer */
 footer {
     background: var(--menu-bg);
