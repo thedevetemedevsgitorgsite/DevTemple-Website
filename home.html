@@ -12,7 +12,7 @@
  <meta property="og:image:height" content="400">
  <meta property="og:image:width" content="1200">
  
-  <script src="https://cdn.jsdelivr.net/npm/fscss@1.1.6" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/fscss@1.1.6/e/exec.min.js" defer></script>
     <script src="https://www.paypal.com/sdk/js?client-id=AUYImzUl0FHdsC8uAfkj8PBAfrUFd5eNOBf3ykI2a1RBd1liLtbGb6yGCGAP0GJi6M_Z4lbY5NpiHJc_&currency=USD"></script>
 
   <!-- Custom Styles -->
@@ -56,6 +56,29 @@
     </section>
     
 <section class="product" id="featuredCard">
+    
+    <div class="card">
+    <div class="product-img" style="background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/036e92179079137.64f343d1ccc2a.jpg);">
+        <h3><i class="fas fa-shopping-cart"></i></h3>
+    </div>
+    
+    <p class="product-describe">
+    <strong>Template Title</strong>
+    <br>
+        Product description goes here. Highlight the main features and benefits clearly. #portfolio #bestoffer
+#website    </p>
+        <div class="profile">
+        <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShFUWapAG8HRAwR7YX8tyeX7tAZnL1Ur9ObQ&s" alt="User-profile">
+        <strong class="user-name">@dena Doe</strong> &nbsp; <sup class="report" style="color:#f50;">Report</sup></p>
+    </div>
+    
+    <div class="buttons">
+        <span class="star-contain"><button class="star"></button><span class="star-count">0</span>
+        </span><span class="amount"><s>$40.16</s> $37.05</span>
+        <a><span class="star-contain"><i class="fas fa-search"></i> </span></a>
+        </div>
+</div>
+
 <div class="card">
     <div class="product-img" style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmK0xed1BuLuS4D-dQ5P-iziKn889RXgnApiQb-dGO_Q&s=10);">
         <h3><i class="fas fa-shopping-cart"></i></h3>
@@ -68,7 +91,7 @@
     </p>
         <div class="profile">
         <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShFUWapAG8HRAwR7YX8tyeX7tAZnL1Ur9ObQ&s" alt="User-profile">
-        <strong class="user-name">John Doe</strong> &nbsp; <sup class="report" style="color:#f50;">Report</sup></p>
+        <strong class="user-name">@John Doe</strong> &nbsp; <sup class="report" style="color:#f50;">Report</sup></p>
     </div>
     
     <div class="buttons">
@@ -89,7 +112,7 @@
     </p>
     <div class="profile">
         <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzCW8ayM9K_iNzX81NSjgpGcl30jDvsTSiIg&usqp=CAU" alt="User-profile">
-        <strong class="user-name">Jane Smith</strong> &nbsp; <sup class="report" style="color:#f50;">Report</sup></p>
+        <strong class="user-name">@Jane Smith</strong> &nbsp; <sup class="report" style="color:#f50;">Report</sup></p>
     </div>
     <div class="buttons">
         <span class="star-contain"><button class="star"></button><span class="star-count">0</span></span>
@@ -110,7 +133,7 @@
     </p>
         <div class="profile">
         <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx61y50nM8LedpPb-KPo8M2TUPKeVLVsHlNJuU_Mbnew&s=10" alt="User-profile">
-        <strong class="user-name">Michael Lee</strong> &nbsp; <sup class="report" style="color:#f50;">Report</sup></p>
+        <strong class="user-name">@Michael Lee</strong> &nbsp; <sup class="report" style="color:#f50;">Report</sup></p>
     </div>
     <div class="buttons">
         <span class="star-contain"><button class="star"></button><span class="star-count">0</span></span>
@@ -124,6 +147,7 @@
     <span class="pay">Pay</span>
     <h4><I class="fas fa-shopping-cart"></I> $<span class="">0.00</span></h4>
 </section>
+
     </main>
     
 <footer>
@@ -172,7 +196,6 @@
     </section>
 </footer>
 <style>
-/* @import(exec(_init themes)) */
 body{
     -*-user-select: none;
 }
@@ -188,7 +211,7 @@ body{
     margin-left: 10px;
     border-radius: 5px;
     border: 0;
-    color: #bdf;
+    color: var(--primary-color);
     border-bottom: 1px solid #36f;
 }
 .buttons span:hover{
@@ -203,6 +226,13 @@ body{
     opacity: 60;
     filter: brightness(60%);
 }
+@arr cnt[1,2,3,4,5,6]
+
+.product .card:nth-child(@arr.cnt[]){
+    $indexs: @arr.cnt[];
+    display: @random([flex]);
+    exec(_log, "$indexs!")
+}
 </style>
 <script>
     
@@ -210,7 +240,7 @@ body{
 
   <script src="/assets/scripts/main.js"></script>
 </body>
-    <section class="search-loader"><img src="/assets/images/20250918_223801.png" width="40" height="40" style="margin-top: 10px;animation:spin-bor 2s ease-in-out infinite;border-radius: 50%;border: 1px solid var(--primary-color);border-right: 0;"></section>
+<section class="search-loader"><img src="/assets/images/20250918_223801.png" width="40" height="40" style="margin-top: 10px;animation:spin-bor 2s ease-in-out infinite;border-radius: 50%;border: 1px solid var(--primary-color);border-right: 0;"></section>
     <section class="loader">
   <img src="/assets/images/20250918_223801.png" alt="Loading...">
 </section>
