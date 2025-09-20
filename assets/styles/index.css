@@ -1,4 +1,3 @@
-
 :root {
   --black: #000000;
   --dark-blue: #0B1E5B;
@@ -20,13 +19,32 @@
   --shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
+:root {
+    --black: #ffffff;
+  --milk: #1a2a4f;
+   --dark-blue: #777fff;
+ --light-blue: #555fff;
+  --gray: rgba(20, 40, 70, 0.85);
+  --bg-img: #9db8c8;
+  --primary-color: #0af;         /* Bright aqua */
+  --secondary-color: #06c;       /* Deep blue */
+  --accent-color: #19d3ae;       /* Teal highlight */
+  --danger-color: #f55;
+  --text-light: #1a2a4f;
+  --text-dim: rgba(20, 40, 70, 0.85);
+  --card-bg: #eaf7ff;
+  --menu-bg: #afb9c9;
+  --hover-highlight: rgba(25, 211, 174, 0.2);
+  --shadow: 0 4px 12px #eaf7ff;
+}
+
 
 /* General Styles */
 body {
   font-family: 'ADLaM Display', sans-serif;
-  background: #081120 no-repeat;
+  background: #fff no-repeat;
   background-image: var(--bg-img);
-  background-blend-mode: multiply;
+  background-blend-mode: darken;
   background-size: cover;
   color: var(--text-light);
   min-height: 100vh;
@@ -179,7 +197,7 @@ color: var(--text-light);
   
   
     background-size: cover;
-    color: #ddd;
+    color: var(--text-light);
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
@@ -189,11 +207,11 @@ color: var(--text-light);
     justify-content: center ;
 }
 .section-contain  p{
-    color: #bbb;
+    color: var(--text-dim);
     opacity: 90%;
 }
 .section-contain section p strong {
-    color: #bdf;
+    color: var(--text-light);
 }
 .profile p{
     display: flex;
@@ -345,7 +363,7 @@ flex: 1 1 17em;
 min-width: 14em;
 max-width: 23em;
 padding: 10px;
-background: var(--menu-bg);
+background: var(--card-bg);
 border: 1px solid var(--primary-color);
 border-radius: 10px;
 display: inline-flex;
@@ -459,5 +477,6 @@ ul a {
  min-width: 200px;
 }
 }
+
 
 
