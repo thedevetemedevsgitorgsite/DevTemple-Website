@@ -27,7 +27,10 @@
         <input type="checkbox" id="toggle" class="toggle" hidden>
             <label for="toggle" class="toggle-btn">☰</label>
             <div class="side-menu">
-               
+               <ul>
+                   <strong>Display</strong>
+                   <li id="theme-toggle"><I class="fas fa-sun"></I> Theme</li>
+               </ul>
             <ul>
                 <strong>Code Cards</strong>
                 <li>Featured</li>
@@ -342,12 +345,13 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 12px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
   width: 320px;
   padding: 20px;
   z-index: 97;
+  color: var(--text-light);
   display: none; /* initially hidden */
   animation: fadeIn 0.3s ease;
 }
@@ -387,7 +391,7 @@ body{
 
 .user-view .user-bio {
   font-size: 13px;
-  color: #666;
+  color: var(--text-dim);
 }
 
 .user-view .report {
@@ -489,4 +493,4 @@ document.getElementById("reportForm").addEventListener("submit",async function(e
    
 </script>
      
-             </html>
+  </html>
