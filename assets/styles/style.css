@@ -1,4 +1,5 @@
-:root {
+
+:root.dark-theme {
   --bg-img: radial-gradient(#1a2a4f, #0d1930, #081120),
              url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbAeAE2hbzD7xVqF2vFoDeg_CD69L1bmcb1IAORDSJBw&s=10);
   --primary-color: #0af;         /* Bright aqua */
@@ -366,4 +367,4 @@ min-width: 200px;
     width: 80vw;
     left: -84vw;
   }
-  }
+    }
