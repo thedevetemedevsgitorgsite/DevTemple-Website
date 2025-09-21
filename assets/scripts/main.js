@@ -1,3 +1,4 @@
+
 const starBtn = document.querySelectorAll(".buttons");
 
 starBtn.forEach(btnPar => {
@@ -223,7 +224,7 @@ function updateCartUI() {
     div.innerHTML = `
       <img src="${item.img}" alt="product" width="30" style="border-radius:5px;vertical-align:middle;">
       <strong>${item.title}</strong> - $${item.price.toFixed(2)}
-      <button data-index="${index}" class="remove">✖</button>
+      <button data-index="${index}" class="remove"><I class='fas fa-times'></i></button>
     `;
     cartBox.insertBefore(div, cartBox.querySelector("h4"));
   });
@@ -288,3 +289,22 @@ cartBox.addEventListener("click", function (e) {
   cartBox.classList.toggle("collapsed");
 });
 });
+
+const themeToggle = document.getElementById('theme-toggle');
+
+// Load saved theme on page load
+if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark-theme');
+}
+
+// Add a single click event listener
+themeToggle.addEventListener('click', function() {
+    document.documentElement.classList.toggle('dark-theme');
+    if (document.documentElement.classList.contains('dark-theme')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
+});
+
+
