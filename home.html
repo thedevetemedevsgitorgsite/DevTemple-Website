@@ -444,7 +444,11 @@ function toggleReport() {
 }
 
 document.querySelectorAll(".card .profile").forEach(profile => {
+    
   profile.addEventListener("click", () => {
+      document.querySelector(".search-loader").style.display = "flex";
+
+setTimeout(() => {
     const name = profile.querySelector(".user-name").textContent;
     let bio = profile.dataset.bio;
     bio=bio.replace(/((https?:\/\/)?(\w+\.[^\s]+))/g, "<a href='$1'>$1</a>")
@@ -457,14 +461,14 @@ document.querySelectorAll(".card .profile").forEach(profile => {
     document.getElementById("popupImg").src = img;
     
     document.getElementById("userView").style.display = "block";
+    document.querySelector(".search-loader").style.display = "none";
+}, 2000);
   });
+  
 });
 
-// Toggle Report form
-function toggleReport() {
-  const form = document.getElementById("reportForm");
-  form.style.display = form.style.display === "flex" ? "none" : "flex";
-}
+
+
 
 document.getElementById("reportForm").addEventListener("submit",async function(e){
     e.preventDefault();
