@@ -69,7 +69,7 @@
         Product description goes here. Highlight the main features and benefits clearly. #portfolio #bestoffer
 #website    </p>
         <div class="profile" data-name="@dena Doe"
-data-bio="Frontend Developer • Coffee Lover ☕">
+data-bio="Coding with special signs • @https://fscss.onrender.com FSCSS STYLE🦺">
         <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShFUWapAG8HRAwR7YX8tyeX7tAZnL1Ur9ObQ&s" alt="User-profile">
         <strong class="user-name">@dena Doe</strong> &nbsp; <sup class="report" style="color:#f50;">Report</sup></p>
     </div>
@@ -91,7 +91,7 @@ data-bio="Frontend Developer • Coffee Lover ☕">
     <br>
         Product description goes here. Highlight the main features and benefits clearly. #html #bestoffer
     </p>
-        <div class="profile" data-bio="Frontend Developer • Coffee Lover ☕">
+        <div class="profile" data-bio="Frontend Developer • Coffee Lover ☕ @https://fscss.onrender.com">
         <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShFUWapAG8HRAwR7YX8tyeX7tAZnL1Ur9ObQ&s" alt="User-profile">
         <strong class="user-name">@John Doe</strong> &nbsp; <sup class="report" style="color:#f50;">Report</sup></p>
     </div>
@@ -112,7 +112,7 @@ data-bio="Frontend Developer • Coffee Lover ☕">
     <br>
         Concise description of this product. Explain its use and value briefly. #php #portfolio 
     </p>
-    <div class="profile" data-bio="Frontend Developer • Coffee Lover ☕">
+    <div class="profile" data-bio="Frontend Developer dev.to/fscss • Coffee Lover ☕ www.gstatic.com">
         <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzCW8ayM9K_iNzX81NSjgpGcl30jDvsTSiIg&usqp=CAU" alt="User-profile">
         <strong class="user-name">@Jane Smith</strong> &nbsp; <sup class="report" style="color:#f50;">Report</sup></p>
     </div>
@@ -446,13 +446,14 @@ function toggleReport() {
 document.querySelectorAll(".card .profile").forEach(profile => {
   profile.addEventListener("click", () => {
     const name = profile.querySelector(".user-name").textContent;
-    const bio = profile.dataset.bio;
+    let bio = profile.dataset.bio;
+    bio=bio.replace(/((https?:\/\/)?(\w+\.[^\s]+))/g, "<a href='$1'>$1</a>")
     const img = profile.querySelector("img").src;
 
     document.getElementById("popupName").textContent = name;
     document.getElementById("schUser").href = `#search?q=${encodeURIComponent(name)}`;
     document.getElementById("userToRe").value=`User reported: ${name}`;
-    document.getElementById("popupBio").textContent = bio;
+    document.getElementById("popupBio").innerHTML = bio;
     document.getElementById("popupImg").src = img;
     
     document.getElementById("userView").style.display = "block";
