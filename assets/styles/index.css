@@ -1,3 +1,4 @@
+
 :root {
   --black: #000000;
   --dark-blue: #0B1E5B;
@@ -9,7 +10,7 @@
              url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbAeAE2hbzD7xVqF2vFoDeg_CD69L1bmcb1IAORDSJBw&s=10);
   --primary-color: #0af;         /* Bright aqua */
   --secondary-color: #06c;       /* Deep blue */
-  --accent-color: #19d3ae;       /* Teal highlight */
+  --accent-color: #9900aa;       /* Teal highlight */
   --danger-color: #f55;
   --text-light: #eaf7ff;
   --text-dim: #9db8c8;
@@ -28,7 +29,7 @@
   --bg-img: #9db8c8;
   --primary-color: #0af;         /* Bright aqua */
   --secondary-color: #06c;       /* Deep blue */
-  --accent-color: #19d3ae;       /* Teal highlight */
+  --accent-color: #9900aa;       /* Teal highlight */
   --danger-color: #f55;
   --text-light: #1a2a4f;
   --text-dim: rgba(20, 40, 70, 0.85);
@@ -41,7 +42,7 @@
 
 /* General Styles */
 body {
-  font-family: 'ADLaM Display', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: #fff no-repeat;
   background-image: var(--bg-img);
   background-blend-mode: darken;
@@ -307,7 +308,7 @@ transition: all 0.3s ease-in-out;
 }
 ::placeholder{
   color: var(--text-dim);
-  font-family: "ADLaM Display", monospace;
+  font-family:"Poppins", monospace;
 }
 .contact input:focus, textarea:focus, button:focus{
   transform: scale(100%);
@@ -358,31 +359,109 @@ gap: 10px;
 overflow: scroll;
 }
 
-.bottom-cards .bcard {
-flex: 1 1 17em;
-min-width: 14em;
-max-width: 23em;
-padding: 10px;
-background: var(--card-bg);
-border: 1px solid var(--primary-color);
-border-radius: 10px;
-display: inline-flex;
-justify-content: center;
-align-items: center;
-transform: scale(95%) skewY(20deg);
-transition: all 0.5s ease-in-out;
-}
-.bottom-cards .bcard:hover{
-  transform: scale(100%) skewY(0);
-}
-.bottom-cards .bcard a{
-  color: inherit;
-  
-}
-.bottom-cards .bcard a h2{
-  display: inline-block;
-  font-size: 2em;
-}
+        .bottom-cards {
+            display: flex;
+            overflow-x: hidden;
+            gap: 1rem;
+            padding: 1rem 0;
+            scroll-behavior: smooth;
+            position: relative;
+        }
+        
+        .bcard {
+            flex: 0 0 auto;
+            width: 200px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bcard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .bcard:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .bcard:hover::before {
+            left: 100%;
+        }
+        
+        .bcard a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .bcard h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(13, 100, 305, 0.5);
+        }
+        
+        .bcard strong {
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .bcard {
+                width: 160px;
+                height: 100px;
+            }
+            
+            .bcard h2 {
+                font-size: 2rem;
+            }
+            
+            .bcard strong {
+                font-size: 1rem;
+            }
+        }
+        
 /* Footer */
 footer {
     background: var(--menu-bg);
@@ -477,6 +556,5 @@ ul a {
  min-width: 200px;
 }
 }
-
 
 
