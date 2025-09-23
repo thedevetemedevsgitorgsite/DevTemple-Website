@@ -1,10 +1,9 @@
-
 :root.dark-theme {
   --bg-img: radial-gradient(#1a2a4f, #0d1930, #081120),
              url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbAeAE2hbzD7xVqF2vFoDeg_CD69L1bmcb1IAORDSJBw&s=10);
   --primary-color: #0af;         /* Bright aqua */
   --secondary-color: #06c;       /* Deep blue */
-  --accent-color: #19d3ae;       /* Teal highlight */
+  --accent-color: #9900aa;       /* Teal highlight */
   --danger-color: #f55;
   --text-light: #eaf7ff;
   --text-dim: #9db8c8;
@@ -18,7 +17,7 @@
   --bg-img: #9db8c8;
   --primary-color: #0af;         /* Bright aqua */
   --secondary-color: #06c;       /* Deep blue */
-  --accent-color: #19d3ae;       /* Teal highlight */
+  --accent-color: #9900aa;       /* Teal highlight */
   --danger-color: #f55;
   --text-light: #1a2a4f;
   --text-dim: rgba(20, 40, 70, 0.85);
@@ -30,7 +29,7 @@
 
 
 body {
-  font-family: 'ADLaM Display', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: #fff no-repeat;
   background-image: var(--bg-img);
   background-blend-mode: darken;
@@ -97,7 +96,7 @@ main {
 }
 ::placeholder {
   color: var(--text-dim);
-  font-family: "ADLaM Display", monospace;
+  font-family: "Poppins", monospace;
 }
 .top-menu form input {
   display: none;
@@ -367,4 +366,4 @@ min-width: 200px;
     width: 80vw;
     left: -84vw;
   }
-    }
+}
