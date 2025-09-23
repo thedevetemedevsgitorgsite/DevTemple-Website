@@ -10,7 +10,9 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ADLaM Display">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
  <link rel="icon" href="https://i.ibb.co/JDrRS3L/DevTemp.jpg">
  <meta name="describe" content="Your one-stop hub for web templates, code snippets, and professional development services.">
  <meta property="og:image" content="https://i.ibb.co/JDrRS3L/DevTemp.jpg">
@@ -18,8 +20,14 @@
  <meta property="og:image:width" content="400">
     <script src="" defer></script>
     <script src="https://kit.fontawesome.com/a076d05399" crossorigin="anonymous"></script>
-   
-   
+    <script src="https://cdn.jsdelivr.net/npm/fscss@1.1.7/e/exec.min.js" defer></script>
+   <style>
+       body{
+           $font: @random([Poppins, Roboto, Open Sans]);
+           font-family: "$font!", sans-serif;
+           exec(_log, $font!)
+       }
+   </style>
 </head>
 <body>
   
@@ -44,15 +52,15 @@
 <section class="section-contain">
     <div class="temp-search">
 <section>
-    <a href="/home.html#search?w=html">
-         <div class="product-img" style="background-image:url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvhDq638--_L-W-_ihQUDa2UreLrxkDvoBBOYgc20sow&s=10);">
+    <a href="/home.html#search?q=WordPress">
+         <div class="product-img" style="background-image:url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd5BEzNpfPALiXcXGMzkQN0_CqfObLRw9axR8UMd2crA&s=10);">
         <h3><i class="fas fa-search"></i> </h3>
     </div>
     
 <p class="product-describe">
     <strong>Quick Search</strong>
     <br>
-    Find modern HTML5 and CSS3 designs with stunning 3D animations, optimized for performance and user experience.
+    WordPress website themes
 </p></a>
     </section>
     
@@ -198,6 +206,10 @@
                                 <div class="bcard">
                     <a href="/home.html#search?=grid"><h2>#</h2>
                     <strong>grid</strong></a>
+                </div>
+                <div class="bcard">
+                    <a href="/home.html#search?=UI"><h2>#</h2>
+                    <strong>UI</strong></a>
                 </div>
     </section>
 </section>
@@ -380,4 +392,4 @@ bcards.addEventListener("touchend", startAutoScroll);
   });
      </script>
 </body>
-        </html>
+</html>
