@@ -107,7 +107,10 @@ box-shadow: var(--shadow);
 }
 /* Hero Section */
 .hero {
-  background: var(--card-bg);
+  background: var(--card-bg) no-repeat center;
+  background-image:url(/assets/images/index.png);
+  background-size: contain;
+  background-blend-mode: color-dodge;
 backdrop-filter: blur(6px);
 color: var(--text-light);
 padding: 1em 1em 2em;
