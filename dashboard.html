@@ -1,292 +1,284 @@
-:root.dark-theme {
-  --black: #000000;
-  --dark-blue: #0B1E5B;
-  --milk: #9db8c8;
-  --light-blue: #1E3A8A;
-  --gray: #B0B0B0;
-  --bg-img: radial-gradient(#1a2a4f, #0d1930, #081120),
-             url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbAeAE2hbzD7xVqF2vFoDeg_CD69L1bmcb1IAORDSJBw&s=10);
-  --primary-color: #0af;         /* Bright aqua */
-  --secondary-color: #06c;       /* Deep blue */
-  --accent-color: #9900aa;       /* Teal highlight */
-  --danger-color: #f55;
-  --text-light: #eaf7ff;
-  --text-dim: #9db8c8;
-  --card-bg: rgba(20, 40, 70, 0.85);
-  --menu-bg: rgba(10, 20, 40, 0.95);
-  --hover-highlight: rgba(25, 211, 174, 0.2);
-  --shadow: 0 4px 12px rgba(0,0,0,0.4);
-  --hero-bg-img: ;
-}
+<!DOCTYPE html>
+<html lang="en">  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
 
-:root {
-    --black: #ffffff;
-  --milk: #1a2a4f;
-   --dark-blue: #777fff;
- --light-blue: #555fff;
-  --gray: rgba(20, 40, 70, 0.85);
-  --bg-img: #9db8c8;
-  --primary-color: #0af;         /* Bright aqua */
-  --secondary-color: #06c;       /* Deep blue */
-  --accent-color: #9900aa;       /* Teal highlight */
-  --danger-color: #f55;
-  --text-light: #1a2a4f;
-  --text-dim: rgba(20, 40, 70, 0.85);
-  --card-bg: #eaf7ff;
-  --menu-bg: #afb9c9;
-  --hover-highlight: rgba(25, 211, 174, 0.2);
-  --shadow: 0 4px 12px #eaf7ff;
-  --hero-bg-img: url(/assets/images/index.png);
+    <link rel="stylesheet" href="/assets/styles/dash.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+ <link rel="icon" href="https://i.ibb.co/JDrRS3L/DevTemp.jpg">
+ <meta name="describe" content="Your one-stop hub for web templates, code snippets, and professional development services.">
+ <meta property="og:image" content="https://i.ibb.co/JDrRS3L/DevTemp.jpg">
+ <meta property="og:image:height" content="1200">
+ <meta property="og:image:width" content="400">
+    <script src="" defer></script>
+    <script src="https://kit.fontawesome.com/a076d05399" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fscss@1.1.7/e/exec.min.js" defer></script>
+   <style>
+       body{
+           $font: @random([Poppins, Roboto, Open Sans]);
+           font-family: "$font!", sans-serif;
+           exec(_log, $font!)
+       }
+   </style>
+</head>
+<body>
+  <section class="top-menu">
+    <button class="top-btn back" onclick="goBack()">
+      <I class="fas fa-arrow-left"></i>
+    </button>
+    <script>
+    function goBack() {
+if (window.history.length > 1) {
+window.history.back();
+} else {
+window.location.href = "/";
+}
+}</script>
+<button class="top-btn user"><i class="fas fa-user"></i></button>
+<button class="top-btn pen"><I class="fas fa-pen"></I></button>
+<button class="top-btn sales"><i class="fas fa-bank"></i></button>
+<button class="top-btn chart"><i class="fas fa-chart-line"></i></button>
+  </section>
+  <main>
   
-}
+      
+      
+  <section id="hero" class="hero">
+    <h2>Welcome back, Developer!</h2>
+    <p>Manage your uploads, check sales, and track performance.</p>
+  </section>
 
+  <section id="user-section" class="section user hidden">
+<div class="view public">
+              <img src="/assets/images/20250918_223801.png" class="user img">
+              <form name="user edit">
+     <h3>Profile information</h3>
+     
+     <label for="userName">UserName</label> <input type="text" maxlength="30" required placeholder="Username*" name="user-name" minlength="3" id="userName">
+     
+     <label for="bio">Bio</label><textarea minlength="10" maxlength="200" required placeholder="Let people know a little bit about you*" name="bio" id="bio"></textarea>
+     <label for="skill">Skill</label>
+     <select name="skills" required id="skill">
+         <option value="">What's your skills*</option>
+         <!-- Tech Skills -->
+         <option value="software_developer">Software Developer</option>
+         <option value="web_developer">Web Developer</option>
+         <option value="data_scientist">Data Scientist</option>
+         <option value="machine_learning_engineer">Machine Learning Engineer</option>
+         <option value="cloud_architect">Cloud Architect</option>
+         <option value="devops_engineer">DevOps Engineer</option>
+         <option value="cybersecurity_analyst">Cybersecurity Analyst</option>
+         <option value="mobile_app_developer">Mobile App Developer</option>
+         <option value="ui_ux_designer">UI/UX Designer</option>
+         <option value="data_analyst">Data Analyst</option>
+         <option value="backend_developer">Backend Developer</option>
+         <option value="frontend_developer">Frontend Developer</option>
+         <option value="full_stack_developer">Full Stack Developer</option>
+         <option value="database_administrator">Database Administrator</option>
+         <option value="ai_engineer">AI Engineer</option>
+         <option value="blockchain_developer">Blockchain Developer</option>
+         <option value="systems_administrator">Systems Administrator</option>
+         <option value="qa_engineer">QA Engineer</option>
+         <!-- Non-Tech Skills -->
+         <option value="project_management">Project Management</option>
+         <option value="business_analysis">Business Analysis</option>
+         <option value="marketing">Marketing</option>
+         <option value="content_creation">Content Creation</option>
+         <option value="human_resources">Human Resources</option>
+         <option value="financial_analysis">Financial Analysis</option>
+         <option value="sales">Sales</option>
+         <option value="customer_service">Customer Service</option>
+         <option value="public_relations">Public Relations</option>
+         <option value="operations_management">Operations Management</option>
+         <option value="event_planning">Event Planning</option>
+         <option value="supply_chain_management">Supply Chain Management</option>
+         <option value="training_and_development">Training and Development</option>
+         <option value="legal_advisory">Legal Advisory</option>
+         <option value="administrative_support">Administrative Support</option>
+         <!-- Creative Skills -->
+         <option value="graphic_design">Graphic Design</option>
+         <option value="illustration">Illustration</option>
+         <option value="video_editing">Video Editing</option>
+         <option value="motion_graphics">Motion Graphics</option>
+         <option value="photography">Photography</option>
+         <option value="creative_writing">Creative Writing</option>
+         <option value="animation">Animation</option>
+         <option value="game_design">Game Design</option>
+         <option value="fashion_design">Fashion Design</option>
+         <option value="interior_design">Interior Design</option>
+         <option value="music_production">Music Production</option>
+         <option value="copywriting">Copywriting</option>
+         <option value="visual_arts">Visual Arts</option>
+         <option value="product_design">Product Design</option>
+         <option value="branding">Branding</option>
+     </select>
+     <label for="imgUrl">Photo URL</label>
+     <input type="url" name="photo" placeholder="Profile picture" id="imgUrl">
+<button type="submit">Save</button>
+              </form>
+              
+          </div>
+          <div class="view private">
+              <div class="user-info">
+                  <p>
+                      <strong>Email:</strong> <span class="email">sample@domain.host</span>
+                      </p>
+                  <p>
+                      <strong>ID :</strong> <span class="uid"> abc122</span>
+                  </p>
+                  <button class="user-btn logout">Log out</button>
+                  <button class="user-btn delete-acct">Delete Account</button>
+              </div>
+          </div>
+  </section>
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #fff no-repeat;
-  background-image: var(--bg-img);
-  background-blend-mode: darken;
-  background-size: cover;
-  color: var(--text-light);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-}
+  <section id="pen-section" class="section pen hidden">
+   <div class="view new-upload">
+              <form id="publisherForm">
+                  
+              
+              <label for="zipInput" class="user-btn upload-btn">Upload zip file <span class="file-name"></span></label>
+              <input type="file" accept="application/zip" id="zipInput" hidden required/>
+              <label for="cardName">Name:</label>
+              <input type="text" id="cardName" placeholder="(e.g: 3d box with efforts)" maxlength="100" required>
+              
+              <label for="cardDes">Description: </label>
+              <textarea name="" id="cardDes" maxlength="300" placeholder="describe your code include tags " required></textarea>
+              <label for="cardCover">Cover Photo:</label>
+<input type="url" id="cardCover" placeholder="(e.g: https://....png)" maxlength="100" required>
+<label for="cardView">Viewers image:</label>
+<input type="url" id="cardView" placeholder="(e.g: ...png, gif, short video mp4)" maxlength="100" required>
+<label for="cardAmount">Amount:</label>
+<input type="number" id="cardAmount" placeholder="(e.g: 10=$10)" maxlength="100" required>
+              <button id="pushCard"  class="user-btn publish"><span class="sending"> </span> Publish</button>
+              </form>
+          </div>
+  </section>
 
-.top-menu{
-  position: fixed;
-padding: 10px;
-left: 0;
-top: 0;
-right: 0;
-z-index: 100;
-background: var(--menu-bg);
-backdrop-filter: blur(10px);
-text-align: right;
-max-width: 100vw;
-box-shadow: var(--shadow);
-display: flex;
-flex-direction: row;
-gap: 1em;
-box-shadow: var(--shadow);
-} 
-.top-menu .top-btn {
-  background: rgba(255, 255, 255, 0.1);
-  margin: 0 6px;
-  color: var(--text-light);
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--primary-color);
-  transition: background 0.3s ease, color 0.3s ease;
-}
-.top-menu .top-btn:hover {
-  background: var(--primary-color);
-  color: #fff;
-}
+  <section id="sales-section" class="section sales hidden">
+    <h3>Your Sales Summary</h3>
+    <div class="sales-stats">
+      <div class="card">Total Sales: <strong>$250</strong></div>
+      <div class="card">Units Sold: <strong>15</strong></div>
+      <div class="card">Pending: <strong>2</strong></div>
+    </div>
+    <h4>Recent Sales</h4>
+    <ul class="sales-list">
+      <li><span>3D Box Template</span> — $15 — <small>2 days ago</small></li>
+      <li><span>Login UI Kit</span> — $12 — <small>1 week ago</small></li>
+      <li><span>Portfolio Theme</span> — $30 — <small>2 weeks ago</small></li>
+    </ul>
+  </section>
 
-.hero{
-background: var(--card-bg) no-repeat center;
-  background-image: var(--hero-bg-img);
-  background-size: contain;
-  background-blend-mode: color-dodge;
-backdrop-filter: blur(6px);
-color: var(--text-light);
-padding: 1em 1em 2em;
-text-align: center;
-border-radius: 10px;
-border-bottom: 2px solid var(--primary-color);
-box-shadow: var(--shadow);
-margin-block-end: 3em;}
-.hero img{
-  width: 5em;
-  height: 5em;
-  border-radius: 50%;
-}
-.hero h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  animation: slideUp 1.2s ease forwards;
-}
+  <section id="posts-section" class="section posts hidden">
+    <h3>Your Uploads</h3>
+    <div class="post-grid">
+      <div class="post-card">
+        <h4>3D Box Template</h4>
+        <p>A fancy interactive CSS/JS 3D box.</p>
+        <span>$15</span>
+      </div>
+      <div class="post-card">
+        <h4>Portfolio Theme</h4>
+        <p>Responsive portfolio template for devs.</p>
+        <span>$30</span>
+      </div>
+      <div class="post-card">
+        <h4>Login UI Kit</h4>
+        <p>Modern login + signup flow with validation.</p>
+        <span>$12</span>
+      </div>
+    </div>
+  </section>
 
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 1.2rem; /* reduced for closer button */
-  animation: slideUp 1.4s ease forwards;
-}
+  <section id="chart-section" class="section static hidden">
+    <h3>Performance Chart</h3>
+    <canvas id="salesChart"></canvas>
+  </section>
 
-main{
-  min-height: 60vh;
-}
-.user.img{
-  max-width: 10em;
-  max-height: 10em;
-  border-radius: 50%;
-  width: 9em;
-  height: 9em;
-  border: 2px solid var(--primary-color);
-}
-.view{
-  background: var(--card-bg);
-  padding: 10px;
-  margin: 10px;
-  box-shadow: var(--shadow);
-  border-radius: 10px;
-}
-.view.public form{
-  display: flex;
-  padding: 5px;
-  border-radius: 10px;
-  flex-direction: column;
-}
-.view.public label{
-  color: var(--text-dim);
-  margin-left: 0;
-  font-weight: 700;
-}
-.view.public form input,.view.public form textarea,.view.public select{
-  background: transparent;
-  color: var(--text-light);
-  margin-left: 10px;
-  width: 100%;
-  padding: 5px;
-  font-weight: 600;
-  border: 0;
-  outline: 0;
-}
-.view.public button, .user-btn{
-  background: var(--primary-color);
-  font-weight: 800;
-  color: #ddd;
-  border: 0;
-  border-radius: 10px;
-  padding: 10px 12px;
-  max-width: 15em;
-}
-.user-btn.delete-acct{
-  background: #d66;
-}
-#publisherForm input, #publisherForm textarea{
-  outline-color: var(--primary-color);
-  padding: 5px;
-  border-radius: 10px;
-  border-color: var(--secondary-color);
-  background: transparent;
-border-width: 0.3px;
-margin: 5px;
-width: 80%;
-}
-#publisherForm textarea{
-  height: 200px;
-  max-width: 80%;
-  max-height: 50%;
-}
-.upload-btn{
-  background: #aaa;
-  color: #fff;
-  display: block;
-  margin: 10px;
-}
-.sending{
-  width: 10px;
-  height: 10px;
-  display: inline-block;
-  border:1px solid #ddd;
-  border-radius: 50%;
-  border-bottom-color: transparent;
-  margin-rigth: 5px;
-  animation: spin 3s ease-in infinite;
-  display: none;
-}
-@keyframes spin{
-  from{
-    transform: rotate(0);
+  </main>
+  <script>
+      const zipInput = document.getElementById("zipInput");
+      const filename = document.querySelector(".file-name");
+      zipInput.onchange = function(){
+          filename.textContent=zipInput.value;
+      }
+      
+  </script>
+  <script>
+const sections = {
+  user: document.getElementById("user-section"),
+  pen: document.getElementById("pen-section"),
+  sales: document.getElementById("sales-section"),
+  chart: document.getElementById("chart-section"),
+  posts: document.getElementById("posts-section")
+};
+
+function showSection(name) {
+  Object.values(sections).forEach(sec => sec.classList.add("hidden"));
+  if (sections[name]) {
+    sections[name].classList.remove("hidden");
   }
-  to{
-    transform: rotate(360deg);
-  }
-}
-.hidden {
-  display: none !important;
 }
 
-.sales-stats {
-  display: flex;
-  gap: 1em;
-  flex-wrap: wrap;
-}
-.sales-stats .card {
-  background: var(--card-bg);
-  padding: 1em;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-  flex: 1 1 150px;
-}
+// Attach menu events
+document.querySelector(".top-btn.user").onclick = () => showSection("user");
+document.querySelector(".top-btn.pen").onclick = () => showSection("pen");
+document.querySelector(".top-btn.sales").onclick = () => showSection("sales");
+document.querySelector(".top-btn.chart").onclick = () => showSection("chart");
+// Optional: Add a button for posts list
+</script>
 
-.sales-list {
-  list-style: none;
-  padding: 0;
-}
-.sales-list li {
-  padding: 8px;
-  border-bottom: 1px solid var(--gray);
-}
-
-.post-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1em;
-}
-.post-card {
-  background: var(--card-bg);
-  padding: 1em;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-}
-.post-card h4 {
-  margin: 0 0 0.5em;
-}
-
-/* ---------------------- Footer ---------------------- */
-footer {
-  background: var(--menu-bg);
-  border-radius: 10px;
-  border-top: 2px solid var(--primary-color);
-  margin-top: 20px;
-  text-align: center;
-  color: var(--text-dim);
-  opacity: 95%;
-  padding: 2em 1em 3em;
-}
-footer .side {
-  margin: 10px auto;
-  width: 95%;
-  border: 0 solid #445;
-  border-width: 1px 0;
-  padding: 10px 0;
-}
-footer .side ul {
-  padding: 0;
-  margin: 0;
-}
-footer .side ul li {
-  list-style: none;
-  padding: 6px;
-  color: var(--text-light);
-}
-ul a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* ---------------------- Scrollbar ---------------------- */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 5px;
-}
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+ <section class="footer-about">
+     <strong>Developers Temple</strong>
+ </section>
+ 
+ <section class="side">
+     <nav>
+         <ul>
+             <strong>Templates</strong>
+             <a href="/home.html#search?q=best"><li>Best Deals</li></a>
+             <a href="/home.html"><li>Available Offers</li></a>
+         </ul>
+         <ul>
+             <strong>DevTemple</strong>
+             <a href="/"><li>Home</li></a>
+             <a href="/home.html"><li>Templates</li></a>
+             <a href="/dashboard"><li>Dashboard</li></a>
+             <a href="/terms/index.html"><li>Terms </li></a>
+             <a href="/terms/privacy.html"><li>Privacy Policy</li></a>
+             <a href="#about"><li>About</li></a>
+             <a href="#contact"><li>Contact</li></a>
+         </ul>
+         <ul>
+             <strong>Team Products</strong>
+             <a href="/home.html"><li>Templates</li></a>
+             <a href="//fscss.onrender.com"><li>FSCSS</li></a>
+         </ul>
+         <ul>
+             <strong>Reach us</strong>
+             <a href="https://www.facebook.com/share/1FB4GtT81U/"><li><i class="fab fa-facebook"></i> Facebook</li></a>
+             <a href="https://x.com/fscss_ttr"><li><I class="fab fa-twitter"></i> X-Twitter</li></a>
+             <a href="https://github.com/fscss-ttr/"><li><I class="fab fa-github"></I> GitHub</li></a>
+             <a href="https://codepen.io/David-Hux/"><li><I class="fab fa-codepen"></i> ConPen</li></a>
+         </ul>
+     </nav>
+ </section>
+ <section class="conclusion">
+     Built with ❤️ by the DevTemple Team
+     <p>
+         ©2025 DevTemple | All rights reserved
+     </p>
+ </section>
+        </div>
+    </footer>
