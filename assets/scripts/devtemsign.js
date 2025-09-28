@@ -5,9 +5,10 @@
   import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
 
   // Firebase config from Netlify environment variables
-  const firebaseConfig = 
+  const res = await fetch("/.netlify/functions/fcfg");
+const config = await res.json();
 
-  const app = initializeApp(firebaseConfig);
+  const app = initializeApp(config);
   const auth = getAuth(app);
   const db = getFirestore(app);
 
