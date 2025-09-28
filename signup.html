@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup—DevTemple</title>
+
+    <link rel="stylesheet" href="/assets/styles/sign.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+ <link rel="icon" href="https://i.ibb.co/JDrRS3L/DevTemp.jpg">
+ <meta name="describe" content="Your one-stop hub for web templates, code snippets, and professional development services.">
+ <meta property="og:image" content="https://i.ibb.co/JDrRS3L/DevTemp.jpg">
+ <meta property="og:image:height" content="1200">
+ <meta property="og:image:width" content="400">
+    <script src="" defer></script>
+    <script src="https://kit.fontawesome.com/a076d05399" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fscss@1.1.7/e/exec.min.js" defer></script>
+   <style>
+       body{
+           $font: @random([Poppins, Roboto, Open Sans]);
+           font-family: "$font!", sans-serif;
+           exec(_log, $font!)
+       }
+   </style>
+</head>
+<body>
+  <section class="top-menu">
+    <button class="top-btn" onclick="goBack()">
+      <I class="fas fa-arrow-left"></i>
+    </button>
+    <script>
+    function goBack() {
+if (window.history.length > 1) {
+window.history.back();
+} else {
+window.location.href = "/";
+}
+}</script>
+  </section>
+<main>
+  <section class="hero">
+    <h2>Create your DevTemple account</h2>
+    <p>
+      Your space to code, collaborate, and share with developers worldwide.
+    </p>
+    I already have an account: <span class="login" onclick="document.querySelector('#haveAcct').style.display='flex';">login</span>
+  </section>
+  <div class="progressbar">
+  <div class="progress-step active">1</div>
+  <div class="progress-step">2</div>
+  <div class="progress-step">3</div>
+</div>
+<section class="section login" id="haveAcct">
+  <h2 onclick="this.parentElement.style.display='none'"><I class="fas fa-times" ></I></h2>
+  <form>
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="password">
+    <button type="submit">Login</button>
+  </form>
+  <p>
+    I don't have an account: <span class="login" onclick="document.querySelector('#haveAcct').style.display='none';">Sign up</span>
+  </p>
+</section>
+  <!-- Step 1 -->
+  <section class="section form form-step active">
+    <form id="step1">
+      <h2>Profile information (Public)</h2>
+      <input type="text" maxlength="30" required placeholder="Username*" name="user-name" minlength="3">
+      <textarea minlength="10" maxlength="200" required placeholder="Let people know a little bit about you*" name="bio"></textarea>
+<select name="skills" required>
+  <option value="">What's your skills*</option>
+  <!-- Tech Skills -->
+  <option value="software_developer">Software Developer</option>
+  <option value="web_developer">Web Developer</option>
+  <option value="data_scientist">Data Scientist</option>
+  <option value="machine_learning_engineer">Machine Learning Engineer</option>
+  <option value="cloud_architect">Cloud Architect</option>
+  <option value="devops_engineer">DevOps Engineer</option>
+  <option value="cybersecurity_analyst">Cybersecurity Analyst</option>
+  <option value="mobile_app_developer">Mobile App Developer</option>
+  <option value="ui_ux_designer">UI/UX Designer</option>
+  <option value="data_analyst">Data Analyst</option>
+  <option value="backend_developer">Backend Developer</option>
+  <option value="frontend_developer">Frontend Developer</option>
+  <option value="full_stack_developer">Full Stack Developer</option>
+  <option value="database_administrator">Database Administrator</option>
+  <option value="ai_engineer">AI Engineer</option>
+  <option value="blockchain_developer">Blockchain Developer</option>
+  <option value="systems_administrator">Systems Administrator</option>
+  <option value="qa_engineer">QA Engineer</option>
+  <!-- Non-Tech Skills -->
+  <option value="project_management">Project Management</option>
+  <option value="business_analysis">Business Analysis</option>
+  <option value="marketing">Marketing</option>
+  <option value="content_creation">Content Creation</option>
+  <option value="human_resources">Human Resources</option>
+  <option value="financial_analysis">Financial Analysis</option>
+  <option value="sales">Sales</option>
+  <option value="customer_service">Customer Service</option>
+  <option value="public_relations">Public Relations</option>
+  <option value="operations_management">Operations Management</option>
+  <option value="event_planning">Event Planning</option>
+  <option value="supply_chain_management">Supply Chain Management</option>
+  <option value="training_and_development">Training and Development</option>
+  <option value="legal_advisory">Legal Advisory</option>
+  <option value="administrative_support">Administrative Support</option>
+  <!-- Creative Skills -->
+  <option value="graphic_design">Graphic Design</option>
+  <option value="illustration">Illustration</option>
+  <option value="video_editing">Video Editing</option>
+  <option value="motion_graphics">Motion Graphics</option>
+  <option value="photography">Photography</option>
+  <option value="creative_writing">Creative Writing</option>
+  <option value="animation">Animation</option>
+  <option value="game_design">Game Design</option>
+  <option value="fashion_design">Fashion Design</option>
+  <option value="interior_design">Interior Design</option>
+  <option value="music_production">Music Production</option>
+  <option value="copywriting">Copywriting</option>
+  <option value="visual_arts">Visual Arts</option>
+  <option value="product_design">Product Design</option>
+  <option value="branding">Branding</option>
+</select>
+      <input type="url" name="photo" placeholder="Profile picture">
+      <button type="button" class="next-btn">Next</button>
+    </form>
+  </section>
+
+  <!-- Step 2 -->
+  <section class="section form form-step">
+    <form id="step2">
+      <h2>Contact information (Private)</h2>
+      <input type="text" name="full-name" placeholder="Your full name*" required>
+      <input type="email" placeholder="Your Email address*" required>
+     
+      <button type="button" id="seePw"><input placeholder="Set a password* (word, digit and character)" minlength="5" pattern="[\w+\d+\W+]{5,}"  required> <i class="fas fa-eye"></i></button>
+       <div class="checkbox-field">
+    <label>
+      <input type="checkbox" id="terms" required>
+      By continuing, you confirm you are 18 or over and agree to our <a href="terms/privacy.html">Privacy Policy</a> and <a href="/terms/index.html" target="_blank">terms and Use</a>.
+    </label>
+  </div>
+      <div class="step-actions">
+        <button type="button" class="prev-btn">Back</button>
+        <button type="button" class="next-btn">Next</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Step 3 -->
+  <section class="section form form-step">
+    <form id="submitable">
+      <h2>Preview</h2>
+      <div class="preview-box">
+        <p><b>Username:</b> <span id="previewUser"></span></p>
+        <p><b>Bio:</b> <span id="previewBio"></span></p>
+        <p><b>Skills:</b> <span id="previewSkills"></span></p>
+        <p><b>Website:</b> <span id="previewWebsite"></span></p>
+        <p><b>Full Name:</b> <span id="previewFullName"></span></p>
+        <p><b>Email:</b> <span id="previewEmail"></span></p>
+        <img id="previewImg" alt="Profile Image">
+      </div>
+      <div class="step-actions">
+        <button type="button" class="prev-btn">Back</button>
+        <button type="submit">Sign up</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+ <section class="footer-about">
+     <strong>Developers Temple</strong>
+ </section>
+ 
+ <section class="side">
+     <nav>
+         <ul>
+             <strong>Templates</strong>
+             <a href="/home.html#search?q=best"><li>Best Deals</li></a>
+             <a href="/home.html"><li>Available Offers</li></a>
+         </ul>
+         <ul>
+             <strong>DevTemple</strong>
+             <a href="/"><li>Home</li></a>
+             <a href="/home.html"><li>Templates</li></a>
+             <a href="/dashboard"><li>Dashboard</li></a>
+             <a href="/terms/index.html"><li>Terms </li></a>
+             <a href="/terms/privacy.html"><li>Privacy Policy</li></a>
+             <a href="#about"><li>About</li></a>
+             <a href="#contact"><li>Contact</li></a>
+         </ul>
+         <ul>
+             <strong>Team Products</strong>
+             <a href="/home.html"><li>Templates</li></a>
+             <a href="//fscss.onrender.com"><li>FSCSS</li></a>
+         </ul>
+         <ul>
+             <strong>Reach us</strong>
+             <a href="https://www.facebook.com/share/1FB4GtT81U/"><li><i class="fab fa-facebook"></i> Facebook</li></a>
+             <a href="https://x.com/fscss_ttr"><li><I class="fab fa-twitter"></i> X-Twitter</li></a>
+             <a href="https://github.com/fscss-ttr/"><li><I class="fab fa-github"></I> GitHub</li></a>
+             <a href="https://codepen.io/David-Hux/"><li><I class="fab fa-codepen"></i> ConPen</li></a>
+         </ul>
+     </nav>
+ </section>
+ <section class="conclusion">
+     Built with ❤️ by the DevTemple Team
+     <p>
+         ©2025 DevTemple | All rights reserved
+     </p>
+ </section>
+        </div>
+    </footer>
+    
+<script>
+  const steps = document.querySelectorAll(".form-step");
+  const progressSteps = document.querySelectorAll(".progress-step");
+  let currentStep = 0;
+  
+  function showStep(index) {
+    steps.forEach((step, i) => step.classList.toggle("active", i === index));
+    updateProgress(index);
+  }
+  
+  function updateProgress(index) {
+    progressSteps.forEach((step, i) => {
+      step.classList.toggle("active", i <= index);
+    });
+    
+    const progressLine = document.querySelector(".progressbar");
+    progressLine.style.setProperty("--progress", ((index) / (steps.length - 1)) * 100 + "%");
+  }
+  
+  // Handle Next buttons
+  document.querySelectorAll(".next-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const form = e.target.closest("form");
+      if (form.checkValidity()) {
+        if (currentStep < steps.length - 1) {
+          currentStep++;
+          
+          // Populate preview step
+          if (currentStep === 2) {
+            document.getElementById("previewUser").innerText = document.querySelector('[name="user-name"]').value;
+            document.getElementById("previewBio").innerText = document.querySelector('[name="bio"]').value;
+            document.getElementById("previewSkills").innerText = document.querySelector('[name="skills"]').value;
+            document.getElementById("previewWebsite").innerText = document.querySelector('[name="website"]').value;
+            document.getElementById("previewFullName").innerText = document.querySelector('[name="full-name"]').value;
+            document.getElementById("previewEmail").innerText = document.querySelector('[type="email"]').value;
+            document.getElementById("previewImg").src =
+              document.querySelector('[name="photo"]').value || "https://via.placeholder.com/100";
+          }
+          
+          showStep(currentStep);
+        }
+      } else {
+        // Show built-in validation error messages
+        form.reportValidity();
+      }
+    });
+  });
+  
+  // Handle Back buttons
+  document.querySelectorAll(".prev-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    });
+  });
+  
+  // Final form submit
+  document.getElementById("submitable").addEventListener("submit", (e) => {
+    if (!e.target.checkValidity()) {
+      e.preventDefault();
+      e.target.reportValidity();
+    } else {
+      alert("✅ Signup successful!");
+    }
+  });
+
+
+  const terms = document.getElementById("terms");
+
+  terms.addEventListener("invalid", function () {
+    this.setCustomValidity("You must accept the terms and conditions before continuing.");
+  });
+
+  terms.addEventListener("input", function () {
+    this.setCustomValidity(""); // clear message when checked
+  });
+
+  // Initial step
+  showStep(currentStep);
+  
+  let seePw=document.getElementById("seePw");
+  let pwInp = seePw.querySelector("input");
+  pwInp.type="password";
+  seePw.querySelector("i").addEventListener("click", e=>{
+    if(pwInp.type==="password"){
+      seePw.querySelector("i").className="fas fa-eye-slash";
+      pwInp.type="text";
+    }
+    else{
+      seePw.querySelector("i").className = "fas fa-eye";
+pwInp.type = "password";
+    }
+  })
+  
+if(!document.getElementById('theme-toggle')){
+  themeEle = document.createElement("div");
+  themeEle.id="theme-toggle";
+  themeEle.hidden=true;
+  themeEle.style.display="none";
+  document.body.appendChild(themeEle);
+}
+let themeToggle = document.getElementById('theme-toggle');
+
+// Load saved theme on page load
+if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark-theme');
+}
+
+// Add a single click event listener
+themeToggle.addEventListener('click', function() {
+    document.documentElement.classList.toggle('dark-theme');
+    if (document.documentElement.classList.contains('dark-theme')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
+});
+
+</script>
+
+</body>
+</html>
