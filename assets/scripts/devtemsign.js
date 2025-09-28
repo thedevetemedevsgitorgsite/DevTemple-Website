@@ -1,18 +1,15 @@
 
-  // Import Firebase modules (ESM works on Netlify)
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
-  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
 
-  // Firebase config from Netlify environment variables
-  const res = await fetch("/.netlify/functions/fcnfig.js");
+const res = await fetch("/.netlify/functions/fcnfig");
 const config = await res.json();
 
-  const app = initializeApp(config);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+const app = initializeApp(config);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
 
-  // Handle signup
   document.getElementById("submitable").addEventListener("submit", async (e) => {
     e.preventDefault();
 
