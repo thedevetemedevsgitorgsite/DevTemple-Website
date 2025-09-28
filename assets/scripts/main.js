@@ -1,17 +1,5 @@
 
-const starBtn = document.querySelectorAll(".buttons");
 
-starBtn.forEach(btnPar => {
-  const btn = btnPar.querySelector("button.star");
-  const starCount = btnPar.querySelector(".star-count");
-  btn.style.background = "#ddd";
-  btn.addEventListener("click", (e) => {
-    const starRaw = parseInt(starCount.textContent);
-    
-    btn.style.background = btn.style.background === "gold" ? "#ddd" : "gold";
-    starCount.textContent = btn.style.background === "gold" ? starRaw + 1 : starRaw - 1;
-  })
-})
 const schForm = document.querySelector(".top-menu form");
 const schInput = schForm.querySelector("input");
 schInput.style.display="none";
@@ -41,18 +29,16 @@ document.addEventListener("DOMContentLoaded", () => {
   proCard.forEach(card => {
     const tag = card.querySelector(".product-describe");
     if (card) {
-      card.querySelector(".buttons a").href = `#search?q=${encodeURIComponent(tag.innerHTML.match(/#[\w-]+/) || "")}`;
+      card.querySelector(".buttons a").href=`#search?q=${encodeURIComponent(tag.innerHTML.match(/#[\w-]+/) || '')}`; 
       tag.innerHTML = tag.innerHTML.replace(/\#([\w\-]+)/g, "<a href='#search?q=$1' class='card-tag'>#$1</a>");
       tag.querySelectorAll(".card-tag").forEach(ctag => {
-        ctag.style.cssText = `
-          color: #09f;
+        ctag.style.cssText =`color: var(--primary-color);
           font-family: "ADLaM Display", monospace;
-          text-decoration: none;
-        `;
+          text-decoration: none;`;
       });
     }
-  });
-  
+ });
+  //`
   let noMatch = document.querySelector("#noMatch");
   if (!noMatch) {
     noMatch = document.createElement("p");
@@ -261,7 +247,7 @@ proCard.forEach(card => {
   document.querySelector(".search-loader").style.display='flex';
   setTimeout(() =>{
     const title = card.querySelector(".product-describe strong").textContent;
-    const priceRaw = card.querySelector(".amount").innerText.split(" ").pop().replace("$", "");
+    const priceRaw = card.querySelector(".amount").dataset.price;
     const price = parseFloat(priceRaw) || 0;
     const img = card.querySelector(".product-img").style.backgroundImage.replace(/url\(["']?(.+?)["']?\)/, '$1');
     const seller = card.querySelector(".user-name").textContent;
@@ -307,4 +293,74 @@ themeToggle.addEventListener('click', function() {
     }
 });
 
+
+
+const allButtonContainers = document.querySelectorAll(".buttons"); // Corrected to select all button groups
+
+allButtonContainers.forEach(btnPar => {
+  const btn = btnPar.querySelector("button.star");
+  const starCount = btnPar.querySelector(".star-count");
+  
+  // Set initial background *after* initFor has run, or move this logic
+  // within the initFor or the click handler's setup.
+  btn.style.background = "#ddd"; 
+  
+  btn.addEventListener("click", (e) => {
+    // 1. Read the raw count from the data attribute (it's a string, convert to number)
+    let starRaw = parseInt(starCount.dataset.rawCount);
+    
+    // 2. Toggle background and calculate the new raw count
+    const isGold = btn.style.background === "gold";
+    
+    btn.style.background = isGold ? "#ddd" : "gold";
+    
+    const newRaw = isGold ? starRaw - 1 : starRaw + 1;
+    
+    // 3. Update the data attribute with the new raw count
+    starCount.dataset.rawCount = newRaw; 
+    
+    // 4. Update the display by re-formatting the new raw count
+    starCount.textContent = formatCount(newRaw);
+  });
+});
+
+function formatCount(num) {
+  if (num >= 1_000_000_000) {
+    return (num / 1_000_000_000).toFixed(1).replace(/\.0$/, "") + "B";
+  }
+  if (num >= 1_000_000) {
+    return (num / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
+  }
+  if (num >= 1_000) {
+    return (num / 1_000).toFixed(1).replace(/\.0$/, "") + "K";
+  }
+  return num.toString();
+}
+
+function initFor(){
+  const containNum = document.querySelectorAll(".buttons");
+  containNum.forEach(contNum=>{
+    // --- For .sales (optional but good practice) ---
+    const salesEl = contNum.querySelector(".sales");
+    const salesRaw = parseInt(salesEl.textContent);
+    salesEl.textContent = formatCount(salesRaw);
+    salesEl.dataset.rawCount = salesRaw;
+
+    // --- For .star-count (CRUCIAL) ---
+    const starCountEl = contNum.querySelector(".star-count");
+    const starRaw = parseInt(starCountEl.textContent); // Get the initial raw number from HTML
+    
+    // Store the raw number in a data attribute
+    starCountEl.dataset.rawCount = starRaw; 
+    
+    // Format the text content for display
+    starCountEl.textContent = formatCount(starRaw);
+  });
+}
+initFor(); // Execute initialization
+document.getElementById("sideSearch").addEventListener("keyup", e=>{
+  if(e.key === "Enter"){
+    window.location.href="/home.html#search?q="+encodeURIComponent(e.target.value);
+  }
+})
 
