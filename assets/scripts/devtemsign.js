@@ -1,10 +1,13 @@
 
+  
+  
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+import { getFirestore, collection, updateDoc, doc, addDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
 
 const res = await fetch("/.netlify/functions/fcnfig");
 const config = await res.json();
+
 
 const app = initializeApp(config);
 export const auth = getAuth(app);
@@ -13,13 +16,13 @@ export const db = getFirestore(app);
   document.getElementById("submitable").addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const email = document.querySelector('input[type="email"]').value;
-    const password = document.querySelector('#seePw input').value;
-    const username = document.querySelector('[name="user-name"]').value;
-    const bio = document.querySelector('[name="bio"]').value;
-    const skills = document.querySelector('[name="skills"]').value;
-    const fullName = document.querySelector('[name="full-name"]').value;
-    const photoURL = document.querySelector('[name="photo"]').value || null;
+    const email = document.querySelector('#signEmail').value;
+    const password = document.querySelector('#signPsw').value;
+    const username = document.querySelector('#signUserName').value;
+    const bio = document.querySelector('#signBio').value;
+    const skills = document.querySelector('#signSkill').value;
+    const fullName = document.querySelector('#signFullName').value;
+    const photoURL = document.querySelector('#signImg').value || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_bGUA_VzLBi52TYDKoEKj-kGTaYbUhb_Sc7FtOGEMug&s";
 
     try {
       const userCred = await createUserWithEmailAndPassword(auth, email, password);
@@ -52,8 +55,8 @@ export const db = getFirestore(app);
   // Handle login form
   document.querySelector('#haveAcct form').addEventListener("submit", async (e) => {
     e.preventDefault();
-    const email = e.target.querySelector('input[type="email"]').value;
-    const password = e.target.querySelector('input[type="password"]').value;
+    const email = document.querySelector('#logEmail').value;
+    const password = document.querySelector('#logPsw').value;
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
