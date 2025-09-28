@@ -57,9 +57,9 @@ window.location.href = "/";
 </div>
 <section class="section login" id="haveAcct">
   <h2 onclick="this.parentElement.style.display='none'"><I class="fas fa-times" ></I></h2>
-  <form>
-    <input type="email" placeholder="Email">
-    <input type="password" placeholder="password">
+  <form id="logForm">
+    <input type="email" placeholder="Email" id="logEmail">
+    <input type="password" placeholder="password" id="logPsw">
     <button type="submit">Login</button>
   </form>
   <p>
@@ -68,11 +68,11 @@ window.location.href = "/";
 </section>
   <!-- Step 1 -->
   <section class="section form form-step active">
-    <form id="step1">
+    <form id="step1" class="signForm1">
       <h2>Profile information (Public)</h2>
-      <input type="text" maxlength="30" required placeholder="Username*" name="user-name" minlength="3">
-      <textarea minlength="10" maxlength="200" required placeholder="Let people know a little bit about you*" name="bio"></textarea>
-<select name="skills" required>
+      <input type="text" maxlength="30" required placeholder="Username*" name="user-name" minlength="3" id="signUserName">
+      <textarea minlength="10" maxlength="200" required placeholder="Let people know a little bit about you*" name="bio" id="signBio"></textarea>
+<select name="skills" id="signSkill" required>
   <option value="">What's your skills*</option>
   <!-- Tech Skills -->
   <option value="software_developer">Software Developer</option>
@@ -126,19 +126,19 @@ window.location.href = "/";
   <option value="product_design">Product Design</option>
   <option value="branding">Branding</option>
 </select>
-      <input type="url" name="photo" placeholder="Profile picture">
+      <input type="url" name="photo" placeholder="Profile picture" id="signImg">
       <button type="button" class="next-btn">Next</button>
     </form>
   </section>
 
   <!-- Step 2 -->
   <section class="section form form-step">
-    <form id="step2">
+    <form id="step2" id="signForm2">
       <h2>Contact information (Private)</h2>
-      <input type="text" name="full-name" placeholder="Your full name*" required>
-      <input type="email" placeholder="Your Email address*" required>
+      <input type="text" name="full-name" placeholder="Your full name*"  required id="signFullName">
+      <input type="email" placeholder="Your Email address*" required id="signEmail">
      
-      <button type="button" id="seePw"><input placeholder="Set a password* (word, digit and character)" minlength="5" pattern="[\w+\d+\W+]{5,}"  required> <i class="fas fa-eye"></i></button>
+      <button type="button" id="seePw"><input placeholder="Set a password* (word, digit and character)" minlength="5" pattern="[\w+\d+\W+]{5,}"  required id="signPsw"> <i class="fas fa-eye"></i></button>
        <div class="checkbox-field">
     <label>
       <input type="checkbox" id="terms" required>
@@ -252,7 +252,7 @@ window.location.href = "/";
             document.getElementById("previewUser").innerText = document.querySelector('[name="user-name"]').value;
             document.getElementById("previewBio").innerText = document.querySelector('[name="bio"]').value;
             document.getElementById("previewSkills").innerText = document.querySelector('[name="skills"]').value;
-            document.getElementById("previewWebsite").innerText = document.querySelector('[name="website"]').value;
+            document.getElementById("previewWebsite").innerText = "";
             document.getElementById("previewFullName").innerText = document.querySelector('[name="full-name"]').value;
             document.getElementById("previewEmail").innerText = document.querySelector('[type="email"]').value;
             document.getElementById("previewImg").src =
@@ -344,3 +344,5 @@ themeToggle.addEventListener('click', function() {
 <script src="/assets/scripts/devtemsign.js" type="module" defer></script>
 </body>
 </html>
+
+
