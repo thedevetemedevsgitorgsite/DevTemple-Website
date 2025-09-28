@@ -1,15 +1,10 @@
 // netlify/functions/fcnfig.js
-exports.handler = async () => {
+export async function handler() {
   return {
     statusCode: 200,
     body: JSON.stringify({
-      apiKey: process.env.PUBLIC_FIRE_API,
-      authDomain: "devtemple0.firebaseapp.com",
-      projectId: "devtemple0",
-      storageBucket: "devtemple0.appspot.com",   // fix: should end with
-      messagingSenderId: "70957783581",
-      appId: "1:70957783581:web:8abb8c66c4a7eb258244f4",
-      measurementId: "G-79T0JMS2KE"
+      url: process.env.PUBLIC_SUPA_URL,
+      key: process.env.PUBLIC_SUPA_API
     }),
   };
-};
+}
