@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">  
 <head>
@@ -48,7 +49,7 @@ window.location.href = "/";
     <p>
       Your space to code, collaborate, and share with developers worldwide.
     </p>
-    I already have an account: <span class="login" onclick="document.querySelector('#haveAcct').style.display='flex';">login</span>
+    Have an account: <span class="login" onclick="document.querySelector('#haveAcct').style.display='flex';">login</span>
   </section>
   <div class="progressbar">
   <div class="progress-step active">1</div>
@@ -63,7 +64,7 @@ window.location.href = "/";
     <button type="submit">Login</button>
   </form>
   <p>
-    I don't have an account: <span class="login" onclick="document.querySelector('#haveAcct').style.display='none';">Sign up</span>
+    Don't have an account: <span class="login" onclick="document.querySelector('#haveAcct').style.display='none';">Sign up</span>
   </p>
 </section>
   <!-- Step 1 -->
@@ -126,7 +127,8 @@ window.location.href = "/";
   <option value="product_design">Product Design</option>
   <option value="branding">Branding</option>
 </select>
-      <input type="url" name="photo" placeholder="Profile picture" id="signImg">
+<label for="signImg">Profile Photo</label>
+     <input type="file" id="signImg" accept="image/*" name="photo" required/>
       <button type="button" class="next-btn">Next</button>
     </form>
   </section>
@@ -344,5 +346,4 @@ themeToggle.addEventListener('click', function() {
 <script src="/assets/scripts/devtemsign.js" type="module" defer></script>
 </body>
 </html>
-
 
