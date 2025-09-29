@@ -1,68 +1,90 @@
 
-  
-  
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
-import { getFirestore, collection, updateDoc, doc, addDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+  import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
 
 const res = await fetch("/.netlify/functions/fcnfig");
-const config = await res.json();
+const { url, key } = await res.json();
 
+export const supabase = createClient(url, key);
 
-const app = initializeApp(config);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-
-  document.getElementById("submitable").addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const email = document.querySelector('#signEmail').value;
-    const password = document.querySelector('#signPsw').value;
-    const username = document.querySelector('#signUserName').value;
-    const bio = document.querySelector('#signBio').value;
-    const skills = document.querySelector('#signSkill').value;
-    const fullName = document.querySelector('#signFullName').value;
-    const photoURL = document.querySelector('#signImg').value || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_bGUA_VzLBi52TYDKoEKj-kGTaYbUhb_Sc7FtOGEMug&s";
-
-    try {
-      const userCred = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCred.user;
-
-      // Update profile
-      await updateProfile(user, {
-        displayName: username,
-        photoURL: photoURL
-      });
-
-      // Save extra info in Firestore
-      await setDoc(doc(db, "users", user.uid), {
-        username,
-        bio,
-        skills,
-        fullName,
-        email,
-        photoURL,
-        createdAt: Date.now()
-      });
-
-      alert("✅ Signup successful! You are logged in.");
-      window.location.href = "/dashboard"; // redirect after signup
-    } catch (err) {
-      alert("❌ Error: " + err.message);
+document.getElementById("submitable").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  
+  const email = document.querySelector('#signEmail').value;
+  const password = document.querySelector('#signPsw').value;
+  const username = document.querySelector('#signUserName').value;
+  const bio = document.querySelector('#signBio').value;
+  const skills = document.querySelector('#signSkill').value;
+  const fullName = document.querySelector('#signFullName').value;
+  const fileInput = document.querySelector('#signImg'); // file input (type="file")
+  
+  try {
+    // 1. Create user in Supabase Auth
+    const { data: authData, error: authError } = await supabase.auth.signUp({
+      email,
+      password
+    });
+    
+    if (authError) throw authError;
+    const user = authData.user;
+    
+    let photoURL = "https://placehold.co/100x100"; // fallback
+    
+    // 2. Upload profile image if selected
+    if (fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      const filePath = `avatars/${user.id}_${Date.now()}_${file.name}`;
+      
+      const { error: uploadError } = await supabase.storage
+        .from("avatars")
+        .upload(filePath, file);
+      
+      if (uploadError) {
+        console.error("Upload failed:", uploadError.message);
+      } else {
+        const { data } = supabase.storage.from("avatars").getPublicUrl(filePath);
+        photoURL = data.publicUrl;
+      }
     }
-  });
+    
+    // 3. Insert profile into "profiles" table
+    const { error: dbError } = await supabase.from("profiles").insert([{
+      id: user.id,
+      username,
+      full_name: fullName,
+      bio,
+      skills,
+      email,
+      photo_url: photoURL,
+      created_at: new Date()
+    }]);
+    
+    if (dbError) throw dbError;
+    
+    alert("✅ Signup successful!");
+window.location.href = "/dashboard";    
+  } catch (err) {
+    alert("❌ Error: " + err.message);
+  }
+});
 
-  // Handle login form
   document.querySelector('#haveAcct form').addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = document.querySelector('#logEmail').value;
-    const password = document.querySelector('#logPsw').value;
-
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert("✅ Logged in successfully!");
-      window.location.href = "/dashboard";
-    } catch (err) {
-      alert("❌ Login failed: " + err.message);
-    }
-  });
+  e.preventDefault();
+  
+  const email = document.querySelector('#logEmail').value;
+  const password = document.querySelector('#logPsw').value;
+  
+  try {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    
+    if (error) throw error;
+    
+    alert("✅ Logged in successfully!");
+    window.location.href = "/dashboard";
+  } catch (err) {
+    alert("❌ Login failed: " + err.message);
+  }
+});
