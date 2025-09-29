@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup—DevTemple</title>
+
+    <link rel="stylesheet" href="/assets/styles/sign.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+ <link rel="icon" href="https://i.ibb.co/JDrRS3L/DevTemp.jpg">
+ <meta name="describe" content="Your one-stop hub for web templates, code snippets, and professional development services.">
+ <meta property="og:image" content="https://i.ibb.co/JDrRS3L/DevTemp.jpg">
+ <meta property="og:image:height" content="1200">
+ <meta property="og:image:width" content="400">
+    <script src="" defer></script>
+    <script src="https://kit.fontawesome.com/a076d05399" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fscss@1.1.7/e/exec.min.js" defer></script>
+   <style>
+       body{
+           $font: @random([Poppins, Roboto, Open Sans]);
+           font-family: "$font!", sans-serif;
+           exec(_log, $font!)
+       }
+   </style>
+</head>
+<body>
+  <section class="top-menu">
+    <button class="top-btn" onclick="goBack()">
+      <I class="fas fa-arrow-left"></i>
+    </button>
+    <script>
+    function goBack() {
+if (window.history.length > 1) {
+window.history.back();
+} else {
+window.location.href = "/";
+}
+}</script>
+  </section>
+<main>
+  <section class="hero">
+    <h2>Reset your password</h2>
+    <p>
+      Your space to code, collaborate, and share with developers worldwide.
+    </p>
+    
+  </section>
+  <main>
+      <section class="section form">
+    <form id="resetForm" style="width: 80vw; align-items: center;" >
+  <input type="email" id="resetEmail" placeholder="Enter your email" required>
+  <button type="submit">Reset Password</button>
+</form>
+      </section>
+
+  </main>
+  
+   <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+ <section class="footer-about">
+     <strong>Developers Temple</strong>
+ </section>
+ 
+ <section class="side">
+     <nav>
+         <ul>
+             <strong>Templates</strong>
+             <a href="/home.html#search?q=best"><li>Best Deals</li></a>
+             <a href="/home.html"><li>Available Offers</li></a>
+         </ul>
+         <ul>
+             <strong>DevTemple</strong>
+             <a href="/"><li>Home</li></a>
+             <a href="/home.html"><li>Templates</li></a>
+             <a href="/dashboard"><li>Dashboard</li></a>
+             <a href="/terms/index.html"><li>Terms </li></a>
+             <a href="/terms/privacy.html"><li>Privacy Policy</li></a>
+             <a href="#about"><li>About</li></a>
+             <a href="#contact"><li>Contact</li></a>
+         </ul>
+         <ul>
+             <strong>Team Products</strong>
+             <a href="/home.html"><li>Templates</li></a>
+             <a href="//fscss.onrender.com"><li>FSCSS</li></a>
+         </ul>
+         <ul>
+             <strong>Reach us</strong>
+             <a href="https://www.facebook.com/share/1FB4GtT81U/"><li><i class="fab fa-facebook"></i> Facebook</li></a>
+             <a href="https://x.com/fscss_ttr"><li><I class="fab fa-twitter"></i> X-Twitter</li></a>
+             <a href="https://github.com/fscss-ttr/"><li><I class="fab fa-github"></I> GitHub</li></a>
+             <a href="https://codepen.io/David-Hux/"><li><I class="fab fa-codepen"></i> ConPen</li></a>
+         </ul>
+     </nav>
+ </section>
+ <section class="conclusion">
+     Built with ❤️ by the DevTemple Team
+     <p>
+         ©2025 DevTemple | All rights reserved
+     </p>
+ </section>
+        </div>
+    </footer>
+    
+<script>
+  
+if(!document.getElementById('theme-toggle')){
+  themeEle = document.createElement("div");
+  themeEle.id="theme-toggle";
+  themeEle.hidden=true;
+  themeEle.style.display="none";
+  document.body.appendChild(themeEle);
+}
+let themeToggle = document.getElementById('theme-toggle');
+
+// Load saved theme on page load
+if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark-theme');
+}
+
+// Add a single click event listener
+themeToggle.addEventListener('click', function() {
+    document.documentElement.classList.toggle('dark-theme');
+    if (document.documentElement.classList.contains('dark-theme')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
+})
+</script>
+<script type="module" defer>
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+const { url, key } = {url: "https://fgglquyepbbzrdzmkpfd.supabase.co", 
+key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnZ2xxdXllcGJienJkem1rcGZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkwOTkyMjksImV4cCI6MjA3NDY3NTIyOX0.mT03kocvd2gMLu6y4VeYXQqcBKUPD5DKtku6HrRO7cA"};
+
+
+export const supabase = createClient(url, key);
+
+
+  document.getElementById("resetForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.querySelector('#resetEmail').value;
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: "https://devtem.netlify.app/user/reset.html"
+  });
+
+  if (error) {
+    alert("❌ Error: " + error.message);
+  } else {
+    alert("📩 Password reset link sent! Check your email.");
+  }
+});
+</script>
+</body>
+</html>
