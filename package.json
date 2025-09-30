@@ -1,0 +1,12 @@
+{
+  "name": "DevTemple-Website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "echo nothing to build"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.3"
+  }
+}
