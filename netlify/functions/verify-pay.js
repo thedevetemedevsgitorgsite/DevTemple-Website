@@ -12,7 +12,7 @@ export async function handler(event) {
 
     // verify with Paystack
     const paystackRes = await fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
-      headers: { Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}` }
+      headers: { Authorization: `Bearer ${process.env.PAYSTACK_SEC_KEY}` }
     });
     const paystackData = await paystackRes.json();
 
