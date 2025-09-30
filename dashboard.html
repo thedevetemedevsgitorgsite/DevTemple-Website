@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">  
 <head>
@@ -7,7 +8,7 @@
 
     <link rel="stylesheet" href="/assets/styles/dash.css">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="withdraw" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
@@ -133,18 +134,42 @@ window.location.href = "/";
                   <p>
                       <strong>ID :</strong> <span class="uid"> abc122</span>
                   </p>
-                  <button class="user-btn logout">Log out</button>
-                  <button class="user-btn delete-acct" id="delete-account">Delete Account</button>
+                  
+                  
               </div>
           </div>
-          <div class="view withdraw">
-              <from id="withdrawForm">
-                  <h3>Withdraw request</h3>
-                  <form>
-                     <label for="" >Amount: $</label><input type="number" required maxlength="6" minlength="1" id="requestAmt"><button type="submit">Send</button>
-                  </form>
-              </from>
-          </div>
+        
+       <label for="settings"><h3>⚙ More & Settings</h3></label>
+<input type="checkbox" hidden id="settings">
+
+<div class="settings-drop">
+  <!-- Withdraw Section -->
+  <div class="settings-section">
+    <h3>💳 Withdraw Request</h3>
+    <form id="withdrawForm">
+      <label for="requestAmt">Amount ($)</label>
+      <input type="number" id="requestAmt" name="amount" min="1" max="999999" required>
+      <button type="submit">Send Request</button>
+    </form>
+  </div>
+
+  <!-- Notices Section -->
+  <div class="settings-section">
+    <h3>🔔 Notices</h3>
+    <ul class="notices-list">
+      <li>No pending withdrawals</li>
+      <li>30% service fee applies to all sales withdrawals</li>
+      <li>Update your payout email in account settings <I class="danger-zone">⚠ feature not available</i></li>
+    </ul>
+  </div>
+
+  <!-- Account Section -->
+  <div class="settings-section danger-zone">
+    <h3>⚠ Account</h3>
+    <button id="deleteAccountBtn" class="danger">Delete Account</button>
+    <button id="logoutBtn" class="user-btn logout">Log Out</button>
+  </div>
+</div>
   </section>
 
   <section id="pen-section" class="section pen hidden">
@@ -437,4 +462,4 @@ themeToggle.addEventListener('click', function() {
 
     <script type="module" defer src="/assets/scripts/devdash.js"></script>
 </body>
-</html>
+            </html>
