@@ -202,27 +202,73 @@ function updateCartUI() {
 // add-to-cart
 
 // checkout click
+// Updated checkout function with better error handling
 checkoutBtn.onclick = async () => {
-  if (cart.length === 0) return alert("Cart is empty");
-
-  const user = await getUser();
-  let email = user?.email;
-
-  // If no user email, prompt for one
-  if (!email) {
-    email = prompt("Enter your email to continue:");
-    if (!email) return alert("Email is required for payment");
+  if (cart.length === 0) {
+    alert("Cart is empty");
+    return;
   }
 
+  // Show loading state
+  checkoutBtn.disabled = true;
+  checkoutBtn.textContent = "Processing...";
+
   try {
+    const user = await getUser();
+    let email = user?.email;
+
+    if (!email) {
+      email = prompt("Enter your email to continue:");
+      if (!email) {
+        alert("Email is required for payment");
+        return;
+      }
+      
+      // Basic email validation
+      if (!email.includes('@') || !email.includes('.')) {
+        alert("Please enter a valid email address");
+        return;
+      }
+    }
+
+    console.log("Sending checkout request:", { email, cart });
+
     const res = await fetch("/.netlify/functions/create-pay", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, cart })
+      body: JSON.stringify({ 
+        email, 
+        cart: cart.map(item => ({
+          id: item.id,
+          title: item.title,
+          price: item.price,
+          sellerId: item.sellerId,
+          filePath: item.filePath
+        }))
+      })
     });
 
     const data = await res.json();
-    if (data.error) return alert("❌ Payment error: " + data.error);
+    console.log("Checkout response:", data);
+
+    if (!res.ok || data.error) {
+      let errorMessage = data.error || "Payment initialization failed";
+      
+      // Specific error messages for common issues
+      if (errorMessage.includes("amount") || errorMessage.includes("Amount")) {
+        errorMessage = "Invalid amount. Please check your cart items.";
+      } else if (errorMessage.includes("email") || errorMessage.includes("Email")) {
+        errorMessage = "Invalid email address. Please check and try again.";
+      } else if (errorMessage.includes("key") || errorMessage.includes("authorization")) {
+        errorMessage = "Payment service configuration error. Please contact support.";
+      }
+      
+      throw new Error(errorMessage);
+    }
+
+    if (!data.authorization_url) {
+      throw new Error("No payment URL received from server");
+    }
 
     // Open Paystack checkout
     const handler = PaystackPop.setup({
@@ -232,30 +278,42 @@ checkoutBtn.onclick = async () => {
       currency: "NGN",
       ref: data.reference,
       callback: async function(response) {
-        // Verify payment with backend
-        const verifyRes = await fetch("/.netlify/functions/verify-pay", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ reference: response.reference })
-        });
+        console.log("Paystack callback:", response);
         
-        const verifyData = await verifyRes.json();
+        try {
+          const verifyRes = await fetch("/.netlify/functions/verify-pay", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ reference: response.reference })
+          });
+          
+          const verifyData = await verifyRes.json();
+          console.log("Verification response:", verifyData);
 
-        if (verifyData.success) {
-          alert("✅ Payment successful! Your downloads are ready.");
-          
-          // Clear cart
-          cart.length = 0;
-          updateCartUI();
-          
-          // Show download links
-          showDownloadLinks(verifyData.downloadLinks);
-        } else {
-          alert("❌ Payment verification failed: " + verifyData.error);
+          if (verifyData.success) {
+            alert("✅ Payment successful! Your downloads are ready.");
+            
+            // Clear cart
+            cart.length = 0;
+            updateCartUI();
+            
+            // Show download links
+            showDownloadLinks(verifyData.downloadLinks);
+          } else {
+            alert("❌ Payment verification failed: " + (verifyData.error || "Unknown error"));
+          }
+        } catch (verifyError) {
+          console.error("Verification error:", verifyError);
+          alert("❌ Could not verify payment. Please contact support with reference: " + response.reference);
         }
       },
       onClose: function() {
+        console.log("Payment window closed");
         alert("Payment window closed. You can complete the payment later.");
+        
+        // Reset button state
+        checkoutBtn.disabled = false;
+        checkoutBtn.textContent = "Checkout with Paystack";
       }
     });
     
@@ -263,9 +321,14 @@ checkoutBtn.onclick = async () => {
     
   } catch (error) {
     console.error("Checkout error:", error);
-    alert("❌ Checkout failed. Please try again.");
+    alert("❌ Checkout failed: " + error.message);
+    
+    // Reset button state
+    checkoutBtn.disabled = false;
+    checkoutBtn.textContent = "Checkout with Paystack";
   }
 };
+
 
 // Function to display download links
 function showDownloadLinks(downloadLinks) {
