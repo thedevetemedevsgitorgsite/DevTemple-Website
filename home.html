@@ -43,14 +43,18 @@
                    <li id="theme-toggle"><I class="fas fa-sun"></I> Theme</li>
                </ul>
             <ul>
-                <strong>Code Cards</strong>
-                <li>Featured</li>
-                <li>Popular</li>
-                <li>Starred</li>
-                <li>All Cards</li>
+                <strong>Nav</strong>
+                <a href="/"><li>Home</li></a>
+             <a href="/home.html"><li>Templates</li></a>
+             <a href="/dashboard.html"><li>Dashboard</li></a>
+             <a href="/terms/index.html"><li>Terms</li></a>
+             <a href="/terms/privacy.html"><li>Privacy Policy</li></a>
+             <a href="/index.html#about"><li>About</li></a>
+             <a href="/index.html#contact"><li>Contact</li></a>
             </ul>
             <ul>
                 <strong>Tags</strong>
+                <a><li><input type="search" placeholder="Search"  id="sideSearch"></li></a>
  <a href="/home.html#search?q=%23PHP"><li>PHP</li></a>
              <a href="/home.html#search?q=%23JavaScript"><li>JavaScript</li></a>
              <a href="/home.html#search?q=%23CSS"><li>CSS</li></a>
@@ -66,7 +70,7 @@
              <a href="/home.html#search?q=%23UX"><li>UXDesigns</li></a>
              <a href="/home.html#search?q=%23WebApp"><li>WebApp</li></a>
              <a href="/home.html#search?q=%23react"><li>React</li></a>
-             <a><li><input type="search" placeholder="Search"  id="sideSearch"></li></a>
+           
             </ul>
             
                 <img src="/assets/images/20250918_223801.png" alt="DevTemple">
@@ -179,7 +183,7 @@ data-bio="Coding with special signs â€¢ @https://fscss.onrender.com FSCSS STYLEð
 
 <section class="video-view">
     <h3 onclick="this.parentElement.style.display='none'"><i class="fas fa-times"></i></h3>
-    <div style="text-align: center;display: flex;justify-content: center;"><embed src="https://media.tenor.com/xfrF7juLowwAAAAM/vatnik-detected.gif" class="video" autoplay></div>
+    <div style="text-align: center;display: flex;justify-content: center;"><embed src="https://media.tenor.com/rRBWXoBqPikAAAAM/critical-error-error.gif" class="video" autoplay></div>
     
     <div id="embedLoader">
         
@@ -289,8 +293,9 @@ body{
 <script>
     
 </script>
+  <script src="/assets/scripts/main.js" defer></script>
+<script src="/assets/scripts/devmain.js" defer type="module"></script>
 
-  <script src="/assets/scripts/main.js"></script>
 </body>
 <section class="search-loader"><img src="/assets/images/20250918_223801.png" width="40" height="40" style="margin-top: 10px;animation:spin-bor 2s ease-in-out infinite;border-radius: 50%;border: 1px solid var(--primary-color);border-right: 0;"></section>
     <section class="loader">
@@ -352,6 +357,7 @@ body{
 }
     </style>
      <script>
+     
      document.querySelector(".search-loader").style.display='flex';
   window.addEventListener("load", () => {
       
@@ -486,35 +492,11 @@ body{
 }
 </style>
 
-<script>
+<script defer>
 function toggleReport() {
   const form = document.getElementById("reportForm");
   form.style.display = form.style.display === "flex" ? "none" : "flex";
 }
-
-document.querySelectorAll(".card .profile").forEach(profile => {
-    
-  profile.addEventListener("click", () => {
-      document.querySelector(".search-loader").style.display = "flex";
-
-setTimeout(() => {
-    const name = profile.querySelector(".user-name").textContent;
-    let bio = profile.dataset.bio;
-    bio=bio.replace(/((https?:\/\/)?(\w+\.[^\s]+))/g, "<a href='$1'>$1</a>")
-    const img = profile.querySelector("img").src;
-
-    document.getElementById("popupName").textContent = name;
-    document.getElementById("schUser").href = `#search?q=${encodeURIComponent(name)}`;
-    document.getElementById("userToRe").value=`User reported: ${name}`;
-    document.getElementById("popupBio").innerHTML = bio;
-    document.getElementById("popupImg").src = img;
-    
-    document.getElementById("userView").style.display = "block";
-    document.querySelector(".search-loader").style.display = "none";
-}, 2000);
-  });
-  
-});
 
 
 
@@ -542,22 +524,7 @@ document.getElementById("reportForm").addEventListener("submit",async function(e
 document.getElementById("topSch").addEventListener("input", function() {
     this.setCustomValidity("");
 })
-const dataView = document.querySelectorAll("h4[data-view*='/']");
-dataView.forEach(view=>{
-    view.addEventListener("click", e=>{
-    const viewSrc = view.dataset.view||"/assets/images/20250918_223801.png";
-    const videoBox = document.querySelector(".video-view");
-    const embed = videoBox.querySelector("embed");
-    embed.src=viewSrc;
-    videoBox.style.display="block";
-    embed.style.display='none';
-    document.getElementById("embedLoader").style.display='block';
-    embed.onload=function(){
-        document.getElementById("embedLoader").style.display='none';
-        embed.style.display='block';
-    }
-    })
-})
+
 </script>
      
-             </html>
+  </html>
