@@ -453,21 +453,37 @@ async function getAvailableBalance() {
   return totalEarnings - totalWithdrawn||0;
 }
 
+async function requestWithdraw(amount) {
+  const user = await getUser();
+  if (!user) return;
+
+  const balance = await getAvailableBalance();
+  if (amount > balance) {
+    return alert(`❌ You can only withdraw up to $${balance.toFixed(2)}`);
+  }
+
+  const { error } = await supabase.from("withdraw_requests").insert({
+    user_id: user.id,
+    amount,
+    status: "pending"
+  });
+
+  if (error) {
+    console.error("Withdraw request failed:", error);
+    return;
+  }
+
+  alert("✅ Withdraw request submitted for review!");
+}
 
     // Withdraw request
 document.getElementById("withdrawForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   const amt = document.getElementById("requestAmt").value;
-  const user = await getUser(); // your helper that gets Supabase auth user
-
-  const res = await fetch("/.netlify/functions/withdraw", {
-    method: "POST",
-    body: JSON.stringify({ amount: amt, user_id: user.id }),
-  });
-
-  const result = await res.json();
-  alert(result.message);
+  await requestWithdraw(amt);
 });
+
+  
 
 // Delete account
 document.getElementById("deleteAccountBtn").addEventListener("click", async () => {
