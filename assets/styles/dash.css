@@ -1,4 +1,3 @@
-
 :root.dark-theme {
   --black: #000000;
   --dark-blue: #0B1E5B;
@@ -155,11 +154,15 @@ main{
   background: transparent;
   color: var(--text-light);
   margin-left: 10px;
-  width: 100%;
+  width: 95%;
   padding: 5px;
   font-weight: 600;
   border: 0;
   outline: 0;
+  padding: 0.6em;
+border: 1px solid #ccc;
+border-radius: 6px;
+margin-bottom: 0.8em;
 }
 .view.public form textarea{
   height: 80px;
@@ -186,6 +189,10 @@ border-width: 0.3px;
 margin: 5px;
 width: 80%;
 color: var(--text-light);
+padding: 0.6em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 0.8em;
 }
 #publisherForm textarea{
   height: 200px;
@@ -599,7 +606,7 @@ min-width: 200px;
 }
 
 .settings-section button {
-  background: #0077ff;
+  background: var(--primary-color);
   color: #fff;
   border: none;
   padding: 0.6em 1.2em;
@@ -609,7 +616,7 @@ min-width: 200px;
 }
 
 .settings-section button:hover {
-  background: #005dc0;
+  background: var(--primary-color);
 }
 
 .danger-zone {
@@ -623,4 +630,4 @@ min-width: 200px;
 
 .danger-zone .danger:hover {
   background: #c0392b;
-  }
+}
