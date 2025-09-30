@@ -202,76 +202,168 @@ function updateCartUI() {
 // add-to-cart
 
 // checkout click
-// checkout click
 checkoutBtn.onclick = async () => {
   if (cart.length === 0) return alert("Cart is empty");
 
-  const email = prompt("Enter your email to continue:");
+  const user = await getUser();
+  let email = user?.email;
 
-  const res = await fetch("/.netlify/functions/create-pay", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, cart })
-  });
+  // If no user email, prompt for one
+  if (!email) {
+    email = prompt("Enter your email to continue:");
+    if (!email) return alert("Email is required for payment");
+  }
 
-  const data = await res.json();
-  if (data.error) return alert("❌ Payment error: " + data.error);
+  try {
+    const res = await fetch("/.netlify/functions/create-pay", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, cart })
+    });
 
-  // open Paystack checkout
-  const handler = PaystackPop.setup({
-    key: "pk_live_0b0770be1e29f5e7a159b39d2d9bdc2c41785306", // ✅ Public key
-    email: email,
-    amount: cart.reduce((s, i) => s + i.price, 0) * 100,
-    currency: "NGN",
-    ref: data.reference,
-    callback: async function(response) {
-      // verify backend
-      const verifyRes = await fetch("/.netlify/functions/verify-pay", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ reference: response.reference, cart })
-      });
-      const verifyData = await verifyRes.json();
+    const data = await res.json();
+    if (data.error) return alert("❌ Payment error: " + data.error);
 
-      if (verifyData.success) {
-        alert("✅ Payment successful! Your downloads are ready.");
-
-        // clear cart UI
-        cart.length = 0;
-        updateCartUI();
-
-        // create a download section inside the cart box
-        const dlSection = document.createElement("div");
-        dlSection.className = "download-links";
-        dlSection.style.cssText = "margin-top:10px; padding:8px; border-top:1px solid #ccc;";
-
-        const title = document.createElement("h4");
-        title.textContent = "📥 Your Downloads";
-        title.style.marginBottom = "6px";
-        dlSection.appendChild(title);
-
-        verifyData.downloadLinks.forEach(linkObj => {
-          const a = document.createElement("a");
-          a.href = linkObj.url;
-          a.textContent = "Download Item " + linkObj.id;
-          a.target = "_blank";
-          a.style.cssText = "display:block; margin:4px 0; color:#06c; text-decoration:underline;";
-          dlSection.appendChild(a);
+    // Open Paystack checkout
+    const handler = PaystackPop.setup({
+      key: "pk_live_0b0770be1e29f5e7a159b39d2d9bdc2c41785306",
+      email: email,
+      amount: cart.reduce((s, i) => s + i.price, 0) * 100,
+      currency: "NGN",
+      ref: data.reference,
+      callback: async function(response) {
+        // Verify payment with backend
+        const verifyRes = await fetch("/.netlify/functions/verify-pay", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ reference: response.reference })
         });
+        
+        const verifyData = await verifyRes.json();
 
-        cartBox.appendChild(dlSection);
-      } else {
-        alert("❌ Verification failed: " + verifyData.error);
+        if (verifyData.success) {
+          alert("✅ Payment successful! Your downloads are ready.");
+          
+          // Clear cart
+          cart.length = 0;
+          updateCartUI();
+          
+          // Show download links
+          showDownloadLinks(verifyData.downloadLinks);
+        } else {
+          alert("❌ Payment verification failed: " + verifyData.error);
+        }
+      },
+      onClose: function() {
+        alert("Payment window closed. You can complete the payment later.");
       }
-    },
-    onClose: function() {
-      alert("Payment window closed.");
-    }
-  });
-  handler.openIframe();
+    });
+    
+    handler.openIframe();
+    
+  } catch (error) {
+    console.error("Checkout error:", error);
+    alert("❌ Checkout failed. Please try again.");
+  }
 };
 
+// Function to display download links
+function showDownloadLinks(downloadLinks) {
+  // Remove existing download section if any
+  const existingSection = cartBox.querySelector(".download-links");
+  if (existingSection) existingSection.remove();
 
+  // Create download section
+  const dlSection = document.createElement("div");
+  dlSection.className = "download-links";
+  dlSection.style.cssText = `
+    margin-top: 15px;
+    padding: 15px;
+    border: 2px solid #0a6;
+    border-radius: 8px;
+    background: #f9fff9;
+  `;
+
+  const title = document.createElement("h4");
+  title.textContent = "📥 Your Downloads";
+  title.style.cssText = "margin-bottom: 10px; color: #0a6;";
+  dlSection.appendChild(title);
+
+  const info = document.createElement("p");
+  info.textContent = "Links are valid for 24 hours. Click to download:";
+  info.style.cssText = "font-size: 14px; color: #666; margin-bottom: 10px;";
+  dlSection.appendChild(info);
+
+  downloadLinks.forEach(linkObj => {
+    const itemDiv = document.createElement("div");
+    itemDiv.style.cssText = "margin: 8px 0; padding: 8px; background: white; border-radius: 4px;";
+    
+    const a = document.createElement("a");
+    a.href = linkObj.url;
+    a.textContent = `Download: ${linkObj.title}`;
+    a.target = "_blank";
+    a.style.cssText = `
+      display: block;
+      padding: 8px 12px;
+      background: #0a6;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      text-align: center;
+      font-weight: bold;
+    `;
+    
+    a.onmouseover = () => a.style.background = "#084";
+    a.onmouseout = () => a.style.background = "#0a6";
+    
+    itemDiv.appendChild(a);
+    dlSection.appendChild(itemDiv);
+  });
+
+  cartBox.appendChild(dlSection);
+}
+
+// Handle payment verification on page load (if returning from Paystack)
+document.addEventListener("DOMContentLoaded", () => {
+  // Check for Paystack reference in URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const reference = urlParams.get('reference');
+  
+  if (reference) {
+    verifyPaymentOnReturn(reference);
+  }
+  
+  loadPosts();
+});
+
+async function verifyPaymentOnReturn(reference) {
+  try {
+    const verifyRes = await fetch("/.netlify/functions/verify-pay", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ reference })
+    });
+    
+    const verifyData = await verifyRes.json();
+
+    if (verifyData.success) {
+      alert("✅ Payment verified! Your downloads are ready.");
+      showDownloadLinks(verifyData.downloadLinks);
+      
+      // Clear cart
+      cart.length = 0;
+      updateCartUI();
+      
+      // Clean URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } else {
+      alert("❌ Payment verification failed: " + verifyData.error);
+    }
+  } catch (error) {
+    console.error("Verification error:", error);
+    alert("❌ Could not verify payment. Please contact support.");
+  }
+      }
 
 // ========== SALES & POSTS ==========
 async function loadPosts() {
