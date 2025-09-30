@@ -1,12 +1,10 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const resSul = await fetch("/.netlify/functions/fcnfig");
-const { url, key } = await resSul.json();
-
+const data = await resSul.json();  // wait for JSON
+const { url, key } = data;
 
 export const supabase = createClient(url, key);
-
-
 
 async function getUser() {
   const { data, error } = await supabase.auth.getUser();
