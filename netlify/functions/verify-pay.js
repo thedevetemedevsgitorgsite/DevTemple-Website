@@ -25,7 +25,7 @@ export async function handler(event) {
     
     // Get transaction from Supabase
     const { data: transaction, error: txError } = await supabase
-      .from("transactions")
+      .from("transactions_b")
       .select("*")
       .eq("reference", reference)
       .single();
@@ -36,7 +36,7 @@ export async function handler(event) {
 
     // Update transaction status
     await supabase
-      .from("transactions")
+      .from("transactions_b")
       .update({ status: "success" })
       .eq("reference", reference);
 
@@ -53,9 +53,7 @@ export async function handler(event) {
 
       // Insert earnings record
 
-      await supabase.from("posts")
-        .update({ sales: (item.sales || 0) + 1 })
-        .eq("id", item.id);
+      
       
       await supabase.from("earnings")
         .insert({
