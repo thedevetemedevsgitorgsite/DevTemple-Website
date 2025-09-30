@@ -566,7 +566,7 @@ min-width: 200px;
   color: #fff;
 }
 .settings-drop {
-  background: #fff;
+  background: var(--card-bg);
   border: 1px solid #ddd;
   border-radius: 12px;
   padding: 1.5em;
@@ -582,7 +582,7 @@ min-width: 200px;
 .settings-section h3 {
   font-size: 1.2em;
   margin-bottom: 0.6em;
-  color: #333;
+  color: var(--text-light);
 }
 
 .settings-section form,
