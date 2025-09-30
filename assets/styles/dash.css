@@ -557,4 +557,70 @@ min-width: 200px;
   letter-spacing: 1px;
   border: 1px groove var(--text-dim);
   color: #fff;
+}
+.settings-drop {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1.5em;
+  margin-top: 1em;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 400px;
+}
+
+.settings-section {
+  margin-bottom: 2em;
+}
+
+.settings-section h3 {
+  font-size: 1.2em;
+  margin-bottom: 0.6em;
+  color: #333;
+}
+
+.settings-section form,
+.settings-section ul {
+  margin: 0;
+  padding: 0;
+}
+
+.settings-section label {
+  display: block;
+  margin-bottom: 0.4em;
+  font-weight: 500;
+}
+
+.settings-section input {
+  width: 100%;
+  padding: 0.6em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 0.8em;
+}
+
+.settings-section button {
+  background: #0077ff;
+  color: #fff;
+  border: none;
+  padding: 0.6em 1.2em;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.settings-section button:hover {
+  background: #005dc0;
+}
+
+.danger-zone {
+  border-top: 1px solid #eee;
+  padding-top: 1em;
+}
+
+.danger-zone .danger {
+  background: #e74c3c;
+}
+
+.danger-zone .danger:hover {
+  background: #c0392b;
   }
