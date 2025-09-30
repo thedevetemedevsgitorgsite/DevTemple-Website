@@ -15,7 +15,7 @@ export async function handler(event) {
 
     // Store transaction in Supabase first
     const { data: transaction, error: txError } = await supabase
-      .from("transactions")
+      .from("transactions_b")
       .insert([
         {
           email,
@@ -54,7 +54,7 @@ export async function handler(event) {
 
     // Update transaction with Paystack reference
     await supabase
-      .from("transactions")
+      .from("transactions_b")
       .update({ reference: data.data.reference })
       .eq("id", transaction.id);
 
