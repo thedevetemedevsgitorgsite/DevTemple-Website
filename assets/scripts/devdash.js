@@ -487,23 +487,37 @@ document.getElementById("withdrawForm").addEventListener("submit", async (e) => 
 
 // Delete account
 document.getElementById("deleteAccountBtn").addEventListener("click", async () => {
-  const user = await getUser();
-  if (!user) return;
+  const confirmDelete = confirm("Are you sure you want to delete your account? This action cannot be undone.");
+  if (!confirmDelete) return;
 
-  if (!confirm("Delete your account permanently?")) return;
+  try {
+    // 1. Get current session user
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    if (userError) throw userError;
+    if (!user) throw new Error("No user found. Please log in again.");
 
-  const res = await fetch("/.netlify/functions/deleteUser", {
-    method: "POST",
-    body: JSON.stringify({ user_id: user.id }),
-  });
+    const userId = user.id;
 
-  const result = await res.json();
-  alert(result.message);
+    // 2. Delete from profiles table (optional: also delete their posts)
+    const { error: profileError } = await supabase.from("profiles").delete().eq("id", userId);
+    if (profileError) throw profileError;
 
-  if (result.success) {
-    await supabase.auth.signOut();
-    window.location.href = "/";
+    // 3. Delete user from Supabase Auth (must be done with Service Role via Netlify Function)
+    const res = await fetch("/.netlify/functions/deleteUser", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user_id: userId }),
+    });
+
+    const result = await res.json();
+    if (!res.ok) throw new Error(result.message);
+
+    alert("✅ Account deleted successfully.");
+    window.location.href = "/"; // redirect after deletion
+  } catch (err) {
+    alert("❌ Error deleting account: " + err.message);
   }
+      
 });
     
 // ========== INIT ==========
