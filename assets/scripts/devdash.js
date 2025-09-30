@@ -453,78 +453,43 @@ async function getAvailableBalance() {
   return totalEarnings - totalWithdrawn||0;
 }
 
-async function requestWithdraw(amount) {
-  const user = await getUser();
-  if (!user) return;
-  
-  const balance = await getAvailableBalance();
-  if (amount > balance) {
-    return alert(`❌ You can only withdraw up to $${balance.toFixed(2)}`);
-  }
-  
-  const { error } = await supabase.from("withdraw_requests").insert({
-    user_id: user.id,
-    amount,
-    status: "pending"
+
+    // Withdraw request
+document.getElementById("withdrawForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const amt = document.getElementById("requestAmt").value;
+  const user = await getUser(); // your helper that gets Supabase auth user
+
+  const res = await fetch("/.netlify/functions/withdraw", {
+    method: "POST",
+    body: JSON.stringify({ amount: amt, user_id: user.id }),
   });
-  
-  if (error) {
-    console.error("Withdraw request failed:", error);
-    return;
-  }
-  
-  alert("✅ Withdraw request submitted for review!");
-}
 
-document.getElementById("withdrawForm").addEventListener("submit", async (e)=>{
-  e.preventDefault()
-  await requestWithdraw(document.querySelector("#requestAmt").value);
-  
-})
-document.getElementById("delete-account").addEventListener("click", async () => {
-  if (!confirm("⚠️ This will permanently delete your account and posts. Continue?")) {
-    return;
-  }
-
-  const user = (await supabase.auth.getUser()).data.user;
-  if (!user) {
-    alert("No user logged in");
-    return;
-  }
-
-  try {
-    // 1. Delete posts (optional – remove if you want to keep them)
-    const { error: postsError } = await supabase
-      .from("posts")
-      .delete()
-      .eq("user_id", user.id);
-    if (postsError) console.error("Post delete error:", postsError);
-
-    // 2. Delete profile
-    const { error: profileError } = await supabase
-      .from("profiles")
-      .delete()
-      .eq("id", user.id);
-    if (profileError) console.error("Profile delete error:", profileError);
-
-    
-    const resS = await fetch("/.netlify/functions/deleteUser", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ uid: user.id })
-    });
-
-    if (!resS.ok) throw new Error("Auth delete failed");
-
-    alert("✅ Account deleted successfully.");
-    window.location.href = "/"; // redirect to homepage
-  } catch (err) {
-    console.error("Delete error:", err.message);
-    alert("❌ Error deleting account: " + err.message);
-  }
+  const result = await res.json();
+  alert(result.message);
 });
 
+// Delete account
+document.getElementById("deleteAccountBtn").addEventListener("click", async () => {
+  const user = await getUser();
+  if (!user) return;
 
+  if (!confirm("Delete your account permanently?")) return;
+
+  const res = await fetch("/.netlify/functions/deleteUser", {
+    method: "POST",
+    body: JSON.stringify({ user_id: user.id }),
+  });
+
+  const result = await res.json();
+  alert(result.message);
+
+  if (result.success) {
+    await supabase.auth.signOut();
+    window.location.href = "/";
+  }
+});
+    
 // ========== INIT ==========
 
 window.addEventListener("DOMContentLoaded", () => {
