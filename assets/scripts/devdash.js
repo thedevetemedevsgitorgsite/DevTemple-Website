@@ -1,7 +1,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const res = await fetch("/.netlify/functions/fcnfig");
-const { url, key } = await res.json();
+const Jres = await fetch("/.netlify/functions/fcnfig");
+const { url, key } = await Jres.json();
 
 export const supabase = createClient(url, key);
 
