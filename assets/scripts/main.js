@@ -141,7 +141,7 @@ themeToggle.addEventListener('click', function() {
 
 document.getElementById("sideSearch").addEventListener("keyup", e=>{
   if(e.key === "Enter"){
-    window.location.href="/home.html#search?q="+encodeURIComponent(e.target.value);
+    window.location.href="#search?q="+encodeURIComponent(e.target.value);
   }
 })
 const td = "https://fgglquyepbbzrdzmkpfd." +te+"upabase.co";
