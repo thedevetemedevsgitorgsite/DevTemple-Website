@@ -305,7 +305,7 @@ async function loadPosts() {
       const div = document.createElement("div");
 div.className = "card";
 div.dataset.id = post.id;
-div.dataset.file = post.file_path;
+div.dataset.filePath = post.file_path;
 div.dataset.sellerId = post.user_id; 
 
 div.innerHTML = `
