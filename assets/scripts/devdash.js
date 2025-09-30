@@ -481,6 +481,50 @@ document.getElementById("withdrawForm").addEventListener("submit", async (e)=>{
   await requestWithdraw(document.querySelector("#requestAmt").value);
   
 })
+
+document.getElementById("delete-account").addEventListener("click", async () => {
+  if (!confirm("⚠️ This will permanently delete your account and posts. Continue?")) {
+    return;
+  }
+
+  const user = (await supabase.auth.getUser()).data.user;
+  if (!user) {
+    alert("No user logged in");
+    return;
+  }
+
+  try {
+    // 1. Delete posts (optional – remove if you want to keep them)
+    const { error: postsError } = await supabase
+      .from("posts")
+      .delete()
+      .eq("user_id", user.id);
+    if (postsError) console.error("Post delete error:", postsError);
+
+    // 2. Delete profile
+    const { error: profileError } = await supabase
+      .from("profiles")
+      .delete()
+      .eq("id", user.id);
+    if (profileError) console.error("Profile delete error:", profileError);
+
+    
+    const res = await fetch("/.netlify/functions/deleteUser", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ uid: user.id })
+    });
+
+    if (!res.ok) throw new Error("Auth delete failed");
+
+    alert("✅ Account deleted successfully.");
+    window.location.href = "/"; // redirect to homepage
+  } catch (err) {
+    console.error("Delete error:", err.message);
+    alert("❌ Error deleting account: " + err.message);
+  }
+});
+
 // ========== INIT ==========
 window.addEventListener("DOMContentLoaded", () => {
 loadPosts();
