@@ -509,13 +509,13 @@ document.getElementById("delete-account").addEventListener("click", async () => 
     if (profileError) console.error("Profile delete error:", profileError);
 
     
-    const res = await fetch("/.netlify/functions/deleteUser", {
+    const resS = await fetch("/.netlify/functions/deleteUser", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ uid: user.id })
     });
 
-    if (!res.ok) throw new Error("Auth delete failed");
+    if (!resS.ok) throw new Error("Auth delete failed");
 
     alert("✅ Account deleted successfully.");
     window.location.href = "/"; // redirect to homepage
