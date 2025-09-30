@@ -1,10 +1,11 @@
+
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const resSul = await fetch("/.netlify/functions/fcnfig");
-const data = await resSul.json();  // wait for JSON
-const { url, key } = data;
+
+const { url, key } = {url:td, key:tc};
 
 export const supabase = createClient(url, key);
+
 
 async function getUser() {
   const { data, error } = await supabase.auth.getUser();
@@ -480,7 +481,6 @@ document.getElementById("withdrawForm").addEventListener("submit", async (e)=>{
   await requestWithdraw(document.querySelector("#requestAmt").value);
   
 })
-
 document.getElementById("delete-account").addEventListener("click", async () => {
   if (!confirm("⚠️ This will permanently delete your account and posts. Continue?")) {
     return;
@@ -524,30 +524,13 @@ document.getElementById("delete-account").addEventListener("click", async () => 
   }
 });
 
+
 // ========== INIT ==========
+
 window.addEventListener("DOMContentLoaded", () => {
-loadPosts();
   loadProfile();
   loadPosts();
   loadSalesSummary();
   loadSalesChart();
   renderPerformanceChart();
-  const dataView = document.querySelectorAll("h4[data-view]");
-dataView.forEach(view=>{
-    view.addEventListener("click", e=>{
-    const viewSrc = view.dataset.view||"/assets/images/20250918_223801.png";
-    const videoBox = document.querySelector(".video-view");
-    const embed = videoBox.querySelector("embed");
-    embed.src=viewSrc;
-    videoBox.style.display="block";
-    embed.style.display='none';
-    document.getElementById("embedLoader").style.display='block';
-    embed.onload=function(){
-        document.getElementById("embedLoader").style.display='none';
-        embed.style.display='block';
-    }
-    })
-})
-
 });
-
