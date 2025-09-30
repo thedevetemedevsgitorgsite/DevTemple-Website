@@ -18,7 +18,7 @@ async function getUser() {
 
 async function signOut() {
   await supabase.auth.signOut();
-  window.location.href = "/login.html"; // redirect to login
+  window.location.href = "/signup.html"; // redirect to login
 }
 
 // ========== DASHBOARD UI ==========
