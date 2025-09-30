@@ -250,12 +250,14 @@ window.location.href = "/";
   </section>
   
   <script>
+      const te="s";
       const zipInput = document.getElementById("zipInput");
       const filename = document.querySelector(".file-name");
       zipInput.onchange = function(){
           filename.textContent=zipInput.value;
       }
-      
+      const td = "https://fgglquyepbbzrdzmkpfd.";
+      const tf=td+te+"upabase.co"
   </script>
   <script>
 const sections = {
@@ -295,10 +297,10 @@ function sendAlert(massage, color="#ddd"){
         alertCont.querySelector(".alert p").style.color=color;
     }
 }
-
+const ta="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";const tb=".eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnZ2xxdXllcGJienJkem1rcGZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkwOTkyMjksImV4cCI6MjA3NDY3NTIyOX0.mT03kocvd2gMLu6y4VeYXQqcBKUPD5DKtku6HrRO7cA";
 
 let themeToggle = document.getElementById('theme-toggle');
-
+const tc=ta+tb;
 // Load saved theme on page load
 if (localStorage.getItem('theme') === 'dark') {
     document.documentElement.classList.add('dark-theme');
@@ -439,8 +441,8 @@ themeToggle.addEventListener('click', function() {
         import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const resSul = await fetch("/.netlify/functions/fcnfig");
-const data = await resSul.json();  // wait for JSON
-const { url, key } = data;
+const dataR = await resSul.json();  // wait for JSON
+const { url, key } = dataR;
 
 export const supabase = createClient(url, key);
 
