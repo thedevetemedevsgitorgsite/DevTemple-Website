@@ -1,3 +1,4 @@
+
 import fetch from "node-fetch";
 import { createClient } from "@supabase/supabase-js";
 
@@ -8,28 +9,54 @@ const supabase = createClient(
 
 export async function handler(event) {
   try {
-    const { reference, cart } = JSON.parse(event.body);
+    const { reference } = JSON.parse(event.body);
 
-    // verify with Paystack
+    // Verify with Paystack
     const paystackRes = await fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
       headers: { Authorization: `Bearer ${process.env.PAYSTACK_SEC_KEY}` }
     });
     const paystackData = await paystackRes.json();
 
-    if (!paystackData.status) {
-      return { statusCode: 400, body: JSON.stringify({ error: "Verification failed" }) };
+    if (!paystackData.status || paystackData.data.status !== "success") {
+      return { statusCode: 400, body: JSON.stringify({ error: "Payment verification failed" }) };
     }
 
-    const buyerEmail = paystackData.data.customer.email;
+    const payment = paystackData.data;
+    
+    // Get transaction from Supabase
+    const { data: transaction, error: txError } = await supabase
+      .from("transactions")
+      .select("*")
+      .eq("reference", reference)
+      .single();
+
+    if (txError || !transaction) {
+      return { statusCode: 404, body: JSON.stringify({ error: "Transaction not found" }) };
+    }
+
+    // Update transaction status
+    await supabase
+      .from("transactions")
+      .update({ status: "success" })
+      .eq("reference", reference);
+
+    const cart = transaction.cart_data;
+    const buyerEmail = payment.customer.email;
     let downloadLinks = [];
 
+    // Process each item in cart
     for (const item of cart) {
-      // update sales
+      // Update sales count
       await supabase.from("posts")
         .update({ sales: (item.sales || 0) + 1 })
         .eq("id", item.id);
 
-      // insert earnings
+      // Insert earnings record
+
+      await supabase.from("posts")
+        .update({ sales: (item.sales || 0) + 1 })
+        .eq("id", item.id);
+      
       await supabase.from("earnings")
         .insert({
           seller_id: item.sellerId,
@@ -38,19 +65,29 @@ export async function handler(event) {
           buyer: buyerEmail,
         });
 
-      // signed download link
+      // Create signed download URL (valid for 24 hours)
       const { data: signedUrl } = await supabase.storage
         .from("uploads")
-        .createSignedUrl(item.filePath, 60 * 60);
+        .createSignedUrl(item.filePath, 60 * 60 * 24); // 24 hours
 
       if (signedUrl?.signedUrl) {
-        downloadLinks.push({ id: item.id, url: signedUrl.signedUrl });
+        downloadLinks.push({ 
+          id: item.id, 
+          title: item.title,
+          url: signedUrl.signedUrl 
+        });
       }
     }
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ success: true, downloadLinks })
+      body: JSON.stringify({ 
+        success: true, 
+        downloadLinks,
+        reference: payment.reference,
+        amount: payment.amount / 100,
+        customer: buyerEmail
+      })
     };
 
   } catch (err) {
