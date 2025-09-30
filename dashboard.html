@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">  
 <head>
@@ -51,21 +52,21 @@ window.location.href = "/";
       
       
   <section id="hero" class="hero">
-    <h2>Welcome back, Developer!</h2>
+    <h2></h2>
     <p>Manage your uploads, check sales, and track performance.</p>
   </section>
 
   <section id="user-section" class="section user hidden">
 <div class="view public">
-              <img src="/assets/images/20250918_223801.png" class="user img">
+              <img src="/assets/images/20250918_223801.png" class="user img" class="img" onclick="sendAlert('your profile picture', '#5f0')"/>
               <form name="user edit">
      <h3>Profile information</h3>
      
-     <label for="userName">UserName</label> <input type="text" maxlength="30" required placeholder="Username*" name="user-name" minlength="3" id="userName">
+     <label for="userName">UserName</label> <input type="text" maxlength="30" required placeholder="Username*" name="user-name" minlength="3" id="userName" class="username">
      
-     <label for="bio">Bio</label><textarea minlength="10" maxlength="200" required placeholder="Let people know a little bit about you*" name="bio" id="bio"></textarea>
+     <label for="bio">Bio</label><textarea minlength="10" maxlength="200" required placeholder="Let people know a little bit about you*" name="bio" id="bio" class="bio"></textarea>
      <label for="skill">Skill</label>
-     <select name="skills" required id="skill">
+     <select name="skills" required id="skill" class="skill">
          <option value="">What's your skills*</option>
          <!-- Tech Skills -->
          <option value="software_developer">Software Developer</option>
@@ -119,8 +120,8 @@ window.location.href = "/";
          <option value="product_design">Product Design</option>
          <option value="branding">Branding</option>
      </select>
-     <label for="imgUrl">Photo URL</label>
-     <input type="url" name="photo" placeholder="Profile picture" id="imgUrl">
+     <label for="imgUrl">Photo</label>
+     <input type="file" name="photo" placeholder="Profile picture" id="imgUrl" accept="image/*">
 <button type="submit">Save</button>
               </form>
               
@@ -134,8 +135,16 @@ window.location.href = "/";
                       <strong>ID :</strong> <span class="uid"> abc122</span>
                   </p>
                   <button class="user-btn logout">Log out</button>
-                  <button class="user-btn delete-acct">Delete Account</button>
+                  <button class="user-btn delete-acct" id="delete-account">Delete Account</button>
               </div>
+          </div>
+          <div class="view withdraw">
+              <from id="withdrawForm">
+                  <h3>Withdraw request</h3>
+                  <form>
+                     <label for="" >Amount: $</label><input type="number" required maxlength="6" minlength="1" id="requestAmt"><button type="submit">Send</button>
+                  </form>
+              </from>
           </div>
   </section>
 
@@ -148,62 +157,99 @@ window.location.href = "/";
               <input type="file" accept="application/zip" id="zipInput" hidden required/>
               <label for="cardName">Name:</label>
               <input type="text" id="cardName" placeholder="(e.g: 3d box with efforts)" maxlength="100" required>
-              
+              <br>
               <label for="cardDes">Description: </label>
               <textarea name="" id="cardDes" maxlength="300" placeholder="describe your code include tags " required></textarea>
+              <br>
               <label for="cardCover">Cover Photo:</label>
-<input type="url" id="cardCover" placeholder="(e.g: https://....png)" maxlength="100" required>
+<input type="url" id="cardCover" placeholder="(e.g: https://....png)" required>
+<br>
 <label for="cardView">Viewers image:</label>
-<input type="url" id="cardView" placeholder="(e.g: ...png, gif, short video mp4)" maxlength="100" required>
+<input type="url" id="cardView" placeholder="(e.g: ...png, gif, short video mp4)" required>
+<br>
 <label for="cardAmount">Amount:</label>
 <input type="number" id="cardAmount" placeholder="(e.g: 10=$10)" maxlength="100" required>
+<br>
               <button id="pushCard"  class="user-btn publish"><span class="sending"> </span> Publish</button>
               </form>
           </div>
   </section>
 
   <section id="sales-section" class="section sales hidden">
-    <h3>Your Sales Summary</h3>
-    <div class="sales-stats">
-      <div class="card">Total Sales: <strong>$250</strong></div>
-      <div class="card">Units Sold: <strong>15</strong></div>
-      <div class="card">Pending: <strong>2</strong></div>
+<section id="summary-section" class="section summary">
+    <h3>Dashboard Summary</h3>
+    <div class="summary-grid">
+        <div class="summary-card sales-stats">
+            <i class="fas fa-upload"></i>
+            <div>
+                <p>Total Uploads</p>
+                <h4 id="summary-uploads">0</h4>
+            </div>
+        </div>
+        <div class="summary-card">
+            <i class="fas fa-dollar-sign"></i>
+            <div>
+                <p>Total Sales</p>
+                <h4 id="summary-sales">$0</h4>
+            </div>
+        </div>
+        <div class="summary-card">
+            <i class="fas fa-eye"></i>
+            <div>
+                <p>Total Views</p>
+                <h4 id="summary-views">0</h4>
+            </div>
+        </div>
+        <div class="summary-card">
+            <i class="fas fa-wallet"></i>
+            <div>
+                <p>Earnings</p>
+                <h4 id="summary-earnings">$0</h4>
+            </div>
+        </div>
     </div>
-    <h4>Recent Sales</h4>
-    <ul class="sales-list">
-      <li><span>3D Box Template</span> — $15 — <small>2 days ago</small></li>
-      <li><span>Login UI Kit</span> — $12 — <small>1 week ago</small></li>
-      <li><span>Portfolio Theme</span> — $30 — <small>2 weeks ago</small></li>
-    </ul>
+</section>
   </section>
 
   <section id="posts-section" class="section posts hidden">
-    <h3>Your Uploads</h3>
-    <div class="post-grid">
-      <div class="post-card">
-        <h4>3D Box Template</h4>
-        <p>A fancy interactive CSS/JS 3D box.</p>
-        <span>$15</span>
-      </div>
-      <div class="post-card">
-        <h4>Portfolio Theme</h4>
-        <p>Responsive portfolio template for devs.</p>
-        <span>$30</span>
-      </div>
-      <div class="post-card">
-        <h4>Login UI Kit</h4>
-        <p>Modern login + signup flow with validation.</p>
-        <span>$12</span>
-      </div>
-    </div>
+
   </section>
 
   <section id="chart-section" class="section static hidden">
-    <h3>Performance Chart</h3>
+    <h3>Performance</h3>
     <canvas id="salesChart"></canvas>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    
+</script>
+    
+    <div class="product-grid">
+        
+    </div>
   </section>
 
+<section class="video-view">
+    <h3 onclick="this.parentElement.style.display='none'"><i class="fas fa-times"></i></h3>
+    <div style="text-align: center;display: flex;justify-content: center;"><embed src="https://media.tenor.com/xfrF7juLowwAAAAM/vatnik-detected.gif" class="video" autoplay></div>
+    
+    <div id="embedLoader">
+        
+        <p><img src="/assets/images/20250918_223801.png" width="30" height="30" style=""></p>
+        <p>loading...</p>
+        </div>
+        
+</section>
+
+
   </main>
+  <section class="alert-container">
+  <div class="alert">
+      <p class="msg">Says: alert</p>
+      <button class="ok-btn" onclick="this.parentElement.parentElement.style.display='none';">ok</button>
+  </div>
+  </section>
+  
   <script>
       const zipInput = document.getElementById("zipInput");
       const filename = document.querySelector(".file-name");
@@ -233,7 +279,44 @@ document.querySelector(".top-btn.user").onclick = () => showSection("user");
 document.querySelector(".top-btn.pen").onclick = () => showSection("pen");
 document.querySelector(".top-btn.sales").onclick = () => showSection("sales");
 document.querySelector(".top-btn.chart").onclick = () => showSection("chart");
-// Optional: Add a button for posts list
+
+if(!document.getElementById('theme-toggle')){
+  themeEle = document.createElement("div");
+  themeEle.id="theme-toggle";
+  themeEle.hidden=true;
+  themeEle.style.display="none";
+  document.body.appendChild(themeEle);
+}
+
+function sendAlert(massage, color="#ddd"){
+    const alertCont = document.querySelector(".alert-container");
+    if(alertCont){
+        alertCont.style.display="flex";
+        alertCont.querySelector(".alert p").textContent=massage;
+        alertCont.querySelector(".alert p").style.color=color;
+    }
+}
+
+
+let themeToggle = document.getElementById('theme-toggle');
+
+// Load saved theme on page load
+if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark-theme');
+}
+
+// Add a single click event listener
+themeToggle.addEventListener('click', function() {
+    document.documentElement.classList.toggle('dark-theme');
+    if (document.documentElement.classList.contains('dark-theme')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
+});
+
+
+
 </script>
 
     <!-- Footer -->
@@ -282,3 +365,74 @@ document.querySelector(".top-btn.chart").onclick = () => showSection("chart");
  </section>
         </div>
     </footer>
+    
+    <section class="search-loader"><img src="/assets/images/20250918_223801.png" width="40" height="40" style="margin-top: 10px;animation:spin-bor 2s ease-in-out infinite;border-radius: 50%;border: 1px solid var(--primary-color);border-right: 0;"></section>
+    <section class="loader">
+  <img src="/assets/images/20250918_223801.png" alt="Loading...">
+</section>
+    <style>
+        .loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #112;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.loader img {
+  width: 120px;
+  height: auto;
+  animation: pulse 1.5s infinite;
+  border-radius: 50%;
+  box-shadow: 0 0 15px #06f;
+}
+
+/* fade-out state */
+.loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  50%  { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1);   opacity: 0.8; }
+}
+.search-loader{
+  position: fixed;
+  display: flex;
+  background: rgba(255 , 255, 255, 0.2);
+  z-index: 10000;
+  width: 99vw;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+}
+@keyframes spin-bor{
+  0%{ transform: rotateX(0);}
+  25%{transform: rotateX(360deg);}
+  50%{transform: rotateY(360deg);}
+  100%{transform: rotateY(0) rotateX(360deg);}
+}
+    </style>
+     <script>
+     document.querySelector(".search-loader").style.display='flex';
+  window.addEventListener("load", () => {
+      
+    const loader = document.querySelector(".loader");
+    loader.classList.add("hidden")
+    setTimeout(()=>document.querySelector(".search-loader").style.display='none', 1500);
+  });
+     </script>
+
+    <script src="/assets/scripts/devdash.js" type="module" defer></script>
