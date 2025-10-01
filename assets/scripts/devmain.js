@@ -202,14 +202,16 @@ function updateCartUI() {
 // add-to-cart
 
 // checkout click
-// Updated checkout function with better error handling
-checkoutBtn.onclick = async () => {
+
+    // Updated checkout function with proper callback handling
+checkoutBtn.onclick = async function() {
   if (cart.length === 0) {
     alert("Cart is empty");
     return;
   }
 
   // Show loading state
+  const originalText = checkoutBtn.textContent;
   checkoutBtn.disabled = true;
   checkoutBtn.textContent = "Processing...";
 
@@ -220,12 +222,13 @@ checkoutBtn.onclick = async () => {
     if (!email) {
       email = prompt("Enter your email to continue:");
       if (!email) {
+        resetCheckoutButton(checkoutBtn, originalText);
         alert("Email is required for payment");
         return;
       }
       
-      // Basic email validation
       if (!email.includes('@') || !email.includes('.')) {
+        resetCheckoutButton(checkoutBtn, originalText);
         alert("Please enter a valid email address");
         return;
       }
@@ -243,7 +246,8 @@ checkoutBtn.onclick = async () => {
           title: item.title,
           price: item.price,
           sellerId: item.sellerId,
-          filePath: item.filePath
+          filePath: item.filePath,
+          sales: item.sales || 0
         }))
       })
     });
@@ -253,16 +257,6 @@ checkoutBtn.onclick = async () => {
 
     if (!res.ok || data.error) {
       let errorMessage = data.error || "Payment initialization failed";
-      
-      // Specific error messages for common issues
-      if (errorMessage.includes("amount") || errorMessage.includes("Amount")) {
-        errorMessage = "Invalid amount. Please check your cart items.";
-      } else if (errorMessage.includes("email") || errorMessage.includes("Email")) {
-        errorMessage = "Invalid email address. Please check and try again.";
-      } else if (errorMessage.includes("key") || errorMessage.includes("authorization")) {
-        errorMessage = "Payment service configuration error. Please contact support.";
-      }
-      
       throw new Error(errorMessage);
     }
 
@@ -270,64 +264,139 @@ checkoutBtn.onclick = async () => {
       throw new Error("No payment URL received from server");
     }
 
-    // Open Paystack checkout
+    // Calculate total amount
+    const totalAmount = cart.reduce((sum, item) => sum + item.price, 0) * 100;
+
+    // Define callback functions first
+    const paymentCallback = function(response) {
+      console.log("Paystack callback triggered:", response);
+      
+      // Reset button immediately
+      resetCheckoutButton(checkoutBtn, originalText);
+      
+      handlePaymentVerification(response.reference);
+    };
+
+    const onCloseCallback = function() {
+      console.log("Payment window closed");
+      resetCheckoutButton(checkoutBtn, originalText);
+      alert("Payment window closed. You can complete the payment later.");
+    };
+
+    // Setup Paystack with the defined functions
     const handler = PaystackPop.setup({
       key: "pk_live_0b0770be1e29f5e7a159b39d2d9bdc2c41785306",
       email: email,
-      amount: cart.reduce((s, i) => s + i.price, 0) * 100,
+      amount: totalAmount,
       currency: "NGN",
       ref: data.reference,
-      callback: async function(response) {
-        console.log("Paystack callback:", response);
-        
-        try {
-          const verifyRes = await fetch("/.netlify/functions/verify-pay", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ reference: response.reference })
-          });
-          
-          const verifyData = await verifyRes.json();
-          console.log("Verification response:", verifyData);
-
-          if (verifyData.success) {
-            alert("✅ Payment successful! Your downloads are ready.");
-            
-            // Clear cart
-            cart.length = 0;
-            updateCartUI();
-            
-            // Show download links
-            showDownloadLinks(verifyData.downloadLinks);
-          } else {
-            alert("❌ Payment verification failed: " + (verifyData.error || "Unknown error"));
-          }
-        } catch (verifyError) {
-          console.error("Verification error:", verifyError);
-          alert("❌ Could not verify payment. Please contact support with reference: " + response.reference);
-        }
-      },
-      onClose: function() {
-        console.log("Payment window closed");
-        alert("Payment window closed. You can complete the payment later.");
-        
-        // Reset button state
-        checkoutBtn.disabled = false;
-        checkoutBtn.textContent = "Checkout with Paystack";
-      }
+      callback: paymentCallback,  // Use the predefined function
+      onClose: onCloseCallback    // Use the predefined function
     });
-    
+
     handler.openIframe();
-    
+
   } catch (error) {
     console.error("Checkout error:", error);
     alert("❌ Checkout failed: " + error.message);
-    
-    // Reset button state
-    checkoutBtn.disabled = false;
-    checkoutBtn.textContent = "Checkout with Paystack";
+    resetCheckoutButton(checkoutBtn, originalText);
   }
 };
+
+// Helper function to reset button state
+function resetCheckoutButton(button, originalText) {
+  button.disabled = false;
+  button.textContent = originalText;
+}
+
+// Separate function for payment verification
+async function handlePaymentVerification(reference) {
+  try {
+    console.log("Verifying payment with reference:", reference);
+    
+    const verifyRes = await fetch("/.netlify/functions/verify-pay", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ reference: reference })
+    });
+    
+    const verifyData = await verifyRes.json();
+    console.log("Verification response:", verifyData);
+
+    if (verifyData.success) {
+      alert("✅ Payment successful! Your downloads are ready.");
+      
+      // Clear cart
+      cart.length = 0;
+      updateCartUI();
+      
+      // Show download links
+      showDownloadLinks(verifyData.downloadLinks);
+    } else {
+      alert("❌ Payment verification failed: " + (verifyData.error || "Unknown error"));
+    }
+  } catch (verifyError) {
+    console.error("Verification error:", verifyError);
+    alert("❌ Could not verify payment. Please contact support with reference: " + reference);
+  }
+}
+
+// Your existing showDownloadLinks function (make sure it's defined)
+function showDownloadLinks(downloadLinks) {
+  // Remove existing download section if any
+  const existingSection = cartBox.querySelector(".download-links");
+  if (existingSection) existingSection.remove();
+
+  // Create download section
+  const dlSection = document.createElement("div");
+  dlSection.className = "download-links";
+  dlSection.style.cssText = `
+    margin-top: 15px;
+    padding: 15px;
+    border: 2px solid #0a6;
+    border-radius: 8px;
+    background: #f9fff9;
+  `;
+
+  const title = document.createElement("h4");
+  title.textContent = "📥 Your Downloads";
+  title.style.cssText = "margin-bottom: 10px; color: #0a6;";
+  dlSection.appendChild(title);
+
+  const info = document.createElement("p");
+  info.textContent = "Links are valid for 24 hours. Click to download:";
+  info.style.cssText = "font-size: 14px; color: #666; margin-bottom: 10px;";
+  dlSection.appendChild(info);
+
+  downloadLinks.forEach(linkObj => {
+    const itemDiv = document.createElement("div");
+    itemDiv.style.cssText = "margin: 8px 0; padding: 8px; background: white; border-radius: 4px;";
+    
+    const a = document.createElement("a");
+    a.href = linkObj.url;
+    a.textContent = `Download: ${linkObj.title || 'Item ' + linkObj.id}`;
+    a.target = "_blank";
+    a.style.cssText = `
+      display: block;
+      padding: 8px 12px;
+      background: #0a6;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      text-align: center;
+      font-weight: bold;
+    `;
+    
+    a.onmouseover = () => a.style.background = "#084";
+    a.onmouseout = () => a.style.background = "#0a6";
+    
+    itemDiv.appendChild(a);
+    dlSection.appendChild(itemDiv);
+  });
+
+  cartBox.appendChild(dlSection);
+    }
+
 
 
 // Function to display download links
