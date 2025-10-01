@@ -534,7 +534,7 @@ div.innerHTML = `
   proCard.forEach(card => {
         const tag = card.querySelector(".product-describe");
         if (card) {
-          card.querySelector(".buttons a").href = `#search?q=${encodeURIComponent(tag.innerHTML.match(/#[\w-]+/) || '')}`;
+          card.querySelector(".buttons a").href = `#search?q=${encodeURIComponent(tag.textContent.match(/#[\w-]+/) || '')}`;
           tag.innerHTML = tag.innerHTML.replace(/\#([\w\-]+)/g, "<a href='#search?q=$1' class='card-tag'>#$1</a>");
           tag.querySelectorAll(".card-tag").forEach(ctag => {
             ctag.style.cssText = `color: var(--primary-color);
