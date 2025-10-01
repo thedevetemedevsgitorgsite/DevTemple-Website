@@ -1,4 +1,3 @@
-
 import fetch from "node-fetch";
 import { createClient } from "@supabase/supabase-js";
 
@@ -36,7 +35,7 @@ export async function handler(event) {
 
     // Update transaction status
     await supabase
-      .from("transactions_b")
+      .from("transactions")
       .update({ status: "success" })
       .eq("reference", reference);
 
@@ -44,38 +43,86 @@ export async function handler(event) {
     const buyerEmail = payment.customer.email;
     let downloadLinks = [];
 
+    console.log("Processing cart items:", cart);
+
     // Process each item in cart
     for (const item of cart) {
-      // Update sales count
-      await supabase.from("posts")
-        .update({ sales: (item.sales || 0) + 1 })
-        .eq("id", item.id);
+      try {
+        // First, get the current post data to ensure it exists and get user_id (seller)
+        const { data: post, error: postError } = await supabase
+          .from("posts")
+          .select("sales, user_id")  // Only get user_id since that's the seller
+          .eq("id", item.id)
+          .single();
 
-      // Insert earnings record
+        if (postError) {
+          console.error(`Error fetching post ${item.id}:`, postError);
+          continue;
+        }
 
-      
-      
-      await supabase.from("earnings")
-        .insert({
-          seller_id: item.sellerId,
-          post_id: item.id,
-          amount: item.price,
-          buyer: buyerEmail,
-        });
+        const sellerId = post.user_id;  // user_id is the seller
+        
+        if (!sellerId) {
+          console.error(`No user_id (seller) found for post ${item.id}`);
+          continue;
+        }
 
-      // Create signed download URL (valid for 24 hours)
-      const { data: signedUrl } = await supabase.storage
-        .from("uploads")
-        .createSignedUrl(item.filePath, 60 * 60 * 24); // 24 hours
+        console.log(`Processing item ${item.id} for seller (user_id): ${sellerId}`);
 
-      if (signedUrl?.signedUrl) {
-        downloadLinks.push({ 
-          id: item.id, 
-          title: item.title,
-          url: signedUrl.signedUrl 
-        });
+        // Update sales count - increment by 1
+        const newSales = (post.sales || 0) + 1;
+        const { error: updateError } = await supabase
+          .from("posts")
+          .update({ sales: newSales })
+          .eq("id", item.id);
+
+        if (updateError) {
+          console.error(`Error updating sales for post ${item.id}:`, updateError);
+        } else {
+          console.log(`Updated sales for post ${item.id} to ${newSales}`);
+        }
+
+        // Insert earnings record - using user_id as seller_id
+        const { error: earningsError } = await supabase
+          .from("earnings")
+          .insert({
+            seller_id: sellerId,  // This is the user_id from posts table
+            post_id: item.id,
+            amount: item.price,
+            buyer: buyerEmail,
+            created_at: new Date().toISOString()
+          });
+
+        if (earningsError) {
+          console.error(`Error creating earnings record for post ${item.id}:`, earningsError);
+          console.error("Earnings error details:", earningsError);
+        } else {
+          console.log(`✅ Created earnings record for post ${item.id}, seller ${sellerId}, amount ${item.price}`);
+        }
+
+        // Create signed download URL
+        if (item.filePath) {
+          const { data: signedUrl, error: signedUrlError } = await supabase.storage
+            .from("uploads")
+            .createSignedUrl(item.filePath, 60 * 60 * 24);
+
+          if (signedUrlError) {
+            console.error(`Error creating signed URL for ${item.filePath}:`, signedUrlError);
+          } else if (signedUrl?.signedUrl) {
+            downloadLinks.push({ 
+              id: item.id, 
+              title: item.title,
+              url: signedUrl.signedUrl 
+            });
+          }
+        }
+
+      } catch (itemError) {
+        console.error(`Error processing cart item ${item.id}:`, itemError);
       }
     }
+
+    console.log("Completed processing. Download links:", downloadLinks.length);
 
     return {
       statusCode: 200,
@@ -89,7 +136,7 @@ export async function handler(event) {
     };
 
   } catch (err) {
-    console.error(err);
+    console.error("Verify-pay overall error:", err);
     return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
   }
 }
