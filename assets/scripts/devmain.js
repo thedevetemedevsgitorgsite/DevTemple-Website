@@ -537,19 +537,30 @@ div.innerHTML = `
           }
         });
         
-        comm.querySelectorAll(".card").forEach(card => {
+// In your add to cart function
+comm.querySelectorAll(".card").forEach(card => {
   const addBtn = card.querySelector(".product-img h3");
   addBtn.style.cursor = "pointer";
   
   addBtn.onclick = () => {
+    document.querySelector(".search-loader").style.display = "flex";
+setTimeout(() => {
     const id = card.dataset.id;
     const title = card.querySelector(".product-describe strong").textContent;
     const price = parseFloat(card.querySelector(".amount").dataset.price);
-    const sellerId = card.dataset.sellerId;
-    const filePath = card.dataset.filePath; // stored in dataset for download later
+    const filePath = card.dataset.filePath;
     
-    cart.push({ id, title, price, sellerId, filePath });
+    
+    cart.push({ 
+      id, 
+      title, 
+      price, 
+      filePath 
+      
+    });
     updateCartUI();
+  document.querySelector(".search-loader").style.display = "none";
+}, 1200);
   };
 });
 
@@ -572,7 +583,7 @@ setTimeout(() => {
     
     document.getElementById("userView").style.display = "block";
     document.querySelector(".search-loader").style.display = "none";
-}, 2000);
+}, 1500);
   });
   
 });
