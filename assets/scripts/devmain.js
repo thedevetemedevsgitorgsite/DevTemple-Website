@@ -14,6 +14,9 @@ async function getUser() {
   }
   return data?.user || null;
 }
+window.fn = function fn(fng) {
+  return fng.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
 
 function formatCount(num) {
   if (num >= 1_000_000_000) {
@@ -154,7 +157,7 @@ const cartBox = document.querySelector(".cart-items");
 const cartTotalEl = cartBox.querySelector("h4 span");
 
 let checkoutBtn = document.createElement("button");
-checkoutBtn.textContent = "Checkout with Paystack";
+checkoutBtn.textContent = `Checkout with Paystack`;
 checkoutBtn.className = "checkout-btn";
 checkoutBtn.style.cssText = `
   background: #0a6;
@@ -176,8 +179,9 @@ function updateCartUI() {
     const div = document.createElement("div");
     div.className = "cart-item";
     div.innerHTML = `
-      <strong>${item.title}</strong> [ ₦${item.price} ]
+      <strong>${item.title}</strong> [ ₦fn(${item.price})]
       <button data-index="${index}" class="remove">x</button>
+      <br><small style="color:#d00;">Note: don't close or reload this window when making the payment</b>
     `;
     cartBox.insertBefore(div, cartBox.querySelector("h4"));
   });
@@ -392,6 +396,7 @@ function showDownloadLinks(downloadLinks) {
     
     itemDiv.appendChild(a);
     dlSection.appendChild(itemDiv);
+    dlSection.innerHTML += `<button onclick="this.parentElement.style.display='none'"><I class="fas fa-times"></i> close</button>`;
   });
 
   cartBox.appendChild(dlSection);
@@ -502,7 +507,7 @@ div.innerHTML = `
           ${formatCount(post.star || 0)}
         </span>
       </span>
-      <span class="amount" data-price="${post.price || 0}">₦${post.price || 0} 
+      <span class="amount" data-price="${post.price || 0}">₦fn(${post.price || 0})
         <small><b class="sales">${post.sales || 0}</b> sales</small>
       </span>
     <a href="/home.html#search?q=${encodeURIComponent(post.name)}"><span class="star-contain"><i class="fas fa-search"></i></span></a>
