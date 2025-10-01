@@ -176,7 +176,7 @@ function updateCartUI() {
     const div = document.createElement("div");
     div.className = "cart-item";
     div.innerHTML = `
-      <strong>${item.title}</strong> - ₦${item.price}
+      <strong>${item.title}</strong> [ ₦${item.price} ]
       <button data-index="${index}" class="remove">x</button>
     `;
     cartBox.insertBefore(div, cartBox.querySelector("h4"));
@@ -502,7 +502,7 @@ div.innerHTML = `
           ${formatCount(post.star || 0)}
         </span>
       </span>
-      <span class="amount" data-price="${post.price || 0}">$${post.price || 0} 
+      <span class="amount" data-price="${post.price || 0}">₦${post.price || 0} 
         <small><b class="sales">${post.sales || 0}</b> sales</small>
       </span>
     <a href="/home.html#search?q=${encodeURIComponent(post.name)}"><span class="star-contain"><i class="fas fa-search"></i></span></a>
