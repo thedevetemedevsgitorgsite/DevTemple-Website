@@ -1,4 +1,5 @@
 
+
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 
@@ -219,7 +220,7 @@ async function loadPosts() {
     </div>
     <div class="buttons">
         <span class="star-contain"><span class="star-count">${post.star? post.star:0}</span></span> stars
-    <span class="amount" data-price="${post.price||0}">₦${post.price||0} <small><b class="sales">${post.sales? post.sales:0}</b> sales</small></span>
+    <span class="amount" data-price="${post.price||0}">₦${fn(post.price||0)} <small><b class="sales">${post.sales? post.sales:0}</b> sales</small></span>
     <a href="/home.html#search?q=${encodeURIComponent(post.name)}"><span class="star-contain"><i class="fas fa-search"></i> </span></a>
     </div>
       `;
@@ -299,39 +300,56 @@ async function loadSalesSummary() {
   const user = await getUser();
   if (!user) return;
 
-  const { data, error } = await supabase
-    .from("posts")
-    .select("price, sales")
-    .eq("user_id", user.id);
+  try {
+    const { data, error } = await supabase
+      .from("posts")
+      .select("id, price, sales, name")
+      .eq("user_id", user.id);
 
-  if (error) {
-    console.error("Sales summary error:", error);
-    return;
+    if (error) {
+      console.error("Sales summary error:", error);
+      return;
+    }
+
+    console.log("User posts data:", data);
+
+    if (!data || data.length === 0) {
+      document.querySelector(".sales-stats").innerHTML = "<p>No products uploaded yet.</p>";
+      return;
+    }
+
+    let totalSales = 0;
+    let unitsSold = 0;
+
+    data.forEach(post => {
+      const postSales = post.sales || 0;
+      const postPrice = post.price || 0;
+      totalSales += postPrice * postSales;
+      unitsSold += postSales;
+      
+      console.log(`Post: ${post.name}, Price: ${postPrice}, Sales: ${postSales}`);
+    });
+
+    const availableBalance = await getAvailableBalance();
+
+    document.querySelector(".sales-stats").innerHTML = `
+      <div class="card">Total Sales Value: <strong>₦${fn(totalSales.toFixed(2))}</strong></div>
+      <div class="card">Units Sold: <strong>${fn(unitsSold)}</strong></div>
+      <div class="card">Products Listed: <strong>${data.length}</strong></div>
+      <div class="card">Available Balance: <strong>₦${fn(availableBalance.toFixed(2))}</strong></div>
+      ${availableBalance > 0 ? `
+        <div class="card" style="border-color: #0a6;">
+          <small>You can withdraw up to ₦${fn(availableBalance.toFixed(2))}</small>
+        </div>
+      ` : ''}
+    `;
+    document.getElementById("summary-sales").textContent = fn(totalSales||0);
+    document.getElementById("summary-earnings").textContent = "₦"+fn(availableBalance.toFixed(2));
+  } catch (error) {
+    console.error("Error in loadSalesSummary:", error);
+    document.querySelector(".sales-stats").innerHTML = "<p>Error loading sales data</p>";
   }
-
-  if (!data || data.length === 0) {
-    document.querySelector(".sales-stats").innerHTML = "<p>No sales yet.</p>";
-    return;
-  }
-
-  let totalSales = 0;
-  let unitsSold = 0;
-
-  data.forEach(post => {
-    totalSales += (post.price || 0) * (post.sales || 0);
-    unitsSold += post.sales || 0;
-  });
-
-  document.querySelector(".sales-stats").innerHTML = `
-    <div class="card">Total Sales: <strong>₦${totalSales.toFixed(2)}</strong></div>
-    <div class="card">Units Sold: <strong>${unitsSold}</strong></div>
-    <div class="card">Products: <strong>${data.length}</strong></div>
-    <div class="card">
-    Available balance: 
-    <strong>${await getAvailableBalance()}</strong></div>
-  `;
 }
-
 async function loadSalesChart() {
   const user = await getUser();
   if (!user) return;
@@ -425,33 +443,58 @@ async function getAvailableBalance() {
   const user = await getUser();
   if (!user) return 0;
 
-  // Total earnings from transactions
-  const { data: txData, error: txError } = await supabase
-    .from("transactions")
-    .select("creator_earnings")
-    .eq("user_id", user.id);
+  try {
 
-  if (txError) {
-    console.error("Error loading transactions:", txError);
+    const { data: postsData, error: postsEarnError } = await supabase
+      .from("posts")
+      .select("price, sales")
+      .eq("user_id", user.id);
+    if (postsEarnError) {
+      console.error("Error loading posts data for earnings:", postsEarnError);
+      return 0;
+    }
+    const totalEarnings = postsData.reduce((sum, post) => {
+      const postSales = post.sales || 0;
+      const postPrice = post.price || 0;
+      
+      const grossRevenue = postPrice * postSales;
+      const netEarnings = grossRevenue * 0.7; 
+      return sum + netEarnings;
+    }, 0);
+
+    const { data: withdraws, error: wdError } = await supabase
+      .from("withdraw_requests")
+      .select("amount, status")
+      .eq("user_id", user.id)
+      .in("status", ["approved", "paid"]);
+
+    if (wdError) {
+      console.error("Error loading withdraws:", wdError);
+      return 0;
+    }
+
+    const totalWithdrawn = withdraws.reduce((sum, w) => sum + (w.amount || 0), 0);
+    
+    // 3. Final Calculation
+    const availableBalance = totalEarnings - totalWithdrawn;
+    
+    console.log("Balance Calculation:", {
+      totalEarnings,
+      totalWithdrawn,
+      availableBalance,
+      earningsCount: postsData?.length || 0,
+      withdrawsCount: withdraws?.length || 0
+    });
+
+    return Math.max(availableBalance, 0); // Ensure non-negative
+
+  } catch (error) {
+    console.error("Error in getAvailableBalance:", error);
     return 0;
   }
-  const totalEarnings = txData.reduce((sum, t) => sum + t.creator_earnings, 0);
-
-  // Total already paid out
-  const { data: withdraws, error: wdError } = await supabase
-    .from("withdraw_requests")
-    .select("amount, status")
-    .eq("user_id", user.id)
-    .in("status", ["approved", "paid"]); // only count approved/paid
-
-  if (wdError) {
-    console.error("Error loading withdraws:", wdError);
-    return 0;
-  }
-  const totalWithdrawn = withdraws.reduce((sum, w) => sum + w.amount, 0);
-
-  return totalEarnings - totalWithdrawn||0;
 }
+
+
 
 async function requestWithdraw(amount) {
   const user = await getUser();
@@ -459,7 +502,7 @@ async function requestWithdraw(amount) {
 
   const balance = await getAvailableBalance();
   if (amount > balance) {
-    return alert(`❌ You can only withdraw up to $${balance.toFixed(2)}`);
+    return alert(`❌ You can only withdraw up to ₦${balance.toFixed(2)}`);
   }
 
   const { error } = await supabase.from("withdraw_requests").insert({
@@ -502,7 +545,6 @@ document.getElementById("deleteAccountBtn").addEventListener("click", async () =
     const { error: profileError } = await supabase.from("profiles").delete().eq("id", userId);
     if (profileError) throw profileError;
 
-    // 3. Delete user from Supabase Auth (must be done with Service Role via Netlify Function)
     const res = await fetch("/.netlify/functions/deleteUser", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -519,6 +561,12 @@ document.getElementById("deleteAccountBtn").addEventListener("click", async () =
   }
       
 });
+
+
+
+window.fn = function fn(fng) {
+  return fng.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
     
 // ========== INIT ==========
 
