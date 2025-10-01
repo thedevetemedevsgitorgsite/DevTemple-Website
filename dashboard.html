@@ -148,7 +148,7 @@ window.location.href = "/";
     <h3>💳 Withdraw Request</h3>
     <form id="withdrawForm">
       <label for="requestAmt">Amount (₦)</label>
-      <input type="number" id="requestAmt" name="amount" min="1" max="999999" required>
+      <input type="number" id="requestAmt" name="amount" min="100" max="250000" required>
       <button type="submit">Send Request</button>
     </form>
   </div>
@@ -176,15 +176,7 @@ window.location.href = "/";
    <div class="view new-upload">
               <form id="publisherForm">
                   
-              <a href="/terms/index.html">Make sure your post complied with our terms</a>
-                  <ul>
-                      <strong>Kindly recheck:</strong>
-                  <a href="/terms/privacy.html"><li>Privacy Policy</li></a>
-        
-                  <a href="/terms/index.html"><li>term of use</li></a>
-                  <a href="/terms/index.html#payment-refunds-heading"><li>Price and representation</li></a>
-                  <a href="/terms/index.htmlcommunity-guidelines"><li>Community Guidelines</li></a>
-                  </ul>
+         
               <label for="zipInput" class="user-btn upload-btn">Upload zip file <span class="file-name"></span></label>
               <input type="file" accept="application/zip" id="zipInput" hidden required/>
               <label for="cardName">Name:</label>
@@ -466,4 +458,4 @@ themeToggle.addEventListener('click', function() {
 
     <script type="module" defer src="/assets/scripts/devdash.js"></script>
 </body>
-            </html>
+            </html> 
