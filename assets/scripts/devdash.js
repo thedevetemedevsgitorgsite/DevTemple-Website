@@ -219,7 +219,7 @@ async function loadPosts() {
     </div>
     <div class="buttons">
         <span class="star-contain"><span class="star-count">${post.star? post.star:0}</span></span> stars
-    <span class="amount" data-price="${post.price||0}">$${post.price||0} <small><b class="sales">${post.sales? post.sales:0}</b> sales</small></span>
+    <span class="amount" data-price="${post.price||0}">₦${post.price||0} <small><b class="sales">${post.sales? post.sales:0}</b> sales</small></span>
     <a href="/home.html#search?q=${encodeURIComponent(post.name)}"><span class="star-contain"><i class="fas fa-search"></i> </span></a>
     </div>
       `;
@@ -323,7 +323,7 @@ async function loadSalesSummary() {
   });
 
   document.querySelector(".sales-stats").innerHTML = `
-    <div class="card">Total Sales: <strong>$${totalSales.toFixed(2)}</strong></div>
+    <div class="card">Total Sales: <strong>₦${totalSales.toFixed(2)}</strong></div>
     <div class="card">Units Sold: <strong>${unitsSold}</strong></div>
     <div class="card">Products: <strong>${data.length}</strong></div>
     <div class="card">
