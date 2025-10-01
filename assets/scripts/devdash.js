@@ -1,5 +1,4 @@
 
-
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 
@@ -343,8 +342,8 @@ async function loadSalesSummary() {
         </div>
       ` : ''}
     `;
-    document.getElementById("summary-sales").textContent = fn(totalSales||0);
-    document.getElementById("summary-earnings").textContent = "₦"+fn(availableBalance.toFixed(2));
+    document.getElementById("summary-sales").textContent = "₦"+fn(totalSales||0);
+    document.getElementById("summary-earnings").textContent = "₦"+fn(availableBalance);
   } catch (error) {
     console.error("Error in loadSalesSummary:", error);
     document.querySelector(".sales-stats").innerHTML = "<p>Error loading sales data</p>";
