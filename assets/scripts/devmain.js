@@ -179,7 +179,7 @@ function updateCartUI() {
     const div = document.createElement("div");
     div.className = "cart-item";
     div.innerHTML = `
-      <strong>${item.title}</strong> [ ₦fn(${item.price})]
+      <strong>${item.title}</strong> [ ₦${fn(item.price)}]
       <button data-index="${index}" class="remove">x</button>
       <br><small style="color:#d00;">Note: don't close or reload this window when making the payment</b>
     `;
@@ -507,7 +507,7 @@ div.innerHTML = `
           ${formatCount(post.star || 0)}
         </span>
       </span>
-      <span class="amount" data-price="${post.price || 0}">₦fn(${post.price || 0})
+      <span class="amount" data-price="${post.price || 0}">₦${fn(post.price || 0)})
         <small><b class="sales">${post.sales || 0}</b> sales</small>
       </span>
     <a href="/home.html#search?q=${encodeURIComponent(post.name)}"><span class="star-contain"><i class="fas fa-search"></i></span></a>
