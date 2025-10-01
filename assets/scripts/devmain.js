@@ -1,3 +1,4 @@
+
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 
@@ -60,6 +61,7 @@ async function toggleStar(postId, btn, starCountEl) {
   }
 
   const userId = user.id;
+  // Get the latest raw count from the DOM right before we use it
   let starRaw = parseInt(starCountEl.dataset.rawCount);
 
   try {
@@ -71,42 +73,62 @@ async function toggleStar(postId, btn, starCountEl) {
       .eq("post_id", postId)
       .maybeSingle();
 
-    if (checkError) throw checkError;
+    if (checkError) throw checkError; // Check 1: Error during select
 
     if (existing) {
       // ⭐ Remove star
-      await supabase.from("stars").delete().eq("id", existing.id);
+      const { error: deleteError } = await supabase
+        .from("stars")
+        .delete()
+        .eq("id", existing.id);
+      
+      if (deleteError) throw deleteError; // Check 2: Error deleting from stars
 
-      await supabase
+      // Update the local raw count for the DB update
+      const newStarCount = starRaw - 1;
+
+      const { error: updateDecError } = await supabase
         .from("posts")
-        .update({ star: starRaw - 1 })
+        .update({ star: newStarCount })
         .eq("id", postId);
-
+      
+      if (updateDecError) throw updateDecError; // Check 3: Error updating post count
+      
+      // If all database calls succeed, update the UI state
       btn.style.background = "#ddd";
-      starRaw -= 1;
+      starRaw = newStarCount; // Commit the new value locally
+      
     } else {
       // ⭐ Add star
-      await supabase.from("stars").insert({
+      const { error: insertError } = await supabase.from("stars").insert({
         user_id: userId,
         post_id: postId,
       });
 
-      await supabase
-        .from("posts")
-        .update({ star: starRaw + 1 })
-        .eq("id", postId);
+      if (insertError) throw insertError; // Check 4: Error inserting into stars
 
+      // Update the local raw count for the DB update
+      const newStarCount = starRaw + 1;
+
+      const { error: updateIncError } = await supabase
+        .from("posts")
+        .update({ star: newStarCount })
+        .eq("id", postId);
+      
+      if (updateIncError) throw updateIncError; // Check 5: Error updating post count
+      
+      // If all database calls succeed, update the UI state
       btn.style.background = "gold";
-      starRaw += 1;
+      starRaw = newStarCount; // Commit the new value locally
     }
 
-    // Update UI counter
+    // Update UI counter with the now-confirmed starRaw value
     starCountEl.dataset.rawCount = starRaw;
     starCountEl.textContent = formatCount(starRaw);
 
   } catch (err) {
     console.error("Star toggle failed:", err);
-    alert("Could not update star, try again.");
+    alert("Could not update star, try again. Details: " + err.message);
   }
 }
 
@@ -464,7 +486,7 @@ async function loadPosts() {
     
     const { data, error } = await supabase
       .from("posts")
-      .select("id, name, description, price, cover, auth_bio,  auth_img, auth_name, star, sales, auth_skill, file_path, viewer")
+      .select("id, name, description, price, cover, auth_bio,  auth_img, auth_name, star, sales, auth_skill, file_path, viewer, user_id")
       .order("id", { ascending: false }); // newest first
     
     if (error) {
@@ -504,7 +526,7 @@ div.innerHTML = `
   </div>
   <div class="buttons">
           <span class="star-contain">
-        <button class="star"></button>
+        <button class="star" style="cursor: pointer;"></button>
         <span class="star-count" data-raw-count="${post.star || 0}">
           ${formatCount(post.star || 0)}
         </span>
@@ -626,5 +648,4 @@ dataView.forEach(view => {
 document.addEventListener("DOMContentLoaded", ()=>{
   loadPosts();
 })
-
 
