@@ -168,9 +168,11 @@ checkoutBtn.style.cssText = `
   border-radius: 5px;
   cursor: pointer;
 `;
-
+cartBox.innerHTML+=`<small style="color:#d00;">Note: don't close or reload the browser when making the payment — <a href="/terms/index.html#payment-refunds-heading">More info</a></b>
+`;
 // update UI
 function updateCartUI() {
+  
   cartBox.querySelectorAll(".cart-item").forEach(el => el.remove());
   
   let total = 0;
@@ -181,8 +183,7 @@ function updateCartUI() {
     div.innerHTML = `
       <strong>${item.title}</strong> [ ₦${fn(item.price)}]
       <button data-index="${index}" class="remove">x</button>
-      <br><small style="color:#d00;">Note: don't close or reload the browser when making the payment</b>
-    `;
+          `;
     cartBox.insertBefore(div, cartBox.querySelector("h4"));
   });
   
