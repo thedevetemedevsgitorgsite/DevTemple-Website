@@ -181,7 +181,7 @@ function updateCartUI() {
     div.innerHTML = `
       <strong>${item.title}</strong> [ ₦${fn(item.price)}]
       <button data-index="${index}" class="remove">x</button>
-      <small style="color:#d00;width:90%;overlay:auto;">Note: don't close or reload the browser when making the payment — <a href="/terms/index.html#payment-refunds-heading">More info</a></b></small>
+      <small style="color:#d00;max-width:80%;overlay:auto;">Note: don't close or reload the browser when making the payment — <a href="/terms/index.html#payment-refunds-heading">More info</a></b></small>
 `;
           
     cartBox.insertBefore(div, cartBox.querySelector("h4"));
