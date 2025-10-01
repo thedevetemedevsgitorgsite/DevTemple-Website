@@ -147,7 +147,7 @@ window.location.href = "/";
   <div class="settings-section">
     <h3>💳 Withdraw Request</h3>
     <form id="withdrawForm">
-      <label for="requestAmt">Amount ($)</label>
+      <label for="requestAmt">Amount (₦)</label>
       <input type="number" id="requestAmt" name="amount" min="1" max="999999" required>
       <button type="submit">Send Request</button>
     </form>
@@ -192,7 +192,7 @@ window.location.href = "/";
 <input type="url" id="cardView" placeholder="(e.g: ...png, gif, short video mp4)" required>
 <br>
 <label for="cardAmount">Amount:</label>
-<input type="number" id="cardAmount" placeholder="(e.g: 10=$10)" maxlength="100" required>
+<input type="number" id="cardAmount" placeholder="(e.g: 500=₦500)" maxlength="100" required>
 <br>
               <button id="pushCard"  class="user-btn publish"><span class="sending"> </span> Publish</button>
               </form>
@@ -214,21 +214,15 @@ window.location.href = "/";
             <i class="fas fa-dollar-sign"></i>
             <div>
                 <p>Total Sales</p>
-                <h4 id="summary-sales">$0</h4>
+                <h4 id="summary-sales">0</h4>
             </div>
         </div>
-        <div class="summary-card">
-            <i class="fas fa-eye"></i>
-            <div>
-                <p>Total Views</p>
-                <h4 id="summary-views">0</h4>
-            </div>
-        </div>
+        
         <div class="summary-card">
             <i class="fas fa-wallet"></i>
             <div>
                 <p>Earnings</p>
-                <h4 id="summary-earnings">$0</h4>
+                <h4 id="summary-earnings">0</h4>
             </div>
         </div>
     </div>
