@@ -41,6 +41,28 @@
   
 }
 
+:root {
+  --primary-color: #3b82f6;
+  --secondary-color: #64748b;
+  --bg-color: #f8fafc;
+  --text-color: #0f172a;
+  --text-light: #475569;
+  --card-bg: #ffffff;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --transition: all 0.3s ease;
+  --bg-img: url(/assets/images/light-bg.png);
+}
+
+:root.dark-theme {
+  --primary-color: #60a5fa;
+  --secondary-color: #94a3b8;
+  --bg-color: #0f172a;
+  --text-color: #f1f5f9;
+  --text-light: #cbd5e1;
+  --card-bg: #1e293b;
+  --shadow: 0 2px 15px rgba(0, 0, 0, 0.25);
+  --bg-img: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
 
 /* General Styles */
 body {
@@ -149,7 +171,7 @@ box-shadow: var(--shadow);
   margin: 0;
 }
 .side-menu ul li {
-  padding: 10px 16px;
+  padding: 6px 16px;
   border-radius: 6px;
   list-style: none;
   color: var(--text-light);
@@ -709,3 +731,193 @@ ul a {
 }
 
 
+body {
+  font-family: system-ui, sans-serif;
+  background: var(--bg-color);
+  background-image: var(--bg-img);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  transition: var(--transition);
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: var(--transition);
+}
+
+a:hover {
+  opacity: 0.85;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+  transition: var(--transition);
+}
+
+/* =======================
+   LAYOUT
+======================= */
+.dashboard {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.sidebar {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* =======================
+   SIDEBAR
+======================= */
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nav-links a {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: var(--text-light);
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+/* =======================
+   HEADER
+======================= */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-bar input {
+  width: 280px;
+  padding: 0.6em 1em;
+  border: 1px solid var(--secondary-color);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-light);
+}
+
+/* =======================
+   CARDS
+======================= */
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* =======================
+   STATS GRID
+======================= */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-card h3 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.stat-card p {
+  color: var(--text-light);
+  margin-top: 0.5rem;
+}
+
+/* =======================
+   FORMS
+======================= */
+input,
+textarea,
+select {
+  border: 1px solid var(--secondary-color);
+  border-radius: 6px;
+  padding: 0.6em;
+  background: transparent;
+  color: var(--text-light);
+  margin-bottom: 0.8em;
+  width: 100%;
+}
+
+button.primary {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6em 1em;
+}
+
+button.primary:hover {
+  opacity: 0.9;
+}
+
+/* =======================
+   CHARTS
+======================= */
+.chart-card canvas {
+  width: 100%;
+  height: 300px;
+}
+
+/* =======================
+   LOADER & ANIMATIONS
+======================= */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.sending {
+  display: inline-block;
+  border: 4px solid var(--secondary-color);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 0.6s linear infinite;
+}
+
+/* =======================
+   RESPONSIVE
+======================= */
