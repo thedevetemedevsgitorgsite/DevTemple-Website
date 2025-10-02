@@ -1,4 +1,3 @@
-
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 
@@ -453,7 +452,7 @@ async function loadPosts() {
     
     const { data, error } = await supabase
       .from("posts")
-      .select("id, name, description, price, cover, auth_bio,  auth_img, auth_name, star, sales, auth_skill, file_path, viewer, user_id")
+      .select("id, name, description, price, cover, auth_bio,  auth_img, auth_name, star, sales, auth_skill, file_path, viewer, user_id, portfolio_url, auth_fname, auth_status")
       .order("id", { ascending: false }); // newest first
     
     if (error) {
@@ -488,8 +487,10 @@ div.innerHTML = `
   <div class="profile" data-bio="${post.auth_bio||''} • ${post.auth_skill||''}">
     <p>
       <img src="${post.auth_img||post.cover||'/assets/images/default.png'}" alt="User profile">
-      <strong class="user-name">@${post.auth_name || post.name}</strong> 
+      <strong class="user-name"> ${post.auth_fname || post.name||" "}</strong><sup>${post.auth_status==="verified"? "<i class='fas fa-check-circle' style='color:#1DA1F2;'></i>":""||""}</sup>
       &nbsp;<sup class="report" style="color:#f50;">Report</sup>
+      <br/>
+      <small style="font-size: 13px;color: var(--text-dim);">@${post.auth_name || ""}</small>
     </p>
   </div>
   <div class="buttons">
@@ -619,4 +620,5 @@ dataView.forEach(view => {
 document.addEventListener("DOMContentLoaded", ()=>{
   loadPosts();
 })
+
 
