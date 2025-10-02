@@ -59,11 +59,9 @@ async function toggleStar(postId, btn, starCountEl) {
     alert("Please log in to star posts.");
     return;
   }
-
+  
   const userId = user.id;
-  // Get the latest raw count from the DOM right before we use it
-  let starRaw = parseInt(starCountEl.dataset.rawCount);
-
+  
   try {
     // Check if this star already exists
     const { data: existing, error: checkError } = await supabase
@@ -72,108 +70,77 @@ async function toggleStar(postId, btn, starCountEl) {
       .eq("user_id", userId)
       .eq("post_id", postId)
       .maybeSingle();
-
-    if (checkError) throw checkError; // Check 1: Error during select
-
+    
+    if (checkError) throw checkError;
+    
     if (existing) {
-      // ⭐ Remove star
-      const { error: deleteError } = await supabase
-        .from("stars")
-        .delete()
-        .eq("id", existing.id);
-      
-      if (deleteError) throw deleteError; // Check 2: Error deleting from stars
-
-      // Update the local raw count for the DB update
-      const newStarCount = starRaw - 1;
-
-      const { error: updateDecError } = await supabase
-        .from("posts")
-        .update({ star: newStarCount })
-        .eq("id", postId);
-      
-      if (updateDecError) throw updateDecError; // Check 3: Error updating post count
-      
-      // If all database calls succeed, update the UI state
+      // Remove star
+      await supabase.from("stars").delete().eq("id", existing.id);
       btn.style.background = "#ddd";
-      starRaw = newStarCount; // Commit the new value locally
-      
     } else {
-      // ⭐ Add star
-      const { error: insertError } = await supabase.from("stars").insert({
+      // Add star
+      await supabase.from("stars").insert({
         user_id: userId,
         post_id: postId,
       });
-
-      if (insertError) throw insertError; // Check 4: Error inserting into stars
-
-      // Update the local raw count for the DB update
-      const newStarCount = starRaw + 1;
-
-      const { error: updateIncError } = await supabase
-        .from("posts")
-        .update({ star: newStarCount })
-        .eq("id", postId);
-      
-      if (updateIncError) throw updateIncError; // Check 5: Error updating post count
-      
-      // If all database calls succeed, update the UI state
       btn.style.background = "gold";
-      starRaw = newStarCount; // Commit the new value locally
     }
-
-    // Update UI counter with the now-confirmed starRaw value
-    starCountEl.dataset.rawCount = starRaw;
-    starCountEl.textContent = formatCount(starRaw);
-
-  } catch (err) {
-    console.error("Star toggle failed:", err);
-    alert("Could not update star, try again. Details: " + err.message);
-  }
-}
-
-async function initStar(postId, btn, starCountEl) {
-  const user = await getUser();
-  if (!user) {
     
-    return;
-  }
-
-  const userId = user.id;
-  let starRaw = parseInt(starCountEl.dataset.rawCount);
-
-  try {
-    // Check if this star already exists
-    const { data: existing, error: checkError } = await supabase
+    // Get fresh count directly from stars table
+    const { count, error: countError } = await supabase
       .from("stars")
-      .select("id")
-      .eq("user_id", userId)
-      .eq("post_id", postId)
-      .maybeSingle();
-
-    if (checkError) throw checkError;
-
-    if (existing) {
-
-      btn.style.background = "gold";
-    } else {
-      
-      
-      btn.style.background = "#ddd";
-    }
-
-    // Update UI counter
-    starCountEl.dataset.rawCount = starRaw;
-    starCountEl.textContent = formatCount(starRaw);
-
+      .select("*", { count: 'exact', head: true })
+      .eq("post_id", postId);
+    
+    if (countError) throw countError;
+    
+    // Update UI with accurate count
+    starCountEl.textContent = formatCount(count);
+    
   } catch (err) {
     console.error("Star toggle failed:", err);
     alert("Could not update star, try again.");
   }
 }
 
-
-
+async function initStar(postId, btn, starCountEl) {
+  const user = await getUser();
+  
+  // Set default color
+  btn.style.background = "#ddd";
+  
+  try {
+    // Get accurate star count from database
+    const { count, error: countError } = await supabase
+      .from("stars")
+      .select("*", { count: 'exact', head: true })
+      .eq("post_id", postId);
+    
+    if (countError) throw countError;
+    
+    // Update UI with count
+    starCountEl.textContent = formatCount(count);
+    
+    // Check if current user has starred (only if logged in)
+    if (user) {
+      const userId = user.id;
+      const { data: existing, error: checkError } = await supabase
+        .from("stars")
+        .select("id")
+        .eq("user_id", userId)
+        .eq("post_id", postId)
+        .maybeSingle();
+      
+      if (checkError) throw checkError;
+      
+      if (existing) {
+        btn.style.background = "gold";
+      }
+    }
+  } catch (err) {
+    console.error("Star init failed:", err);
+  }
+}
 const cart = [];
 const cartBox = document.querySelector(".cart-items");
 const cartTotalEl = cartBox.querySelector("h4 span");
@@ -508,6 +475,7 @@ div.dataset.id = post.id;
 div.dataset.filePath = post.file_path;
 div.dataset.sellerId = post.user_id; 
 
+// In your loadPosts function, update the card HTML:
 div.innerHTML = `
   <div class="product-img" style="background-image: url(${post.cover || "/assets/images/index.png"});">
     <h3><i class="fas fa-shopping-cart"></i></h3>
@@ -525,15 +493,15 @@ div.innerHTML = `
     </p>
   </div>
   <div class="buttons">
-          <span class="star-contain">
-        <button class="star" style="cursor: pointer;"></button>
-        <span class="star-count" data-raw-count="${post.star || 0}">
-          ${formatCount(post.star || 0)}
-        </span>
+    <span class="star-contain">
+      <button class="star" data-post-id="${post.id}" style="cursor: pointer;"></button>
+      <span class="star-count" data-raw-count="${post.star || 0}">
+        ${post.star || 0}
       </span>
-      <span class="amount" data-price="${post.price || 0}">₦${fn(post.price || 0)}
-        <small><b class="sales">${post.sales || 0}</b> sales</small>
-      </span>
+    </span>
+    <span class="amount" data-price="${post.price || 0}">₦${fn(post.price || 0)}
+      <small><b class="sales">${post.sales || 0}</b> sales</small>
+    </span>
     <a href="/home.html#search?q=${encodeURIComponent(post.name)}"><span class="star-contain"><i class="fas fa-search"></i></span></a>
   </div>
 `;
@@ -545,11 +513,14 @@ div.innerHTML = `
   const btn = div.querySelector("button.star");
   const starCountEl = div.querySelector(".star-count");
 
-  btn.style.background = "#ddd";
-  initStar(post.id, btn, starCountEl);
-  btn.addEventListener("click", () => {
-    toggleStar(post.id, btn, starCountEl);
+
+div.querySelector(".star-contain").addEventListener("click",()=>{
+toggleStar(post.id, btn, starCountEl);
 })
+div.addEventListener("dblclick", ()=>{
+  toggleStar(post.id, btn, starCountEl);
+})
+initStar(post.id, btn, starCountEl);
   const comm = document.querySelector(".product");
   const proCard = comm.querySelectorAll(".card");
   
