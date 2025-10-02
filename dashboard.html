@@ -710,29 +710,8 @@ themeToggle.addEventListener('click', function() {
             charCount.textContent = this.value.length;
         });
 
-        // Form submission
-        document.getElementById("publisherForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-            
-            // Show loading state
-            sending.style.display = "inline-block";
-            pushCard.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                sending.style.display = "none";
-                pushCard.disabled = false;
-                
-                // Show success message (in a real app, this would be handled by your alert system)
-                alert("Project published successfully!");
-                this.reset();
-                fileName.textContent = "No file selected";
-                coverPreview.style.backgroundImage = "none";
-                mediaPreview.style.backgroundImage = "none";
-                charCount.textContent = "0";
-            }, 2000);
-        });
-
+        
+        
         // Save as draft
         draftBtn.addEventListener("click", function() {
             // In a real app, this would save form data to local storage or send to backend
