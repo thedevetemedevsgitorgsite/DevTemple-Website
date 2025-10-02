@@ -32,7 +32,7 @@ let authName = "creator";
 let authSkill = "creator";
 let portfolioUrl = " ";
 let authFname = "creator";
-let authStatus = "padding";
+let authStatus = "pending";
 function showSection(name) {
   Object.values(sections).forEach(sec => sec.classList.add("hidden"));
   if (sections[name]) sections[name].classList.remove("hidden");
@@ -83,7 +83,7 @@ async function loadProfile() {
     // Update form fields
   document.querySelector("#account-status").textContent = profile.status;
     
-document.querySelector(".status").style.color =  document.querySelector("#account-status").textContent === "padding" ? "#960" : "#096";
+document.querySelector(".status").style.color =  document.querySelector("#account-status").textContent === "pending" ? "#960" : "#096";
 
     document.getElementById("userName").value = profile.username || "";
     document.getElementById("fullName").value = profile.full_name || "";
@@ -104,7 +104,7 @@ document.querySelector(".status").style.color =  document.querySelector("#accoun
     authImg = profile.photo_url || "/assets/images/default.png";
     authName = profile.username || "";
     authSkill = profile.skills || "";
-    authStatus = profile.status || "padding";
+    authStatus = profile.status || "pending";
     authFname = profile.full_name || "";
     portfolioUrl = profile.portfolio_url || "";
     
