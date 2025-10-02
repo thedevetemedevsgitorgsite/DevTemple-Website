@@ -30,7 +30,9 @@ let authBio = "creator";
 let authImg = "/assets/images/default.png";
 let authName = "creator";
 let authSkill = "creator";
-
+let portfolioUrl = " ";
+let authFname = "creator";
+let authStatus = "padding";
 function showSection(name) {
   Object.values(sections).forEach(sec => sec.classList.add("hidden"));
   if (sections[name]) sections[name].classList.remove("hidden");
@@ -102,6 +104,9 @@ document.querySelector(".status").style.color =  document.querySelector("#accoun
     authImg = profile.photo_url || "/assets/images/default.png";
     authName = profile.username || "";
     authSkill = profile.skills || "";
+    authStatus = profile.status || "padding";
+    authFname = profile.full_name || "";
+    portfolioUrl = profile.portfolio_url || "";
     
     // Update bio character count
     updateBioCharCount();
@@ -201,7 +206,10 @@ if (publisherForm) {
       auth_bio: authBio, 
       auth_img: authImg, 
       auth_name: authName, 
-      auth_skill: authSkill
+      auth_skill: authSkill, 
+      auth_status: authStatus, 
+      auth_fname: authFname, 
+      portfolio_url: portfolioUrl
     });
     
     if (dbError) {
@@ -278,7 +286,7 @@ async function loadPosts() {
     
     const { data, error } = await supabase
       .from("posts")
-      .select("id, name, description, price, cover, auth_bio, auth_img, auth_name, star, sales, auth_skill")
+      .select("id, name, description, price, cover, auth_bio, auth_img, auth_name, star, sales, auth_skill, portfolio_url, auth_fname, auth_status")
       .eq("user_id", user.id)
       .order("id", { ascending: false });
     
