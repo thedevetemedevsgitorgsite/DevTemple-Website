@@ -1,4 +1,5 @@
 
+
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 
@@ -137,6 +138,24 @@ document.getElementById("publisherForm").onsubmit = async (e) => {
   showSection("posts");
 };
 
+async function initStar(postId) {
+  try {
+    // Get accurate star count - use single() if you want just the count
+    const { count, error: countError } = await supabase
+      .from("stars")
+      .select("*", { count: 'exact', head: true })
+      .eq("post_id", postId);
+    
+    if (countError) throw countError;
+    
+    return count || 0;
+    
+  } catch (err) {
+    console.error("Star init failed:", err);
+    return 0;
+  }
+}
+
 // ========== DELETE POST ==========
 async function deletePost(post) {
   const confirmDelete = confirm(`Delete "${post.name}"? This cannot be undone.`);
@@ -180,7 +199,6 @@ async function loadPosts() {
       return;
     }
     
-    console.log("Current user ID:", user.id);
     
     const { data, error } = await supabase
       .from("posts")
@@ -201,6 +219,7 @@ async function loadPosts() {
     }
     
     data.forEach(post => {
+      
       const div = document.createElement("div");
       div.className = "card";
       div.innerHTML = `
@@ -218,7 +237,7 @@ async function loadPosts() {
         <strong class="user-name">@${post.auth_name?post.auth_name:post.name.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</strong></p>
     </div>
     <div class="buttons">
-        <span class="star-contain"><span class="star-count">${post.star? post.star:0}</span></span> stars
+        <span class="star-contain"><span class="star-count">_</span></span> stars
     <span class="amount" data-price="${post.price||0}">₦${fn(post.price||0)} <small><b class="sales">${post.sales? post.sales:0}</b> sales</small></span>
     <a href="/home.html#search?q=${encodeURIComponent(post.name)}"><span class="star-contain"><i class="fas fa-search"></i> </span></a>
     </div>
@@ -349,22 +368,28 @@ async function loadSalesSummary() {
     document.querySelector(".sales-stats").innerHTML = "<p>Error loading sales data</p>";
   }
 }
+
 async function loadSalesChart() {
   const user = await getUser();
   if (!user) return;
 
   const { data, error } = await supabase
     .from("posts")
-    .select("name, sales, star")
+    .select("id, name, sales, star")
     .eq("user_id", user.id);
-
+    
   if (error) {
     console.error("Chart load error:", error);
     return;
   }
 
+  // Get all star counts first using Promise.all
+  const starData = await Promise.all(
+    data.map(p => initStar(p.id))
+  );
+
   const ctx = document.getElementById("salesChart").getContext("2d");
-  if (window.myChart) window.myChart.destroy(); // destroy old chart if any
+  if (window.myChart) window.myChart.destroy();
 
   window.myChart = new Chart(ctx, {
     type: "bar",
@@ -378,7 +403,7 @@ async function loadSalesChart() {
         },
         {
           label: "Stars",
-          data: data.map(p => p.star || 0),
+          data: starData,
           backgroundColor: "rgba(255, 206, 86, 0.6)"
         }
       ]
@@ -397,7 +422,7 @@ async function renderPerformanceChart() {
 
   const { data, error } = await supabase
     .from("posts")
-    .select("name, sales, star")
+    .select("id, name, sales, star")
     .eq("user_id", user.id);
 
   if (error) {
@@ -405,10 +430,13 @@ async function renderPerformanceChart() {
     return;
   }
 
-  // Prepare arrays
+  // Get all star counts first
+  const stars = await Promise.all(
+    data.map(post => initStar(post.id))
+  );
+
   const names = data.map(post => post.name);
   const sales = data.map(post => post.sales || 0);
-  const stars = data.map(post => post.star || 0);
 
   const ctx = document.getElementById("salesChart").getContext("2d");
   if (window.performanceChart) window.performanceChart.destroy();
