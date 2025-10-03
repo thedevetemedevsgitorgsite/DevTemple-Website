@@ -446,6 +446,33 @@ async function loadPosts() {
     const user = await getUser();
     if (!user) {
       console.warn("No logged-in user found.");
+      document.querySelector(".product").innerHTML = `
+    
+    <div class="card">
+    <div class="product-img" style="background-image: url(https://media.tenor.com/2yKn3g52FdgAAAAM/login-required-access-denied-gen-v.gif);">
+        <h3><i class="fas fa-shopping-cart"></i></h3>
+        <h4 data-view="https://media.tenor.com/J3_7mEynzQIAAAAM/ganz.gif"><I class="fas fa-eye"></I></h4>
+    </div>
+    
+    <p class="product-describe">
+    <strong><a href="/signup.html">Sign up/Login</a></strong>
+    <br>
+        
+            </p>
+        <div class="profile" data-name="@DevTemple"
+data-bio="Official DevTemple •🦺">
+        <p><img src="/assets/images/20250918_223801.png" alt="User-profile">
+        <strong class="user-name">@DevTemple<I class="fas fa-verify"></I></strong> &nbsp; <sup class="report" style="color:#f50;">Report</sup></p>
+    </div>
+    
+    <div class="buttons">
+        <span class="star-contain"><button class="star"></button><span class="star-count">_</span>
+        </span><span class="amount" data-price="37.05">_ <small><b class="sales">_</b> sales</small></span>
+        <a><span class="star-contain"><i class="fas fa-search"></i> </span></a>
+        </div>
+</div>
+  `;
+      
       return;
     }
     
