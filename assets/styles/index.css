@@ -1064,7 +1064,6 @@ button.primary:hover {
   padding: var(--space-xl) 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
 }
 
 /* Improved grid for templates */
