@@ -50,6 +50,30 @@
   --bg-img: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
 }
 
+:root {
+  /* Add glass morphism effect variables */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  
+  /* Refined spacing scale */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  
+  /* Border radius scale */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}
+
+:root.dark-theme {
+  --glass-bg: rgba(0, 0, 0, 0.2);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -640,3 +664,157 @@ button.primary:hover {
 /* =======================
    RESPONSIVE
 ======================= */
+/* Modern navbar with glass effect */
+.top-menu {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+/* Enhanced cards with consistent styling */
+.product .card{
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+} 
+
+/* Hero element transition */
+.hero h2 {
+  view-transition-name: hero-title;
+}
+
+/* Smooth theme transition for all properties */
+* {
+  transition: background-color 0.3s ease, 
+              color 0.3s ease, 
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* Theme toggle button styling */
+.theme-toggle {
+  position: relative;
+  width: 48px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.theme-toggle .moon-icon {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+:root.dark-theme .theme-toggle .sun-icon {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+:root.dark-theme .theme-toggle .moon-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Refined button interactions */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+/* Staggered animation for cards */
+.product .card {
+  animation: slideUp 0.6s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.product .card:nth-child(1) { animation-delay: 0.1s; }
+.product .card:nth-child(2) { animation-delay: 0.2s; }
+.product .card:nth-child(3) { animation-delay: 0.3s; }
+/* Update your container and section spacing */
+.card {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-lg) 0;
+}
+
+.container {
+  padding: var(--space-xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Improved grid for templates */
+.temp-search {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  80% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+ @view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: fade 0.3s ease both;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+/* Product images with shared transitions */
+.product-img {
+  view-transition-name: product-image;
+}
+
+/* Hero element transition */
