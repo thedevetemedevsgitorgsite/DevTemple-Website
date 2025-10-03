@@ -1,3 +1,4 @@
+
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 
@@ -98,7 +99,7 @@ async function toggleStar(postId, btn, starCountEl) {
     
   } catch (err) {
     console.error("Star toggle failed:", err);
-    alert("Could not update star, try again.");
+    cAlert("Could not update star, try again.");
   }
 }
 
@@ -200,7 +201,7 @@ function updateCartUI() {
     // Updated checkout function with proper callback handling
 checkoutBtn.onclick = async function() {
   if (cart.length === 0) {
-    alert("Cart is empty");
+    cAlert("Cart is empty");
     return;
   }
 
@@ -292,7 +293,7 @@ checkoutBtn.onclick = async function() {
 
   } catch (error) {
     console.error("Checkout error:", error);
-    alert("❌ Checkout failed: " + error.message);
+    cAlert("❌ Checkout failed: " + error.message);
     resetCheckoutButton(checkoutBtn, originalText);
   }
 };
@@ -318,7 +319,7 @@ async function handlePaymentVerification(reference) {
     console.log("Verification response:", verifyData);
 
     if (verifyData.success) {
-      alert("✅ Payment successful! Your downloads are ready.");
+      cAlert("✅ Payment successful! Your downloads are ready.");
       
       // Clear cart
       cart.length = 0;
@@ -327,11 +328,11 @@ async function handlePaymentVerification(reference) {
       // Show download links
       showDownloadLinks(verifyData.downloadLinks);
     } else {
-      alert("❌ Payment verification failed: " + (verifyData.error || "Unknown error"));
+      cAlert("❌ Payment verification failed: " + (verifyData.error || "Unknown error"));
     }
   } catch (verifyError) {
     console.error("Verification error:", verifyError);
-    alert("❌ Could not verify payment. Please contact support with reference: " + reference);
+    cAlert("❌ Could not verify payment. Please contact support with reference: " + reference);
   }
 }
 
@@ -421,7 +422,7 @@ async function verifyPaymentOnReturn(reference) {
     const verifyData = await verifyRes.json();
 
     if (verifyData.success) {
-      alert("✅ Payment verified! Your downloads are ready.");
+      cAlert("✅ Payment verified! Your downloads are ready.");
       showDownloadLinks(verifyData.downloadLinks);
       
       // Clear cart
@@ -431,11 +432,11 @@ async function verifyPaymentOnReturn(reference) {
       // Clean URL
       window.history.replaceState({}, document.title, window.location.pathname);
     } else {
-      alert("❌ Payment verification failed: " + verifyData.error);
+      cAlert("❌ Payment verification failed: " + verifyData.error);
     }
   } catch (error) {
     console.error("Verification error:", error);
-    alert("❌ Could not verify payment. Please contact support.");
+    cAlert("❌ Could not verify payment. Please contact support.");
   }
       }
 
@@ -620,5 +621,4 @@ dataView.forEach(view => {
 document.addEventListener("DOMContentLoaded", ()=>{
   loadPosts();
 })
-
 
