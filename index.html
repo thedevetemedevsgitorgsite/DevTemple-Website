@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">  
 <head>
@@ -38,7 +39,12 @@
            <div class="side-menu">
                <ul>
                    <strong>Display</strong>
-                   <li id="theme-toggle"><I class="fas fa-sun"></I> Theme</li>
+                   <li>
+                 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+  <span class="sun-icon">☀️</span>
+  <span class="moon-icon">🌙</span>
+</button>
+                   </li>
                </ul>
             <ul>
                 <strong>Nav</strong>
@@ -95,7 +101,7 @@
     <div class="temp-search">
 <section>
     <a href="/home.html#search?q=WordPress">
-         <div class="product-img" style="background-image:url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd5BEzNpfPALiXcXGMzkQN0_CqfObLRw9axR8UMd2crA&s=10);">
+         <div class="product-img" style="background-image:url(https://i.ibb.co/0S4nLmh/Showcase1.jpg);">
         <h3><i class="fas fa-search"></i> </h3>
     </div>
     
@@ -108,7 +114,7 @@
     
     <section>
         <a href="/home.html#search?q=contact%20form">
-         <div class="product-img" style="background-image:url(https://www.sliderrevolution.com/wp-content/uploads/2021/03/form-header1.jpg);">
+         <div class="product-img" style="background-image:url(https://i.ibb.co/N6zcdHSs/Forms.png);">
         <h3><i class="fas fa-search"></i> </h3>
     </div>
     
@@ -468,7 +474,28 @@ toggle.addEventListener("input", (e)=>{
   document.getElementById("topSch").addEventListener("input", function(){
       this.setCustomValidity("");
   })
-  const themeToggle = document.getElementById('theme-toggle');
+// Enhanced theme detection with system preferences
+function initializeTheme() {
+  const storedTheme = localStorage.getItem('theme');
+  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  // Priority: stored theme > system preference > light
+  const theme = storedTheme || (systemPrefersDark ? 'dark' : 'light');
+  
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark-theme');
+  } else {
+    document.documentElement.classList.remove('dark-theme');
+  }
+}
+
+// Listen for system theme changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+  if (!localStorage.getItem('theme')) {
+    initializeTheme();
+  }
+});
+const themeToggle = document.getElementById('theme-toggle');
 
 // Load saved theme on page load
 if (localStorage.getItem('theme') === 'dark') {
@@ -484,6 +511,8 @@ themeToggle.addEventListener('click', function() {
         localStorage.setItem('theme', 'light');
     }
 });
+
+
 
      </script>
 </body>
