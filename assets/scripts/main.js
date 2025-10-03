@@ -1,5 +1,7 @@
 
 
+
+
 const schForm = document.querySelector(".top-menu form");
 const schInput = schForm.querySelector("input");
 schInput.style.display="none";
@@ -145,3 +147,25 @@ document.getElementById("sideSearch").addEventListener("keyup", e=>{
   }
 })
 const td = "https://fgglquyepbbzrdzmkpfd." +te+"upabase.co";
+
+// Enhanced theme detection with system preferences
+function initializeTheme() {
+  const storedTheme = localStorage.getItem('theme');
+  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  // Priority: stored theme > system preference > light
+  const theme = storedTheme || (systemPrefersDark ? 'dark' : 'light');
+  
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark-theme');
+  } else {
+    document.documentElement.classList.remove('dark-theme');
+  }
+}
+
+// Listen for system theme changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+  if (!localStorage.getItem('theme')) {
+    initializeTheme();
+  }
+});
