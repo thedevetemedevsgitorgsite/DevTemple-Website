@@ -185,7 +185,7 @@ if (publisherForm) {
     if (storageError) {
       console.error(storageError);
       document.querySelector(".sending").style.display = "none";
-      return alert("Upload failed.");
+      return cAlert("Upload failed.");
     }
     
     // Insert metadata 
@@ -215,13 +215,13 @@ if (publisherForm) {
     if (dbError) {
       console.error(dbError);
       document.querySelector(".sending").style.display = "none";
-      return sendAlert("Database insert failed.", "#d00");
+      return cAlert("❌ Insert failed.");
     }
     
     document.querySelector(".sending").style.display = "none";
     loadPosts();
     loadProfileStats(); // Refresh stats
-    sendAlert("Upload successful!");
+    cAlert("Upload successful!");
     showSection("posts");
   };
 }
@@ -253,7 +253,7 @@ async function deletePost(post) {
       .remove([post.file_path]);
     if (storageError) {
       console.error("Storage delete error:", storageError);
-      sendAlert("Failed to delete file from storage.", '#d00');
+      cAlert("❌Failed to delete file from storage.");
       return;
     }
   }
@@ -266,11 +266,11 @@ async function deletePost(post) {
 
   if (dbError) {
     console.error("DB delete error:", dbError);
-    alert("Failed to delete post from database.");
+    cAlert("❌Failed to delete post from Database.");
     return;
   }
 
-  alert("Post deleted!");
+  cAlert("Post deleted!");
   loadPosts();
   loadProfileStats(); // Refresh stats
 }
@@ -325,7 +325,7 @@ async function loadPosts() {
           <a href="/home.html#search?q=${encodeURIComponent(post.name)}"><span class="star-contain"><i class="fas fa-search"></i> </span></a>
         </div>
       `;
-      
+      //`
       div.querySelector(".delete-btn").onclick = () => deletePost(post);
       grid.appendChild(div);
     });
@@ -393,11 +393,11 @@ if (profileForm) {
       
       if (updateError) throw updateError;
       
-      sendAlert("✅ Profile updated!");
+      cAlert("✅ Profile updated!");
       loadProfile(); // Reload to show updated data
     } catch (err) {
       console.error("Profile update error:", err.message);
-      sendAlert("❌ Error updating profile: " + err.message, "#d00");
+      cAlert("❌ Error updating profile: " + err.message);
     }
   });
 }
@@ -408,7 +408,7 @@ if (notificationForm) {
   notificationForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     // Save notification preferences logic here
-    sendAlert("Notification preferences saved!");
+    cAlert("Notification preferences saved!");
   });
 }
 
@@ -627,7 +627,7 @@ async function requestWithdraw(amount, bankDetails) {
 
   const balance = await getAvailableBalance();
   if (amount > balance) {
-    return alert(`❌ You can only withdraw up to ₦${balance.toFixed(2)}`);
+    return cAlert(`❌ You can only withdraw up to ₦${balance.toFixed(2)}`);
   }
 
   const { error } = await supabase.from("withdraw_requests").insert({
@@ -639,11 +639,11 @@ async function requestWithdraw(amount, bankDetails) {
 
   if (error) {
     console.error("Withdraw request failed:", error);
-    alert("Withdraw request failed. Please try again.");
+    cAlert("Withdraw request failed. Please try again.");
     return;
   }
 
-  alert("✅ Withdraw request submitted for review!");
+  cAlert("✅ Withdraw request submitted for review!");
   document.getElementById("withdrawForm").reset();
 }
 
@@ -656,7 +656,7 @@ if (withdrawForm) {
     const bankDetails = document.getElementById("bankDetails").value;
     
     if (!bankDetails) {
-      alert("Please provide your bank details.");
+      cAlert("Please provide your bank details.");
       return;
     }
     
@@ -690,10 +690,10 @@ if (deleteAccountBtn) {
       const result = await res.json();
       if (!res.ok) throw new Error(result.message);
 
-      alert("✅ Account deleted successfully.");
+      cAlert("✅ Account deleted successfully.");
       window.location.href = "/";
     } catch (err) {
-      alert("❌ Error deleting account: " + err.message);
+      cAlert("❌ Error deleting account: " + err.message);
     }
   });
 }
