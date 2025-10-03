@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -450,14 +449,14 @@ document.getElementById("reportForm").addEventListener("submit",async function(e
     const data = new FormData(f);try{
     const r=await fetch("https://formspree.io/f/xqadrken",{method:"POST",body:data,headers:{ "Accept": "application/json" }});
     if(r.ok){
-   alert("Report submitted for " + document.getElementById("popupName").textContent);
+   cAlert("Report submitted for " + document.getElementById("popupName").textContent);
     f.reset();
     f.state.display='none';
     }else{
-        alert("Sorry, we couldn’t send your message. Please try again in a moment.");
+        cAlert("Sorry, we couldn’t send your message. Please try again in a moment.");
     }
     }catch(err){
-        alert("⚠️ Network error.");
+        cAlert("⚠️ Network error.");
      }
     
    });
@@ -469,5 +468,71 @@ document.getElementById("topSch").addEventListener("input", function() {
 })
 
 </script>
-     
+      <section class="custom-alert">
+    <h3 class="alert-heading">
+     message
+    </h3>
+    <div class="alert-msg">
+      Logged in successfully
+    </div>
+    <p class="btn-right"><button class="btn alert-ok" onclick="this.parentElement.parentElement.style.display='none';">OK</button></p>
+  </section>
+  <style>
+      .custom-alert{
+  position: fixed;
+  top: 30vw;
+  left: 5vw;
+  max-width: 350px;
+  width: 330px;
+  height: auto;
+  padding: 10px;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  background: #fff;
+  transition: all 0.5s ease-in-out;
+  z-index: 2500;
+  color: #222111;
+  display: none;
+  justify-content: center;
+  gap: 2px;
+  flex-direction: column;
+  animation: slideRight 0.5s ease-in-out 1 forwards;
+  
+}
+@keyframes slideRight{
+  0%{
+    left: -100vw;
+  }
+  100%{
+    left: 5vw;
+  }
+}
+.btn.alert-ok{
+  padding: 6px 12px;
+  border: 1px solid var(--glass-border);
+  color: #ddd;
+  font-weight: bolder;
+  border-radius: 6px;
+  background: var(--primary-color);
+  max-width: 50px;
+}
+.alert-heading{
+  text-align: center;
+}
+.alert-msg{
+  text-align: center;
+}
+.btn-right{
+  text-align: right;
+}
+  </style>
+  <script>
+      function cAlert(msg){
+  document.querySelector(".custom-alert .alert-msg").textContent=msg;
+  document.querySelector(".custom-alert").style.display='flex';
+}
+  </script>
+    
   </html>
