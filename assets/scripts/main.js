@@ -1,7 +1,3 @@
-
-
-
-
 const schForm = document.querySelector(".top-menu form");
 const schInput = schForm.querySelector("input");
 schInput.style.display="none";
