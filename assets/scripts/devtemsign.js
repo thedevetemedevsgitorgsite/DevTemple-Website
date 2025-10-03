@@ -6,16 +6,21 @@ const res = await fetch("/.netlify/functions/fcnfig");
 const { url, key } = await res.json();
 
 export const supabase = createClient(url, key);
-
 document.getElementById("submitable").addEventListener("submit", async (e) => {
   e.preventDefault();
   
   const email = document.querySelector('#signEmail').value;
   const password = document.querySelector('#signPsw').value;
-  const username = document.querySelector('#signUserName').value;
-  const bio = document.querySelector('#signBio').value;
+  const username = document.querySelector('#signUserName').value.replace(/&/g, "&amp;")
+  .replace(/</g, "&lt;")
+  .replace(/>/g, "&gt;");
+  const bio = document.querySelector('#signBio').value.replace(/&/g, "&amp;")
+  .replace(/</g, "&lt;")
+  .replace(/>/g, "&gt;");
   const skills = document.querySelector('#signSkill').value;
-  const fullName = document.querySelector('#signFullName').value;
+  const fullName = document.querySelector('#signFullName').value.replace(/&/g, "&amp;")
+  .replace(/</g, "&lt;")
+  .replace(/>/g, "&gt;");
   const fileInput = document.querySelector('#signImg'); // file input (type="file")
   
   try {
@@ -61,10 +66,10 @@ document.getElementById("submitable").addEventListener("submit", async (e) => {
     
     if (dbError) throw dbError;
     
-    alert("✅ Signup successful!");
+    cAlert("✅ Signup successful!");
 window.location.href = "/dashboard";    
   } catch (err) {
-    alert("❌ Error: " + err.message);
+    cAlert("❌ Error: " + err.message);
   }
 });
 
@@ -82,9 +87,11 @@ window.location.href = "/dashboard";
     
     if (error) throw error;
     
-    alert("✅ Logged in successfully!");
+    cAlert("✅ Logged in successfully!");
     window.location.href = "/dashboard";
   } catch (err) {
-    alert("❌ Login failed: " + err.message);
+    cAlert("❌ Login failed: " + err.message);
   }
 });
+
+  
