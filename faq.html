@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DevTemple — Frequently Asked Questions</title>
+  <link rel="icon" href="https://i.ibb.co/JDrRS3L/DevTemp.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta name="description" content="DevTemple FAQ - Find answers to common questions about our marketplace, policies, and services." />
+  <meta property="og:image" content="/assets/images/20250918_223801.png">
+  <meta property="og:image:height" content="1200">
+  <meta property="og:image:width" content="400">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --accent: #0f1724;
+      --highlight: #0b4b9b;
+      --maxw: 900px;
+      --radius: 10px;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: var(--accent);
+    }
+    .container {
+      max-width: var(--maxw);
+      margin: 32px auto;
+      padding: 28px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 20px rgba(15, 23, 36, 0.06);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+    header p {
+      margin: 8px 0 18px;
+      color: var(--muted);
+    }
+    nav {
+      margin-bottom: 18px;
+    }
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      margin-right: 12px;
+      font-size: 0.95rem;
+    }
+    .search-container {
+      margin: 20px 0;
+      position: relative;
+    }
+    .search-container input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .search-container i {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+    section {
+      margin: 18px 0;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #eef2f7;
+    }
+    h2 {
+      font-size: 1.2rem;
+      margin: 0 0 12px;
+      color: var(--highlight);
+    }
+    .faq-category {
+      margin-bottom: 30px;
+    }
+    .faq-item {
+      margin-bottom: 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .faq-question {
+      padding: 16px;
+      background: #f8fafc;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+    }
+    .faq-question:hover {
+      background: #f1f5f9;
+    }
+    .faq-answer {
+      padding: 0 16px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    .faq-answer.active {
+      padding: 16px;
+      max-height: 1000px;
+    }
+    .faq-answer p, .faq-answer ul {
+      margin: 0 0 10px;
+    }
+    .faq-answer ul {
+      padding-left: 1.2rem;
+    }
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+    p, li {
+      line-height: 1.5;
+      color: #111827;
+      margin: 0 0 10px;
+    }
+    ul {
+      padding-left: 1.2rem;
+      margin: 6px 0 12px;
+    }
+    .muted {
+      color: var(--muted);
+    }
+    footer {
+      margin-top: 22px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .contact address {
+      font-style: normal;
+    }
+    .highlight {
+      display: inline-block;
+      background: #eef2ff;
+      color: #0b4b9b;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+    @media (max-width: 600px) {
+      .container {
+        margin: 16px;
+        padding: 18px;
+      }
+    }
+    /* Cookie Consent Styles */
+    .cookie-consent {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      max-width: 600px;
+      background: var(--card);
+      padding: 16px;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(15, 23, 36, 0.1);
+      z-index: 10000;
+      display: none;
+    }
+    .cookie-consent p {
+      margin: 0 0 12px;
+      font-size: 0.9rem;
+    }
+    .cookie-consent button {
+      padding: 8px 16px;
+      margin-right: 8px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .cookie-consent .accept {
+      background: #0b4b9b;
+      color: #fff;
+    }
+    .cookie-consent .decline {
+      background: #e5e7eb;
+      color: var(--accent);
+    }
+    .no-results {
+      text-align: center;
+      padding: 20px;
+      color: var(--muted);
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="main" aria-labelledby="faq-title">
+    <header>
+      <h1 id="faq-title">DevTemple — Frequently Asked Questions</h1>
+      <p class="muted">Find answers to common questions about our marketplace, policies, and services.</p>
+      <div class="highlight" aria-hidden="true">Last Updated: 18 Sep 2025</div>
+    </header>
+
+    <nav aria-label="FAQ navigation">
+      <a href="#general">General</a>
+      <a href="#accounts">Accounts & Profiles</a>
+      <a href="#buyers">For Buyers</a>
+      <a href="#sellers">For Sellers</a>
+      <a href="#privacy">Privacy & Security</a>
+      <a href="#payments">Payments & Refunds</a>
+    </nav>
+
+    <div class="search-container">
+      <input type="text" id="faqSearch" placeholder="Search FAQs...">
+      <i class="fas fa-search"></i>
+    </div>
+
+    <div class="no-results" id="noResults">
+      <p>No results found. Try different keywords or browse the categories above.</p>
+    </div>
+
+    <section id="general" class="faq-category" aria-labelledby="general-heading">
+      <h2 id="general-heading">General Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What is DevTemple?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>DevTemple is a marketplace for web templates, code snippets, and development services. We connect developers who create digital products with buyers who need them for their projects.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How do I get started with DevTemple?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Getting started is simple:</p>
+          <ul>
+            <li>Create an account with your name, email, etc.</li>
+            <li>Browse our marketplace for templates and code snippets</li>
+            <li>Purchase items using our secure payment system</li>
+            <li>If you're a creator, you can also upload your own products to sell</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What are the Community Guidelines?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Our Community Guidelines ensure a safe and respectful environment:</p>
+          <ul>
+            <li>Treat others with respect - no harassment or hate speech</li>
+            <li>Upload only original or properly licensed content</li>
+            <li>Provide accurate product descriptions and previews</li>
+            <li>No fake reviews or rating manipulation</li>
+            <li>Report suspicious activity or security issues</li>
+            <li>No promotion of violence, illegal activities, or IP theft</li>
+            <li>Maintain one account per person</li>
+            <li>Get approval before posting advertisements</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="accounts" class="faq-category" aria-labelledby="accounts-heading">
+      <h2 id="accounts-heading">Accounts & Profiles</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How do I create an account?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>To create an account, you'll need to provide:</p>
+          <ul>
+            <li>Your full name</li>
+            <li>A valid email address</li>
+            <li>Your bio, photo and skill </li>
+            <li>A secure password</li>
+          </ul>
+          <p>Passwords are encrypted and never stored in plaintext for security.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What are my account responsibilities?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>As a DevTemple user, you're responsible for:</p>
+          <ul>
+            <li>Keeping your login credentials secure</li>
+            <li>Reporting any unauthorized access immediately</li>
+            <li>Ensuring your account information is accurate and up-to-date</li>
+            <li>Complying with our Terms and Conditions and Privacy Policy</li>
+            <li>Following all applicable laws (NDPR, GDPR, CCPA, etc.)</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Can I have multiple accounts?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>No, we enforce a "One Account, One You" policy. Creating multiple accounts is against our Community Guidelines and may result in account suspension.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How do I update my profile information?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>You can update your profile information through your account settings. It's important to keep your details current, especially your email address, to receive important notifications about your purchases and account.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="buyers" class="faq-category" aria-labelledby="buyers-heading">
+      <h2 id="buyers-heading">For Buyers</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How do I purchase items on DevTemple?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>To purchase items:</p>
+          <ul>
+            <li>Browse our marketplace and find products you like</li>
+            <li>Review product descriptions, images, and previews carefully</li>
+            <li>Add items to your cart</li>
+            <li>Proceed to checkout and complete payment via Paystack</li>
+            <li>Do not close the checkout window until payment is fully processed</li>
+            <li>After successful payment, you'll be redirected back to DevTemple</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What should I check before making a purchase?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Before purchasing any item, make sure to:</p>
+          <ul>
+            <li>Read the product description thoroughly</li>
+            <li>Examine the cover image and any preview materials</li>
+            <li>Check the license terms for usage rights</li>
+            <li>Verify compatibility with your projects</li>
+            <li>Review seller ratings and feedback</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What if I encounter issues with a purchased item?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>If you experience problems with a purchased item:</p>
+          <ul>
+            <li>First, contact the seller directly through our messaging system</li>
+            <li>If the issue isn't resolved, report harmful or malicious content using the report button on the product page</li>
+            <li>For technical issues preventing access, contact our support team</li>
+            <li>Refunds may be considered for inaccessible content due to technical issues</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="sellers" class="faq-category" aria-labelledby="sellers-heading">
+      <h2 id="sellers-heading">For Sellers</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How do I become a seller on DevTemple?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>To become a seller:</p>
+          <ul>
+            <li>Create a DevTemple account if you haven't already</li>
+            <li>Navigate to the seller dashboard</li>
+            <li>Complete the seller verification process</li>
+            <li>Start uploading your original or properly licensed content</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What is the 30% service charge for sellers?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>DevTemple applies a 30% service charge on each sale. This commission covers:</p>
+          <ul>
+            <li>Platform maintenance and development</li>
+            <li>Payment processing fees</li>
+            <li>Customer support services</li>
+            <li>Marketing and marketplace promotion</li>
+            <li>Security and data protection measures</li>
+          </ul>
+          <p>For example, if you sell a product for $10, you'll receive $7 after our commission.</p>
+        </div>
+      </div>
+      
+     <div class="faq-item">
+  <div class="faq-question">
+    <span>How and when do I get paid?</span>
+    <i class="fas fa-chevron-down faq-icon"></i>
+  </div>
+  <div class="faq-answer">
+    <p><strong>Payout details for sellers:</strong></p>
+    <ul>
+      <li>Payouts are processed after you submit a withdrawal request.</li>
+      <li>Payments follow our regular payout schedule (usually once a month).</li>
+      <li>Earnings are calculated after deducting a 30% service fee.</li>
+      <li>Payouts may be delayed or withheld if an account or sale is under review for policy violations.</li>
+    </ul>
+    <p>If you don’t receive your payout or notice any issues, please contact our support team within 30 days.</p>
+  </div>
+</div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What are the content requirements for sellers?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>As a seller, you must:</p>
+          <ul>
+            <li>Upload only original or properly licensed content</li>
+            <li>Provide accurate product descriptions</li>
+            <li>Include a clear cover image representing the product</li>
+            <li>Use screenshots or previews that show the actual product output</li>
+            <li>Avoid misleading visuals or unrelated stock images</li>
+            <li>Price products fairly according to their value</li>
+            <li>Follow our Community Guidelines and Terms of Service</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy" class="faq-category" aria-labelledby="privacy-heading">
+      <h2 id="privacy-heading">Privacy & Security</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What information does DevTemple collect?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We collect the following information:</p>
+          <ul>
+            <li><strong>Account Information:</strong> Name, email address, and country</li>
+            <li><strong>Payment Information:</strong> Payment history via Paystack to track transactions</li>
+            <li><strong>Usage Data:</strong> Cookies, session data, and analytics to improve user experience</li>
+          </ul>
+          <p>Passwords are never stored in plaintext - only encrypted versions are maintained for security.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How is my data protected?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We implement industry-standard security measures:</p>
+          <ul>
+            <li>Encryption of sensitive information (passwords, payment details)</li>
+            <li>Secure handling of payment data by Paystack</li>
+            <li>Regular security assessments and updates</li>
+            <li>Limited access to personal data for authorized personnel only</li>
+          </ul>
+          <p>However, no system is completely secure, so users should also protect their account credentials.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What are my privacy rights?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Under GDPR and CCPA, you have the right to:</p>
+          <ul>
+            <li>Access the personal data we hold about you</li>
+            <li>Update or correct inaccurate information</li>
+            <li>Request deletion of your data (subject to legal obligations)</li>
+            <li>Receive your data in a portable format (GDPR)</li>
+            <li>Opt out of data sharing (we don't sell your data)</li>
+            <li>Restrict processing in certain circumstances</li>
+            <li>Object to processing based on legitimate interests</li>
+          </ul>
+          <p>To exercise these rights, contact us using the details below.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How are cookies used on DevTemple?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We use cookies for:</p>
+          <ul>
+            <li><strong>Essential Cookies:</strong> Managing user sessions and core functionality</li>
+            <li><strong>Analytics Cookies:</strong> Analyzing platform performance and usage</li>
+            <li><strong>Functional Cookies:</strong> Providing personalized content and recommendations</li>
+          </ul>
+          <p>Under GDPR, we require explicit consent for non-essential cookies. You can manage preferences via the cookie consent popup or browser settings.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="payments" class="faq-category" aria-labelledby="payments-heading">
+      <h2 id="payments-heading">Payments & Refunds</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What payment methods are accepted?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>DevTemple uses Paystack for payment processing, which supports various payment methods including:</p>
+          <ul>
+            <li>Credit and debit cards</li>
+            <li>Bank transfers</li>
+            <li>Mobile money (in supported regions)</li>
+            <li>Other local payment options depending on your country</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What is your refund policy?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Our refund policy:</p>
+          <ul>
+            <li>Payments are generally non-refundable</li>
+            <li>Refunds may be considered if technical issues prevent access to purchased content</li>
+            <li>If Paystack experiences issues (failed debit, double charge), they handle refunds according to their policies</li>
+            <li>Refunds may be approved if content is proven fraudulent, harmful, or misrepresented</li>
+            <li>Disputes must be reported within 30 days of purchase</li>
+          </ul>
+          <p>We encourage buyers to review products carefully before purchasing.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What happens if I close the payment window too early?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>If you close the checkout window before payment is fully processed:</p>
+          <ul>
+            <li>Your purchase may not be recorded</li>
+            <li>It can be difficult to trace or refund incomplete transactions</li>
+            <li>You might be charged without receiving the product</li>
+          </ul>
+          <p>Always wait for the payment confirmation and redirection back to DevTemple before closing any windows.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Who should I contact for payment issues?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>For payment-related issues:</p>
+          <ul>
+            <li>First, check your transaction history in your account</li>
+            <li>If the issue is with Paystack (failed payments, double charges), contact Paystack support</li>
+            <li>For other payment issues or if you didn't receive purchased content, contact DevTemple support</li>
+            <li>Include transaction details and screenshots when reporting issues</li>
+          </ul>
+        </div>
+      </div>
+      
+<div class="faq-item">
+  <div class="faq-question">
+    <span>What should I do to get verified?</span>
+    <i class="fas fa-chevron-down faq-icon"></i>
+  </div>
+  <div class="faq-answer">
+    <p>
+      After signing up, go to your dashboard and complete your personal information, then click <strong>“Save Changes.”</strong>
+      Once we review and confirm your details, your account will be verified.
+    </p>
+    <p>
+      You can still sell without verification, but getting verified helps you stand out — a verified badge will appear on your posts, showing buyers that you’re a trusted seller.
+      Verified sellers often gain more visibility and buyer confidence.
+    </p>
+  </div>
+</div>
+<div class="faq-item">
+  <div class="faq-question">
+    <span>Why should I get verified?</span>
+    <i class="fas fa-chevron-down faq-icon"></i>
+  </div>
+  <div class="faq-answer">
+    <p>
+      Getting verified helps you build trust and credibility on the platform. A verified badge shows buyers that your account details have been reviewed and confirmed, making you look more professional and reliable.
+    </p>
+    <p>
+      Verified sellers often get more visibility, attract more buyers, and enjoy faster sales because customers feel more confident dealing with them.
+    </p>
+  </div>
+</div>
+<div class="faq-item">
+  <div class="faq-question">
+    <span>What is verification?</span>
+    <i class="fas fa-chevron-down faq-icon"></i>
+  </div>
+  <div class="faq-answer">
+    <p>
+      Verification is the process of confirming your identity and account details to ensure authenticity and safety for all users.  
+      It helps maintain a secure and trustworthy marketplace by verifying that sellers are real and their information is accurate.
+    </p>
+    <p>
+      Once verified, a badge appears on your profile and posts to show buyers you’re an approved and trusted seller.
+    </p>
+  </div>
+</div>
+
+    </section>
+
+    <section id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Still Have Questions?</h2>
+      <p>If you couldn't find the answer to your question, please contact our support team:</p>
+      <div class="contact">
+        <address>
+          General Inquiries: <a href="mailto:requestcheck.valtik@gmail.com">requestcheck.valtik@gmail.com</a><br />
+          Data Protection Officer: <a href="mailto:safetyunion5550@gmail.com">safetyunion5550@gmail.com</a><br />
+          Website: <a href="https://devtem.netlify.app" target="_blank" rel="noopener noreferrer">DevTemple</a>
+        </address>
+      </div>
+    </section>
+
+    <footer aria-label="FAQ footer">
+      <p class="muted">This FAQ was last updated on <time datetime="2025-09-18">18 September 2025</time>. For the most current information, please refer to our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms and Conditions</a>.</p>
+    </footer>
+  </main>
+
+  <section class="loader">
+    <img src="/assets/images/20250918_223801.png" alt="Loading...">
+  </section>
+
+  <div class="cookie-consent" id="cookieConsent">
+    <p>We use cookies to enhance your experience, analyze usage, and provide personalized content. By clicking "Accept," you consent to all cookies. You can manage preferences or decline non-essential cookies.</p>
+    <button class="accept" onclick="acceptCookies()">Accept</button>
+    <button class="decline" onclick="declineCookies()">Decline</button>
+  </div>
+
+  <style>
+    .loader {
+      position: fixed;
+      top: -5vh;
+      left: 0;
+      right: 0;
+      bottom: -5vh;
+      background: #112;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    .loader img {
+      width: 120px;
+      height: auto;
+      animation: pulse 1.5s infinite;
+      border-radius: 50%;
+      box-shadow: 0 0 15px #06f;
+    }
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+  </style>
+
+  <button class="scroll-btn"><i class="fas fa-arrow-up"></i></button>
+  <style>
+   .scroll-btn{
+     background: #09f;
+     border-radius: 50%;
+     border: 1px solid rgb(255,255,255, 0.5);
+     opacity: 0.8;
+     padding: 10px;
+     width: 50px;
+     height: 50px;
+     position: fixed !important;
+     z-index: 1900;
+     right: 10px;
+     bottom: 8em;
+     animation: animate 1s ease infinite alternate, slideSUp 0.5s ease 1 forwards;
+     color: #ddd;
+     font-weight: bolder;
+     display: none;
+   }
+  .scroll-btn.show{
+    display: inline-block;
+  }
+   @keyframes animate{
+     from{
+       transform: translateY(3px);
+     }
+     to{
+       transform: translateY(0);
+     }
+   }
+   @keyframes slideSUp{
+     from{
+       bottom: -0.5em;
+     }
+     to{
+       bottom: 8em;
+     }
+   }
+  </style>
+
+  <script>
+    // Loader Script
+    window.addEventListener("load", () => {
+      const loader = document.querySelector(".loader");
+      setTimeout(() => loader.classList.add("hidden"), 1500);
+
+      // Show cookie consent popup if not previously accepted/declined
+      if (!localStorage.getItem("cookieConsent")) {
+        document.getElementById("cookieConsent").style.display = "block";
+      }
+    });
+
+    // Cookie Consent Script
+    function acceptCookies() {
+      localStorage.setItem("cookieConsent", "accepted");
+      document.getElementById("cookieConsent").style.display = "none";
+      // Enable all cookies (implement your cookie-setting logic here)
+    }
+
+    function declineCookies() {
+      localStorage.setItem("cookieConsent", "declined");
+      document.getElementById("cookieConsent").style.display = "none";
+      // Disable non-essential cookies (implement your cookie-disabling logic here)
+    }
+
+    // FAQ Accordion Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const faqItems = document.querySelectorAll('.faq-item');
+      
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        
+        question.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+          
+          // Close all items
+          faqItems.forEach(otherItem => {
+            otherItem.classList.remove('active');
+            otherItem.querySelector('.faq-answer').classList.remove('active');
+          });
+          
+          // Open clicked item if it wasn't active
+          if (!isActive) {
+            item.classList.add('active');
+            answer.classList.add('active');
+          }
+        });
+      });
+      
+      // FAQ Search Functionality
+      const searchInput = document.getElementById('faqSearch');
+      const noResults = document.getElementById('noResults');
+      const allCategories = document.querySelectorAll('.faq-category');
+      
+      searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase().trim();
+        let hasResults = false;
+        
+        if (searchTerm === '') {
+          // Show all categories and items when search is empty
+          allCategories.forEach(category => {
+            category.style.display = 'block';
+            const items = category.querySelectorAll('.faq-item');
+            items.forEach(item => {
+              item.style.display = 'block';
+            });
+          });
+          noResults.style.display = 'none';
+          return;
+        }
+        
+        // Search through all FAQ items
+        allCategories.forEach(category => {
+          const items = category.querySelectorAll('.faq-item');
+          let categoryHasResults = false;
+          
+          items.forEach(item => {
+            const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+            const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+            
+            if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+              item.style.display = 'block';
+              categoryHasResults = true;
+              hasResults = true;
+              
+              // Open matching items
+              item.classList.add('active');
+              item.querySelector('.faq-answer').classList.add('active');
+            } else {
+              item.style.display = 'none';
+            }
+          });
+          
+          // Show/hide category based on whether it has matching items
+          category.style.display = categoryHasResults ? 'block' : 'none';
+        });
+        
+        // Show no results message if no matches found
+        noResults.style.display = hasResults ? 'none' : 'block';
+      });
+    });
+
+    // Scroll to top button
+    const scrollBack = document.querySelector(".scroll-btn");
+    
+    window.addEventListener("scroll", function() {
+      if (window.pageYOffset >= 300) {
+        scrollBack.classList.add("show");
+      } else {
+        scrollBack.classList.remove("show");
+      }
+    });
+    
+    scrollBack.addEventListener("click", (e) => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+</body>
+</html>
