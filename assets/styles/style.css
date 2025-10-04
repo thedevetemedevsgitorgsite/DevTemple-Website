@@ -293,8 +293,10 @@ border: 1px solid var(--primary-color);
   margin-left: 60px;
 }
 .product .card img{
-    max-width: 30px;
-    max-height: 30px;
+    max-width: 36px;
+  width: 35px;
+  height: 35px;
+    max-height: 36px;
     border-radius: 50%;
 }
 .product-img h3:hover {
