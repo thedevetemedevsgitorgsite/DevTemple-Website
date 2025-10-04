@@ -1,4 +1,3 @@
-
 :root.dark-theme {
   --black: #000000;
   --dark-blue: #0B1E5B;
@@ -307,26 +306,7 @@ color: var(--text-light);
 }
 
 /* Buttons */
-.btn {
-  background-color: var(--milk);
-  color: var(--dark-blue);
-  
-  border: none;
-  padding: 0.8rem 2rem;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: 0.3s;
-  text-decoration: none;
-  border-bottom: 2px solid #06f;
-}
 
-.btn:hover {
-  background-color: var(--light-blue);
-  color: var(--text-light);
-  transform: scale(1.1) translateY(-3px);
-}
 
 /* About Section */
 .section-contain{
@@ -1021,13 +1001,14 @@ button.primary:hover {
   transform: scale(1);
 }
 /* Refined button interactions */
-.btn {
+.hero .btn {
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
+  
 }
 
-.btn::before {
+.hero .btn::before {
   content: '';
   position: absolute;
   top: 0;
@@ -1038,10 +1019,55 @@ button.primary:hover {
   transition: left 0.5s;
 }
 
-.btn:hover::before {
+.hero .btn:hover::before {
   left: 100%;
 }
+.hero .btn {
+  background: var(--primary-color) linear-gradient(145deg, var(--secondary-color), var(--primary-color)) !important;
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 28px !important;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    0 6px 14px rgba(0,0,0,0.25);
+  transform: perspective(600px) rotateY(8deg);
+  transition: 
+    all 0.3s ease,
+    box-shadow 0.4s ease,
+    transform 0.4s ease;
+}
 
+/* Calm sleeping state */
+.hero .btn {
+  opacity: 0.9;
+}
+
+/* Wakes up smoothly */
+.hero .btn:hover {
+  background: var(--glass-bg) linear-gradient(145deg, #1af, #0cd) !important;
+  
+  transform: perspective(600px) rotateY(0deg) translateY(-3px);
+  box-shadow:
+    0 8px 18px rgba(0,180,255,0.35),
+    0 0 12px rgba(0,200,255,0.3),
+    inset 0 1px 2px rgba(255,255,255,0.2);
+  opacity: 1;
+}
+
+/* Small glowing pulse when idle (“sleep breathing”) */
+@keyframes sleepPulse {
+  0%, 100% { box-shadow: 0 6px 14px rgba(0,0,0,0.25); }
+  50% { box-shadow: 0 8px 18px rgba(0,200,255,0.25); }
+}
+
+.hero .btn{
+  animation: sleepPulse 4s ease-in-out infinite;
+}
 /* Staggered animation for cards */
 .section-contain section {
   animation: slideUp 0.6s ease forwards;
@@ -1064,6 +1090,7 @@ button.primary:hover {
   padding: var(--space-xl) 0;
   display: flex;
   flex-direction: column;
+
 }
 
 /* Improved grid for templates */
@@ -1072,4 +1099,66 @@ button.primary:hover {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--space-md);
   padding: var(--space-md) 0;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  color: var(--text-color, #fff);
+  text-align: center;
+  background: linear-gradient(-45deg,
+    var(--hover-highlight),
+    var(--card-bg),
+    var(--primary-color)
+  );
+  background-size: 300% 300%;
+  animation: gradientShift 12s ease infinite;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+/* Subtle light shimmer (lighter and faster) */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 30% 70%,
+    rgba(255,255,255,0.08),
+    transparent 60%
+  );
+  animation: float 10s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+/* Hero content */
+.hero .container {
+  position: relative;
+  z-index: 1;
+  max-width: 650px;
+}
+
+.hero .container h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.hero .container p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  opacity: 0.85;
+}
+
+/* Smooth gradient and float animation */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
