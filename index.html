@@ -572,6 +572,17 @@ themeToggle.addEventListener('click', function() {
         }) 
       
     })
+      const sections = document.querySelectorAll('.section-contain section');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate');
+    }
+  });
+}, { threshold: 0.2 });
+
+sections.forEach(section => observer.observe(section));
   </script>
 </body>
 </html>
