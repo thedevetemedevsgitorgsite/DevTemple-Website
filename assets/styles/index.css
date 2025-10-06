@@ -1151,6 +1151,35 @@ button.primary:hover {
   transition: all 1s ease;
 }
 
+
+  .section-contain section:nth-child(1) {
+  transform: translateX(50px) rotateY(20deg);
+/* 1 */
+}
+
+.section-contain section:nth-child(2) {
+  transform: translateX(-50px) rotateY(20deg);
+/* 2 */
+}
+
+.section-contain section:nth-child(3) {
+  transform: translateX(50px) rotateY(20deg);
+/* 3 */
+}
+
+.section-contain section:nth-child(4) {
+  transform: translateX(-50px) rotateY(20deg);
+/* 4 */
+}
+
+.section-contain section:nth-child(5) {
+  transform: translateX(50px) rotateY(20deg);
+
+}
+.section-contain section:nth-child(6) {
+  transform: translateX(-50px) rotateY(20deg);
+  
+}
 .section-contain section.animate {
   opacity: 1;
   transform: translateX(0) rotateY(0);
