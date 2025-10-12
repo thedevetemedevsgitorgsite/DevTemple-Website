@@ -33,7 +33,7 @@
 </head>
 
 <body>
-    <section class="top-menu">
+    <section class="top-menu main">
         <input type="checkbox" id="toggle" class="toggle" hidden>
             <label for="toggle" class="toggle-btn">☰</label>
 <div class="side-menu">
@@ -83,7 +83,13 @@
         <form><input type="search" placeholder="Search templates" id="topSch" required><button><i class="fas fa-search"></i></button></form>
          <a href="/dashboard.html"><button class="top-btn user"><i class="fas fa-user"></i></button></a>
     </section>
+      <section class="top-menu dash">
+<button class="top-btn all-post blue">All</button> 
+<button class="top-btn latest-post">Newest</button> 
+<button class="top-btn popular-post">Popular</button>
+  </section>
     <main>
+      
    <section class="top-card">
     All posts are neatly organized by tags for faster search.
 </section>
@@ -541,9 +547,11 @@ height: 2em;
   window.addEventListener("scroll", function(){
     if(window.pageYOffset>=300){
       scrollBack.classList.add("show");
+      document.querySelector(".cart-items").style.display="none";
     }
     else{
       scrollBack.classList.remove("show");
+      document.querySelector(".cart-items").style.display="block";
     }
   })
     scrollBack.addEventListener("click", (e)=>{
@@ -555,5 +563,24 @@ height: 2em;
       
     })
   </script>
+        <style>
+.top-menu.dash .top-btn{
+  background: transparent;
+}
+ .top-menu.dash .top-btn.blue{
+    background: #06f;
+    background: var(--primary-color) !important;
+    color: #ddd;
+  }
+</style>
+<script>
+  const preBtn = document.querySelectorAll(".top-menu.dash .top-btn");
+  preBtn.forEach(b=>{
     
+    b.addEventListener("click", (e=>{
+            preBtn.forEach(bn=>bn.classList.remove("blue")) 
+      e.target.classList.add("blue");
+    }))
+  })
+</script>
   </html>
