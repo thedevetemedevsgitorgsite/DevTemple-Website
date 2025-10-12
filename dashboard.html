@@ -1,6 +1,5 @@
 
 
-
 <!DOCTYPE html>
 <html lang="en">  
 <head>
@@ -33,7 +32,57 @@
    </style>
 </head>
 <body>
-  <section class="top-menu">
+    <section class="top-menu main">
+                <input type="checkbox" id="toggle" class="toggle" hidden>
+            <label for="toggle" class="toggle-btn">☰</label>
+<div class="side-menu">
+    <ul>
+        <strong>Display</strong>
+        <li>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="color: var(--text-light)">
+                <i class="fas fa-sun sun-icon"></i>
+                <i class="fas fa-moon moon-icon"></i>
+            </button>
+        </li>
+    </ul>
+    <ul>
+        <strong>Nav</strong>
+        <a href="/"><li><i class="fas fa-home"></i> Home</li></a>
+        <a href="/home.html"><li><i class="fas fa-th-large"></i> Templates</li></a>
+        <a href="/dashboard.html"><li><i class="fas fa-tachometer-alt"></i> Dashboard</li></a>
+        <a href="/terms/index.html"><li><i class="fas fa-file-contract"></i> Terms</li></a>
+        <a href="/terms/privacy.html"><li><i class="fas fa-shield-alt"></i> Privacy Policy</li></a>
+        <a href="/terms/index.html#payment-refunds-heading"><li><i class="fas fa-credit-card"></i> Payment/refunds</li></a>
+        <a href="/faq.html"><li><i class="fas fa-question-circle"></i> FAQ</li></a>
+        <a href="/index.html#about"><li><i class="fas fa-info-circle"></i> About</li></a>
+        <a href="/index.html#contact"><li><i class="fas fa-envelope"></i> Contact</li></a>
+    </ul>
+    <ul>
+        <strong>Tags</strong>
+        <a><li><i class="fas fa-search"></i> <input type="search" placeholder="Search" id="sideSearch"></li></a>
+        <a href="#search?q=%23PHP"><li><i class="fab fa-php"></i> PHP</li></a>
+        <a href="#search?q=%23JavaScript"><li><i class="fab fa-js"></i> JavaScript</li></a>
+        <a href="#search?q=%23CSS"><li><i class="fab fa-css3-alt"></i> CSS</li></a>
+        <a href="#search?q=%23HTML"><li><i class="fab fa-html5"></i> HTML</li></a>
+        <a href="#search?q=%23WordPress"><li><i class="fab fa-wordpress"></i> WordPress</li></a>
+        <a href="#search?q=%23eCommerce"><li><i class="fas fa-shopping-cart"></i> eCommerce</li></a>
+        <a href="#search?q=%23AI"><li><i class="fas fa-robot"></i> AITools</li></a>
+        <a href="#search?q=%23WPThemes"><li><i class="fas fa-paint-brush"></i> WPThemes</li></a>
+        <a href="#search?q=%23Plugins"><li><i class="fas fa-puzzle-piece"></i> Plugins</li></a>
+        <a href="#search?q=%23mobile"><li><i class="fas fa-mobile-alt"></i> mobile</li></a>
+        <a href="#search?q=%23design"><li><i class="fas fa-palette"></i> designs</li></a>
+        <a href="#search?q=%23UI"><li><i class="fas fa-object-group"></i> UIDesigns</li></a>
+        <a href="#search?q=%23UX"><li><i class="fas fa-users"></i> UXDesigns</li></a>
+        <a href="#search?q=%23WebApp"><li><i class="fas fa-globe"></i> WebApp</li></a>
+        <a href="#search?q=%23react"><li><i class="fab fa-react"></i> React</li></a>
+    </ul>
+    
+    <img src="/assets/images/20250918_223801.png" alt="DevTemple">
+</div>
+        <form><input type="search" placeholder="Search templates" id="topSch" required><button><i class="fas fa-search"></i></button></form>
+         <a href="/home.html"><button class="top-btn home"><i class="fas fa-home"></i></button></a>
+    </section>
+  <section class="top-menu dash">
     <button class="top-btn back" onclick="goBack()">
       <I class="fas fa-arrow-left"></i>
     </button>
@@ -45,10 +94,11 @@ window.history.back();
 window.location.href = "/";
 }
 }</script>
-<button class="top-btn user"><i class="fas fa-user"></i></button>
+<button class="top-btn user blue"><i class="fas fa-user"></i></button>
 <button class="top-btn pen"><I class="fas fa-pen"></I></button>
 <button class="top-btn sales"><i class="fas fa-bank"></i></button>
 <button class="top-btn chart"><i class="fas fa-chart-line"></i></button>
+<button class="top-btn notify"><I class="fas fa-bell"></I></button>
   </section>
   <main>
   
@@ -57,16 +107,17 @@ window.location.href = "/";
   <section id="hero" class="hero">
     <h2></h2>
     <p>Manage your uploads, check sales, and track performance.</p>
-  </section>
 
+  </section>
+    <button class="top-btn notify-btn" style="display:none;"><i class="fas fa-bell"></i></button>
  <section id="user-section" class="section user">
         <div class="user-profile-container">
             <div class="view public">
                 <div class="profile-header">
                     <img src="/assets/images/20250918_223801.png" class="user img" onclick="cAlert('your profile picture')"/>
                     <div class="profile-info">
-                        <h2 id="profileName">Loading... </h2>
-                        <span class="skill" id="profileSkill">Loading... </span>
+                        <h2 id="profileName">Loading...</h2>
+                        <span class="skill" id="profileSkill">Loading...</span>
                     </div>
                 </div>
                 
@@ -80,7 +131,7 @@ window.location.href = "/";
                         <div class="stat-label">Sales</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value" id="statEarnings">₦0.00</div>
+                        <div class="stat-value" id="statEarnings">Loading...</div>
                         <div class="stat-label">Earnings</div>
                     </div>
                 </div>
@@ -414,6 +465,11 @@ window.location.href = "/";
   <section id="posts-section" class="section posts hidden">
 
   </section>
+  
+  <section id="notify-section" class="section notifications hidden">
+<h3 style="color: rgb(70,70,70,0.3);">Notifications</h3>
+<div class="notify-grid"></div>
+  </section>
 
   <section id="chart-section" class="section static hidden">
     <h3>Performance</h3>
@@ -426,8 +482,31 @@ window.location.href = "/";
     
     <div class="product-grid">
         
+        <section class="product" id="featuredCard">
+  
+  <div class="loading-post">
+    <button>
+      
+    </button><span>Loading...</span>
+    <style>
+     .loading-post button{
+       width: 50px;
+       height: 50px;
+       border-radius: 50%;
+       border: 2px solid var(--primary-color);
+       border-top-color: transparent;
+       background: transparent;
+       opacity: 90%;
+       animation: spin 3s linear infinite;
+     }
+    </style>
+  </div>
+  
+
+
     </div>
   </section>
+
 
 <section class="video-view">
     <h3 onclick="this.parentElement.style.display='none'"><i class="fas fa-times"></i></h3>
@@ -441,7 +520,65 @@ window.location.href = "/";
         
 </section>
 
-
+  <button class="scroll-btn"><i class="fas fa-arrow-up"></i></button>
+  <style>
+   .scroll-btn{
+     background: #09f;
+     border-radius: 50%;
+     border: 1px solid rgb(255,255,255, 0.5);
+     opacity: 0.8;
+     padding: 10px;
+     width: 50px;
+     height: 50px;
+     position: fixed !important;
+     z-index: 1900;
+     right: 10px;
+     bottom: 8em;
+     animation: animate 1s ease infinite alternate, slideSUp 0.5s ease 1 forwards;
+     color: #ddd;
+     font-weight: bolder;
+     display: none;
+   }
+  .scroll-btn.show{
+    display: inline-block;
+  }
+   @keyframes animate{
+     from{
+       transform: translateY(3px);
+     }
+     to{
+       transform: translateY(0);
+     }
+   }
+   @keyframes slideSUp{
+     from{
+       bottom: -0.5em;
+     }
+     to{
+       bottom: 8em;
+     }
+   }
+  </style>
+  <script>
+  const scrollBack=document.querySelector(".scroll-btn");
+  
+  window.addEventListener("scroll", function(){
+    if(window.pageYOffset>=300){
+      scrollBack.classList.add("show");
+    }
+    else{
+      scrollBack.classList.remove("show");
+    }
+  })
+    scrollBack.addEventListener("click", (e)=>{
+      
+        window.scrollTo({
+          top:0,
+          behavior: 'smooth' 
+        }) 
+      
+    })
+  </script>
   </main>
   <section class="alert-container">
   <div class="alert">
@@ -465,7 +602,8 @@ const sections = {
   pen: document.getElementById("pen-section"),
   sales: document.getElementById("sales-section"),
   chart: document.getElementById("chart-section"),
-  posts: document.getElementById("posts-section")
+  posts: document.getElementById("posts-section"), 
+  notify: document.getElementById("notify-section")
 };
 
 function showSection(name) {
@@ -480,6 +618,7 @@ document.querySelector(".top-btn.user").onclick = () => showSection("user");
 document.querySelector(".top-btn.pen").onclick = () => showSection("pen");
 document.querySelector(".top-btn.sales").onclick = () => showSection("sales");
 document.querySelector(".top-btn.chart").onclick = () => showSection("chart");
+document.querySelector(".top-btn.notify").onclick = () => showSection("notify");
 
 if(!document.getElementById('theme-toggle')){
   themeEle = document.createElement("div");
@@ -568,6 +707,7 @@ themeToggle.addEventListener('click', function() {
         </section>
     </div>
 </footer>
+    
       <section class="custom-alert">
     <h3 class="alert-heading">
      message
@@ -663,7 +803,7 @@ themeToggle.addEventListener('click', function() {
   box-shadow: 0 0 15px #06f;
 }
 
-/* fade-out state */
+
 .loader.hidden {
   opacity: 0;
   visibility: hidden;
@@ -721,7 +861,7 @@ themeToggle.addEventListener('click', function() {
         const pushCard = document.getElementById("pushCard");
         const sending = document.querySelector(".sending");
 
-        // File upload handling
+        
         fileUploadBtn.addEventListener("click", () => {
             zipInput.click();
         });
@@ -734,7 +874,7 @@ themeToggle.addEventListener('click', function() {
             }
         });
 
-        // Drag and drop functionality
+        
         fileUploadArea.addEventListener("dragover", (e) => {
             e.preventDefault();
             fileUploadArea.classList.add("dragover");
@@ -754,7 +894,7 @@ themeToggle.addEventListener('click', function() {
             }
         });
 
-        // Preview image updates
+        
         cardCover.addEventListener("input", function() {
             if (this.value) {
                 coverPreview.style.backgroundImage = `url(${this.value})`;
@@ -786,67 +926,51 @@ themeToggle.addEventListener('click', function() {
             cAlert("Draft saved successfully!");
         });
         
+        const toggle = document.querySelector("#toggle");
+const toggleBtn = document.querySelector("[for='toggle']");
+toggle.addEventListener("input", (e) => {
+    if (e.target.checked) {
+        toggleBtn.innerHTML = "<I class='fas fa-times'></i>";
+        
+    }
+    else {
+        toggleBtn.textContent = "☰";
+    }
+})
+const schForm = document.querySelector(".top-menu.main form");
+const schInput = schForm.querySelector("input");
+schInput.style.display = "none";
+schForm.querySelector("button").onclick = () => {
+    
+    schInput.style.display = schInput.style.display === "none" ? "inline-block" : "none";
+    
+}
+document.querySelector(".top-menu.main form").addEventListener("submit", (e) => {
+    e.preventDefault()
+    window.location.href = (`/home.html#search?q=${encodeURIComponent(document.querySelector(".top-menu.main form input").value)}`);
+})
     </script>
+    
     <script type="module" defer src="assets/scripts/devdash.js"></script>
-
-      <button class="scroll-btn"><i class="fas fa-arrow-up"></i></button>
-  <style>
-   .scroll-btn{
-     background: #09f;
-     border-radius: 50%;
-     border: 1px solid rgb(255,255,255, 0.5);
-     opacity: 0.8;
-     padding: 10px;
-     width: 50px;
-     height: 50px;
-     position: fixed !important;
-     z-index: 1900;
-     right: 10px;
-     bottom: 8em;
-     animation: animate 1s ease infinite alternate, slideSUp 0.5s ease 1 forwards;
-     color: #ddd;
-     font-weight: bolder;
-     display: none;
-   }
-  .scroll-btn.show{
-    display: inline-block;
+    <style>
+.top-menu.dash .top-btn{
+  background: transparent;
+}
+ .top-menu.dash .top-btn.blue{
+    background: #06f;
+    background: var(--primary-color) !important;
+    color: #ddd;
   }
-   @keyframes animate{
-     from{
-       transform: translateY(3px);
-     }
-     to{
-       transform: translateY(0);
-     }
-   }
-   @keyframes slideSUp{
-     from{
-       bottom: -0.5em;
-     }
-     to{
-       bottom: 8em;
-     }
-   }
-  </style>
-  <script>
-  const scrollBack=document.querySelector(".scroll-btn");
-  
-  window.addEventListener("scroll", function(){
-    if(window.pageYOffset>=300){
-      scrollBack.classList.add("show");
-    }
-    else{
-      scrollBack.classList.remove("show");
-    }
+</style>
+<script>
+  const preBtn = document.querySelectorAll(".top-menu.dash .top-btn");
+  preBtn.forEach(b=>{
+    
+    b.addEventListener("click", (e=>{
+            preBtn.forEach(bn=>bn.classList.remove("blue")) 
+      e.target.classList.add("blue");
+    }))
   })
-    scrollBack.addEventListener("click", (e)=>{
-      
-        window.scrollTo({
-          top:0,
-          behavior: 'smooth' 
-        }) 
-      
-    })
-    </script>
-    </body>
+</script>
+</body>
             </html> 
