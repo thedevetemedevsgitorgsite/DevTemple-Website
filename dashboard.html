@@ -92,7 +92,7 @@
 <button class="top-btn pen"><I class="fas fa-pen"></I></button>
 <button class="top-btn sales"><i class="fas fa-bank"></i></button>
 <button class="top-btn chart"><i class="fas fa-chart-line"></i></button>
-<button class="top-btn notify"><I class="fas fa-bell"></I></button>
+<button class="top-btn notify" onclick="this.querySelector('.red-top').style.display='none';"><sup class="red-top"></sup><I class="fas fa-bell"></I></button>
   </section>
   <main>
   
@@ -758,6 +758,16 @@ const td = decodeURIComponent(cor+corAp+"%2F%2Ffgglquyepbbzrdzmkpfd."+te+"base.c
 .btn-right{
   text-align: right;
 }
+.red-top{
+   background: red;
+   border-radius: 50%;
+   width: 7px;
+   height: 7px;
+   display: inline-block;
+   position: fixed;
+   margin-left: 7px;
+   margin-bottom: 2.8em;
+ }
   </style>
   <script>
       function cAlert(msg){
