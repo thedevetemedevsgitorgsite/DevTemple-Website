@@ -942,6 +942,17 @@ document.querySelector(".top-menu.main form").addEventListener("submit", (e) => 
     e.preventDefault()
     window.location.href = (`/home.html#search?q=${encodeURIComponent(document.querySelector(".top-menu.main form input").value)}`);
 })
+document.getElementById("topSch").addEventListener("invalid", function() {
+    this.setCustomValidity("Enter to search");
+})
+document.getElementById("topSch").addEventListener("input", function() {
+    this.setCustomValidity("");
+})
+document.getElementById("sideSearch").addEventListener("keyup", e=>{
+  if(e.key === "Enter"){
+    window.location.href="/home.html#search?q="+encodeURIComponent(e.target.value);
+  }
+})
     </script>
     
     <script type="module" defer src="assets/scripts/devdash.js"></script>
