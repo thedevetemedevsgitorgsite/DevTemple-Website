@@ -60,21 +60,21 @@
     <ul>
         <strong>Tags</strong>
         <a><li><i class="fas fa-search"></i> <input type="search" placeholder="Search" id="sideSearch"></li></a>
-        <a href="#search?q=%23PHP"><li><i class="fab fa-php"></i> PHP</li></a>
-        <a href="#search?q=%23JavaScript"><li><i class="fab fa-js"></i> JavaScript</li></a>
-        <a href="#search?q=%23CSS"><li><i class="fab fa-css3-alt"></i> CSS</li></a>
-        <a href="#search?q=%23HTML"><li><i class="fab fa-html5"></i> HTML</li></a>
-        <a href="#search?q=%23WordPress"><li><i class="fab fa-wordpress"></i> WordPress</li></a>
-        <a href="#search?q=%23eCommerce"><li><i class="fas fa-shopping-cart"></i> eCommerce</li></a>
-        <a href="#search?q=%23AI"><li><i class="fas fa-robot"></i> AITools</li></a>
-        <a href="#search?q=%23WPThemes"><li><i class="fas fa-paint-brush"></i> WPThemes</li></a>
-        <a href="#search?q=%23Plugins"><li><i class="fas fa-puzzle-piece"></i> Plugins</li></a>
-        <a href="#search?q=%23mobile"><li><i class="fas fa-mobile-alt"></i> mobile</li></a>
-        <a href="#search?q=%23design"><li><i class="fas fa-palette"></i> designs</li></a>
-        <a href="#search?q=%23UI"><li><i class="fas fa-object-group"></i> UIDesigns</li></a>
-        <a href="#search?q=%23UX"><li><i class="fas fa-users"></i> UXDesigns</li></a>
-        <a href="#search?q=%23WebApp"><li><i class="fas fa-globe"></i> WebApp</li></a>
-        <a href="#search?q=%23react"><li><i class="fab fa-react"></i> React</li></a>
+        <a href="/home.html#search?q=%23PHP"><li><i class="fab fa-php"></i> PHP</li></a>
+        <a href="/home.html#search?q=%23JavaScript"><li><i class="fab fa-js"></i> JavaScript</li></a>
+        <a href="/home.html#search?q=%23CSS"><li><i class="fab fa-css3-alt"></i> CSS</li></a>
+        <a href="/home.html#search?q=%23HTML"><li><i class="fab fa-html5"></i> HTML</li></a>
+        <a href="/home.html#search?q=%23WordPress"><li><i class="fab fa-wordpress"></i> WordPress</li></a>
+        <a href="/home.html#search?q=%23eCommerce"><li><i class="fas fa-shopping-cart"></i> eCommerce</li></a>
+        <a href="/home.html#search?q=%23AI"><li><i class="fas fa-robot"></i> AITools</li></a>
+        <a href="/home.html#search?q=%23WPThemes"><li><i class="fas fa-paint-brush"></i> WPThemes</li></a>
+        <a href="/home.html#search?q=%23Plugins"><li><i class="fas fa-puzzle-piece"></i> Plugins</li></a>
+        <a href="/home.html#search?q=%23mobile"><li><i class="fas fa-mobile-alt"></i> mobile</li></a>
+        <a href="/home.html#search?q=%23design"><li><i class="fas fa-palette"></i> designs</li></a>
+        <a href="/home.html#search?q=%23UI"><li><i class="fas fa-object-group"></i> UIDesigns</li></a>
+        <a href="/home.html#search?q=%23UX"><li><i class="fas fa-users"></i> UXDesigns</li></a>
+        <a href="/home.html#search?q=%23WebApp"><li><i class="fas fa-globe"></i> WebApp</li></a>
+        <a href="/home.html#search?q=%23react"><li><i class="fab fa-react"></i> React</li></a>
     </ul>
     
     <img src="/assets/images/20250918_223801.png" alt="DevTemple">
@@ -86,14 +86,7 @@
     <button class="top-btn back" onclick="goBack()">
       <I class="fas fa-arrow-left"></i>
     </button>
-    <script>
-    function goBack() {
-if (window.history.length > 1) {
-window.history.back();
-} else {
-window.location.href = "/";
-}
-}</script>
+    <script>function goBack(){if(window.history.length>1){window.history.back();}else {window.location.href = "/";}}</script>
 <button class="top-btn user blue"><i class="fas fa-user"></i></button>
 <button class="top-btn pen"><I class="fas fa-pen"></I></button>
 <button class="top-btn sales"><i class="fas fa-bank"></i></button>
@@ -153,7 +146,7 @@ window.location.href = "/";
                     <div class="form-row" >
                         <div hidden style="display: none !important;">
                             <label for="email">Email Address</label>
-                            <input type="email" required placeholder="Email Address*" name="email" id="email" value="sample@domain.host">
+                            <input type="email" required placeholder="Email Address*" name="email" id="email" value="NULL">
                         </div>
                         <div>
                             <label for="phone">Phone Number</label>
@@ -163,7 +156,7 @@ window.location.href = "/";
                     
                     <div>
                         <label for="bio">Bio</label>
-                        <textarea minlength="10" maxlength="200" required placeholder="Let people know a little bit about you*" name="bio" id="bio" class="bio">Passionate web developer with 5+ years of experience creating interactive and user-friendly applications. Specialized in front-end technologies and UI/UX design.</textarea>
+                        <textarea minlength="10" maxlength="200" required placeholder="Let people know a little bit about you*" name="bio" id="bio" class="bio">NULL</textarea>
                         <div style="text-align: right; font-size: 0.8em; color: var(--text-dim); margin-top: 0.5em;">
                             <span id="bioCharCount">0</span>/200 characters
                         </div>
@@ -265,15 +258,15 @@ window.location.href = "/";
                         </p>
                         <p>
                             <strong>Member Since:</strong>
-                            <span class="join-date">January 15, 2023</span>
+                            <span class="join-date">Loading...</span>
                         </p>
                         <p>
                             <strong>Account Status:</strong>
-                            <span class="status" style="color: var(--primary-color);" id="account-status">_</span>
+                            <span class="status" style="color: var(--primary-color);" id="account-status">checking...</span>
                         </p>
                         <p>
                             <strong>Last Login:</strong>
-                            <span class="last-login">2 hours ago</span>
+                            <span class="last-login">NULL</span>
                         </p>
                         <p>
                             <strong>Preferred Language:</strong>
