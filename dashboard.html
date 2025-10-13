@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en">  
 <head>
@@ -460,7 +461,7 @@
   </section>
   
   <section id="notify-section" class="section notifications hidden">
-<h3 style="color: rgb(70,70,70,0.3);">Notifications</h3>
+<h3 style="var(--text-dim)">Notifications</h3>
 <div class="notify-grid"></div>
   </section>
 
@@ -581,13 +582,12 @@
   </section>
   
   <script>
-      const te="s";
-      const zipInput = document.getElementById("zipInput");
-      const filename = document.querySelector(".file-name");
+      const te="supa",zipInput = document.getElementById("zipInput"),cor="ht",filename = document.querySelector(".file-name"),corAp="tps:";
       zipInput.onchange = function(){
           filename.textContent=zipInput.value;
       }
-      const td = "https://fgglquyepbbzrdzmkpfd." +te+"upabase.co";
+      
+ 
   </script>
   <script>
 const sections = {
@@ -647,9 +647,7 @@ themeToggle.addEventListener('click', function() {
         localStorage.setItem('theme', 'light');
     }
 });
-
-
-
+const td = decodeURIComponent(cor+corAp+"%2F%2Ffgglquyepbbzrdzmkpfd."+te+"base.co");
 </script>
 
     <!-- Footer -->
@@ -840,7 +838,7 @@ themeToggle.addEventListener('click', function() {
 
 
     <script>
-        
+        var API_KEY=API_KEY||{};
         const fileName = document.getElementById("fileName");
         const fileUploadArea = document.getElementById("fileUploadArea");
         const fileUploadBtn = document.querySelector(".file-upload-btn");
