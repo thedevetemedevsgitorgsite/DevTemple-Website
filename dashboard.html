@@ -1,7 +1,6 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="en">  
 <head>
@@ -488,8 +487,8 @@
        width: 50px;
        height: 50px;
        border-radius: 50%;
-       border: 3px solid #ccc;
-       border-top-color: var(--primary-color);
+       border: 2px solid var(--primary-color);
+       border-top-color: transparent;
        background: transparent;
        opacity: 90%;
        animation: spin 3s linear infinite;
@@ -984,7 +983,8 @@ document.getElementById("sideSearch").addEventListener("keyup", e=>{
       e.target.classList.add("blue");
     }))
   })
-document.documentElement.addEventListener("mousedown", ()=>{
+  
+  document.documentElement.addEventListener("mousedown", ()=>{
     document.getElementById("toggle").checked=false;
     document.querySelector("[for='toggle']").textContent="☰"; 
   })
