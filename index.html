@@ -40,7 +40,7 @@
     <ul>
         <strong>Display</strong>
         <li>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="color: var(--text-light)">
                 <i class="fas fa-sun sun-icon"></i>
                 <i class="fas fa-moon moon-icon"></i>
             </button>
@@ -585,6 +585,12 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.2 });
 
 sections.forEach(section => observer.observe(section));
+
+      document.documentElement.addEventListener("mousedown", ()=>{
+    document.getElementById("toggle").checked=false;
+    document.querySelector("[for='toggle']").textContent="☰"; 
+  })
+  
   </script>
 </body>
 </html>
