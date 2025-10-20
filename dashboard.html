@@ -984,6 +984,11 @@ document.getElementById("sideSearch").addEventListener("keyup", e=>{
       e.target.classList.add("blue");
     }))
   })
+document.documentElement.addEventListener("mousedown", ()=>{
+    document.getElementById("toggle").checked=false;
+    document.querySelector("[for='toggle']").textContent="☰"; 
+  })
+  
 </script>
 </body>
             </html> 
