@@ -108,9 +108,9 @@
         <div class="user-profile-container">
             <div class="view public">
                 <div class="profile-header">
-                    <img src="/assets/images/20250918_223801.png" class="user img" onclick="cAlert('your profile picture')"/>
+                    <img src="/assets/images/20250918_223801.png" class="user img" onclick="cAlert('Your profile picture', 'success', 'user')"/>
                     <div class="profile-info">
-                        <h2 id="profileName">Loading...</h2>
+                        <div style="word-break: keep-all; white-space: nowrap;"><h2 id="profileName">Loading...</h2></div>
                         <span class="skill" id="profileSkill">Loading...</span>
                     </div>
                 </div>
@@ -702,7 +702,6 @@ const td = decodeURIComponent(cor+corAp+"%2F%2Ffgglquyepbbzrdzmkpfd."+te+"base.c
      
      <style>
  :root {
-      --primary-color: #2563eb;
       --danger-color: #dc2626;
       --success-color: #16a34a;
       --warning-color: #ea580c;
