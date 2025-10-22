@@ -435,7 +435,7 @@ height: 2em;
 }
 </style>
 
-      <style>
+     <style>
  :root {
       --danger-color: #dc2626;
       --success-color: #16a34a;
@@ -701,8 +701,7 @@ height: 2em;
         closeAlert();
       }
     });
-    </script>
-      
+  </script>
     <button class="scroll-btn"><i class="fas fa-arrow-up"></i></button>
   <style>
    .scroll-btn{
@@ -747,13 +746,14 @@ height: 2em;
   const scrollBack=document.querySelector(".scroll-btn");
   
   window.addEventListener("scroll", function(){
+    
     if(window.pageYOffset>=300){
       scrollBack.classList.add("show");
       document.querySelector(".cart-items").style.display="none";
     }
     else{
       scrollBack.classList.remove("show");
-      document.querySelector(".cart-items").style.display="block";
+        document.querySelector(".cart-items").style.display=schInput.style.display==="none"?"block":"none";
     }
   })
     scrollBack.addEventListener("click", (e)=>{
