@@ -147,7 +147,7 @@ gap: 1em;
     overflow-y: visible;
     gap: 1em;
     box-shadow: var(--shadow);
-  margin-top: 10px;
+    margin-top: 10px;
 }
 .top-menu .top-btn {
   background: rgba(255, 255, 255, 0.1);
@@ -398,18 +398,25 @@ border: 1px solid var(--primary-color);
   background: var(--menu-bg);
   border-radius: 12px;
   position: fixed;
-  right: 3vw;
-  max-width: 22em;
+  left: 2em;
+  max-width: calc(99vw - 2em);
   height: auto;
   max-height: 60vh;
   z-index: 102;
-  top: -1.5vh;
+  top: 8vh;
   overflow-y: auto;
   color: var(--text-light);
   padding: 1em;
   transition: all 0.5s ease-in-out;
   box-shadow: var(--shadow);
 }
+
+/* Hide when collapsed */
+.cart-items.collapsed {
+  display: none !important;
+}
+
+/* Cart item styles */
 .cart-items .cart-item {
   background: var(--card-bg);
   border-radius: 8px;
@@ -428,21 +435,6 @@ border: 1px solid var(--primary-color);
   font-weight: bold;
   cursor: pointer;
 }
-
-/* collapsed state */
-.cart-items.collapsed .cart-item,
-.cart-items.collapsed select,
-.cart-items.collapsed button,
-.cart-items.collapsed #paypal-button-container {
-  display: none;
-}
-.cart-items.collapsed {
-  max-height: 1.8em;
-  padding: 0.3em 1em;
-  max-width: 12em;
-  right: 40vw;
-  overflow: visible;
-}
 .cart-items .pay {
   position: absolute;
   color: var(--text-light);
@@ -450,13 +442,12 @@ border: 1px solid var(--primary-color);
   margin-left: 12px;
   visibility: hidden;
 }
-.cart-items.collapsed .pay { visibility: visible; }
 
+/* Optional hover effect (only when visible) */
 .cart-items:hover {
-  top: 2vh;
+  top: 10vh;
   border-top: 2px solid var(--accent-color);
 }
-
 /* ---------------------- Footer ---------------------- */
 footer {
   background: var(--menu-bg);
@@ -934,6 +925,10 @@ footer .side{
 }
 .video-view{
   width: calc(99.5vw - 15em);
+}
+.cart-items{
+  left: 16em;
+  max-width: calc(99vw - 19em);
 }
 }
 /* Hero element transition */
