@@ -80,6 +80,7 @@
     
     <img src="/assets/images/20250918_223801.png" alt="DevTemple">
 </div>
+<button class="top-btn top-cart"><i class="fas fa-shopping-cart"></i></button>
         <form><input type="search" placeholder="Search templates" id="topSch" required><button><i class="fas fa-search"></i></button></form>
          <a href="/dashboard.html"><button class="top-btn user"><i class="fas fa-user"></i></button></a>
     </section>
@@ -761,11 +762,9 @@ height: 2em;
     
     if(window.pageYOffset>=300){
       scrollBack.classList.add("show");
-      document.querySelector(".cart-items").style.display="none";
     }
     else{
       scrollBack.classList.remove("show");
-        document.querySelector(".cart-items").style.display=schInput.style.display==="none"?"block":"none";
     }
   })
     scrollBack.addEventListener("click", (e)=>{
