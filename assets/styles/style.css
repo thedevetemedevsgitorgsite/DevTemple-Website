@@ -931,6 +931,9 @@ footer .side{
 .f-us{
   display: flex;
 }
+.video-view{
+  width: calc(99.5vw - 15em);
+}
 }
 /* Hero element transition */
 
