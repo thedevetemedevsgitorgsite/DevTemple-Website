@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">  
 <head>
@@ -175,45 +174,99 @@
     </div>
     
     <!--About Section-->
-    
-  <section id="about" class="about fade-up">
+<section id="about" class="about fade-up">
     <div class="container">
         <h2>About DevTemple</h2>
         <p>At <b>DevTemple</b>, we're more than just a resource hub—we're your trusted partner in web development. We connect you with a vibrant marketplace of high-quality <b>templates, UI components, and code snippets</b>. Our goal is simple: to <b>empower creators</b> like you by giving you ready-made solutions that instantly save time.</p>
-
+        
         <p>We believe in building a strong community where businesses, freelancers, and learners can find exactly what they need to succeed. Our resources—from fully designed websites to customizable UI kits—are vetted for <b>quality, usability, and modern design</b>. Everything is <b>production-ready</b> so you can focus on building, not debugging.</p>
-
+        
         <p>DevTemple is also a platform for creators, allowing developers to publish their best work and reach a wider audience. Whether you're a startup founder, a developer scaling a project, or a student learning the ropes, consider us your go-to source for reliable and innovative web solutions.</p>
+        
+        <!-- Add this section -->
+        <h2>Why Choose DevTemple?</h2>
+        <ul style="list-style: none; padding-left: 0;">
+            <li>✓ <b>Secure Transactions</b> – Safe payment processing and file delivery</li>
+            <li>✓ <b>Instant Access</b> – Download your purchases immediately</li>
+            <li>✓ <b>Quality Guaranteed</b> – All resources are reviewed before listing</li>
+            <li>✓ <b>Creator Support</b> – Earn from your work with fair pricing</li>
+        </ul>
+        
+        <h2>Customer Care</h2>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <a href="/faq.html" style="text-decoration: none;">
+                <p style="margin: 5px 0;">📋 FAQs – Common questions answered</p>
+            </a>
+            <a href="/terms/index.html#payment-refunds-heading" style="text-decoration: none;">
+                <p style="margin: 5px 0;">💳 Payment & Refunds – Billing information</p>
+            </a>
+            <a href="/terms/index.html" style="text-decoration: none;">
+                <p style="margin: 5px 0;">📝 Creator Terms – Seller guidelines</p>
+            </a>
+            <a href="#contact" style="text-decoration: none;">
+                <p style="margin: 5px 0;">📧 Contact Support – Get help from our team</p>
+            </a>
+            <a href="/terms/privacy.html" style="text-decoration: none;">
+                <p style="margin: 5px 0;">🔒 Privacy Policy – How we protect your data</p>
+            </a>
+        </div>
     </div>
 </section>
-
+    
 <section id="contact" class="contact fade-up">
     <div class="container">
-        <h2>Let's Build Something Together</h2>
-        <p>Have an idea or a project ready to launch? We're ready to listen. Whether you need a simple personal portfolio, a startup MVP, or a complex enterprise solution, our team is here to help you turn those ideas into a successful reality.</p>
-        <form id="contactForm">
-        <div class="form-group">
-            <input type="text" id="name" required>
-            <label for="name">Your Name</label>
-        </div>
+        <h2>Need Help? We're Here for You</h2>
+        <p>Whether you're experiencing issues with a purchase, need technical support, want to report a problem, or have questions about using DevTemple, our support team is ready to assist. We typically respond within 24 hours.</p>
         
-        <div class="form-group">
-            <input type="email" id="email" required>
-            <label for="email">Email Address</label>
-        </div>
+        <form id="contactForm" name="customer_cantact">
+            <div class="form-group">
+                
+                <input type="text" id="name" name="customer_name" required>
+                <label for="name">Your Name</label>
+            </div>
+            
+            <div class="form-group">
+                <input type="email" id="email" name="customer_email" required>
+                <label for="email">Email Address</label>
+            </div>
+            
+            <div class="form-group">
+                <select id="subject" required name="subject">
+                    <option value="">Select a topic...</option>
+                    <option value="Purchase Issue">Purchase or Download Issue</option>
+                    <option value="Technical Support">Technical Support</option>
+                    <option value="Report Content">Report Content or User</option>
+                    <option value="Account Help">Account Help</option>
+                    <option value="Refund Request">Refund Request</option>
+                    <option value="Creator Support">Creator/Seller Support</option>
+                    <option value="Other">Other Question</option>
+                </select>
+                <label for="subject"></label>
+            </div>
+            
+            <div class="form-group">
+                <textarea id="message" required name="customer_message"></textarea>
+                <label for="message">Describe your issue or question</label>
+            </div>
+            
+            <button type="submit">Submit Request</button>
+        </form>
         
-        <div class="form-group">
-            <textarea id="message" required></textarea>
-            <label for="message">Message</label>
-        </div>
-        
-        <button type="submit">Send Message</button>
-    </form>
         <p id="msg"></p>
         <p id="formStatus"></p>
+        
+        <div style="margin-top: 30px; padding: 20px; background: var(--card-bg, #f5f5f5); border-radius: 8px;">
+            <h3 style="margin-top: 0;">Quick Help</h3>
+            <p><b>Before contacting us, check if your question is answered in our:</b></p>
+            <ul style="list-style: none; padding-left: 0;">
+                <li>• <a href="/faq.html">Frequently Asked Questions (FAQs)</a></li>
+                <li>• <a href="/terms/index.html#payment-refunds-heading">Payment & Refunds Policy</a></li>
+                <li>• <a href="/terms">Creator Guidelines</a></li>
+            </ul>
+            <p style="margin-bottom: 0;"><b>Email us directly:</b> <a href="mailto:safetyunion5550@gmail.com">safetyunion5550@gmail.com</a></p>
+        </div>
     </div>
 </section>
-
 
 <section class="bottom-cards">
     <div class="bcard">
