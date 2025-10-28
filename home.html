@@ -367,7 +367,7 @@ height: 2em;
       
       <!-- Action Buttons -->
       <div class="profile-actions">
-        <a id="schUser" class="btn-primary">
+        <a id="schUser" class="btn-primary" onclick="document.getElementById('userView').style.display='none'">
           <i class="fas fa-search"></i> View Products
         </a>
         <button class="btn-secondary" onclick="toggleReport()">
@@ -387,7 +387,7 @@ height: 2em;
         </div>
         <div class="detail-item" id="userWebsite" style="display: none;">
           <i class="fas fa-link"></i>
-          <a id="websiteLink" href="#" target="_blank" onclick="document.getElementById('userView').style.display='none'">Visit Website</a>
+          <a id="websiteLink" href="#" target="_blank">Visit Website</a>
         </div>
       </div>
     </div>
