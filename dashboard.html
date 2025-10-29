@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">  
 <head>
@@ -34,52 +35,104 @@
 </head>
 <body>
     <section class="top-menu main">
-                <input type="checkbox" id="toggle" class="toggle" hidden>
-            <label for="toggle" class="toggle-btn">☰</label>
-<div class="side-menu">
-    <ul>
-        <strong>Display</strong>
-        <li>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="color: var(--text-light)">
-                <i class="fas fa-sun sun-icon"></i>
-                <i class="fas fa-moon moon-icon"></i>
-            </button>
-        </li>
-    </ul>
-    <ul>
-        <strong>Nav</strong>
-        <a href="/"><li><i class="fas fa-home"></i> Home</li></a>
-        <a href="/home.html"><li><i class="fas fa-th-large"></i> Templates</li></a>
-        <a href="/dashboard.html"><li><i class="fas fa-tachometer-alt"></i> Dashboard</li></a>
-        <a href="/terms/index.html"><li><i class="fas fa-file-contract"></i> Terms</li></a>
-        <a href="/terms/privacy.html"><li><i class="fas fa-shield-alt"></i> Privacy Policy</li></a>
-        <a href="/terms/index.html#payment-refunds-heading"><li><i class="fas fa-credit-card"></i> Payment/refunds</li></a>
-        <a href="/faq.html"><li><i class="fas fa-question-circle"></i> FAQ</li></a>
-        <a href="/index.html#about"><li><i class="fas fa-info-circle"></i> About</li></a>
-        <a href="/index.html#contact"><li><i class="fas fa-envelope"></i> Contact</li></a>
-    </ul>
-    <ul>
-        <strong>Tags</strong>
-        <a><li><i class="fas fa-search"></i> <input type="search" placeholder="Search" id="sideSearch"></li></a>
-        <a href="/home.html#search?q=%23PHP"><li><i class="fab fa-php"></i> PHP</li></a>
-        <a href="/home.html#search?q=%23JavaScript"><li><i class="fab fa-js"></i> JavaScript</li></a>
-        <a href="/home.html#search?q=%23CSS"><li><i class="fab fa-css3-alt"></i> CSS</li></a>
-        <a href="/home.html#search?q=%23HTML"><li><i class="fab fa-html5"></i> HTML</li></a>
-        <a href="/home.html#search?q=%23WordPress"><li><i class="fab fa-wordpress"></i> WordPress</li></a>
-        <a href="/home.html#search?q=%23eCommerce"><li><i class="fas fa-shopping-cart"></i> eCommerce</li></a>
-        <a href="/home.html#search?q=%23AI"><li><i class="fas fa-robot"></i> AITools</li></a>
-        <a href="/home.html#search?q=%23WPThemes"><li><i class="fas fa-paint-brush"></i> WPThemes</li></a>
-        <a href="/home.html#search?q=%23Plugins"><li><i class="fas fa-puzzle-piece"></i> Plugins</li></a>
-        <a href="/home.html#search?q=%23mobile"><li><i class="fas fa-mobile-alt"></i> mobile</li></a>
-        <a href="/home.html#search?q=%23design"><li><i class="fas fa-palette"></i> designs</li></a>
-        <a href="/home.html#search?q=%23UI"><li><i class="fas fa-object-group"></i> UIDesigns</li></a>
-        <a href="/home.html#search?q=%23UX"><li><i class="fas fa-users"></i> UXDesigns</li></a>
-        <a href="/home.html#search?q=%23WebApp"><li><i class="fas fa-globe"></i> WebApp</li></a>
-        <a href="/home.html#search?q=%23react"><li><i class="fab fa-react"></i> React</li></a>
-    </ul>
-    
-    <img src="/assets/images/20250918_223801.png" alt="DevTemple">
-</div>
+                  <input type="checkbox" id="toggle" class="toggle" hidden>
+   <label for="toggle" class="toggle-btn top-btn"><i class="fas fa-bars"></i></label>
+
+    <div class="side-menu">
+        <!-- Header with Logo & Close Button -->
+        <div class="side-menu-header">
+            <div class="brand">
+                <img src="/assets/images/20250918_223801.png" alt="DevTemple">
+                <span>DevTemple</span>
+            </div>
+            <label for="notoggle" class="close-btn">
+                <i class="fas fa-times"></i>
+            </label>
+        </div>
+
+        <!-- Menu Content -->
+        <div class="side-menu-content">
+            <!-- Display Section -->
+            <div class="menu-section">
+                <h4 class="menu-label"><i class="fas fa-palette"></i> Display</h4>
+                <ul>
+                    <li>
+                        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                            <div class="theme-option">
+                                <i class="fas fa-sun sun-icon"></i>
+                                <span>Light</span>
+                            </div>
+                            <div class="theme-option">
+                                <i class="fas fa-moon moon-icon"></i>
+                                <span>Dark</span>
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Navigation Section -->
+            <div class="menu-section">
+                <h4 class="menu-label"><i class="fas fa-compass"></i> Navigation</h4>
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="/home.html"><i class="fas fa-th-large"></i> Templates</a></li>
+                    <li><a href="/dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                </ul>
+            </div>
+
+            <!-- Search Section -->
+            <div class="menu-section search-section">
+                <h4 class="menu-label"><i class="fas fa-tags"></i> Browse Tags</h4>
+                <div class="side-search">
+                    <i class="fas fa-search"></i>
+                    <input type="search" placeholder="Search tags..." id="sideSearch">
+                </div>
+                <ul class="tags-list">
+                    <li><a href="#search?q=%23PHP"><i class="fab fa-php"></i> PHP</a></li>
+                    <li><a href="#search?q=%23JavaScript"><i class="fab fa-js"></i> JavaScript</a></li>
+                    <li><a href="#search?q=%23CSS"><i class="fab fa-css3-alt"></i> CSS</a></li>
+                    <li><a href="#search?q=%23HTML"><i class="fab fa-html5"></i> HTML</a></li>
+                    <li><a href="#search?q=%23WordPress"><i class="fab fa-wordpress"></i> WordPress</a></li>
+                    <li><a href="#search?q=%23eCommerce"><i class="fas fa-shopping-cart"></i> eCommerce</a></li>
+                    <li><a href="#search?q=%23AI"><i class="fas fa-robot"></i> AI Tools</a></li>
+                    <li><a href="#search?q=%23WPThemes"><i class="fas fa-paint-brush"></i> WP Themes</a></li>
+                    <li><a href="#search?q=%23Plugins"><i class="fas fa-puzzle-piece"></i> Plugins</a></li>
+                    <li><a href="#search?q=%23mobile"><i class="fas fa-mobile-alt"></i> Mobile</a></li>
+                    <li><a href="#search?q=%23design"><i class="fas fa-palette"></i> Designs</a></li>
+                    <li><a href="#search?q=%23UI"><i class="fas fa-object-group"></i> UI Designs</a></li>
+                    <li><a href="#search?q=%23UX"><i class="fas fa-users"></i> UX Designs</a></li>
+                    <li><a href="#search?q=%23WebApp"><i class="fas fa-globe"></i> Web App</a></li>
+                    <li><a href="#search?q=%23react"><i class="fab fa-react"></i> React</a></li>
+                </ul>
+            </div>
+
+            <!-- Support Section -->
+            <div class="menu-section">
+                <h4 class="menu-label"><i class="fas fa-life-ring"></i> Support</h4>
+                <ul>
+                    <li><a href="/faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                    <li><a href="/index.html#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="/index.html#about"><i class="fas fa-info-circle"></i> About</a></li>
+                </ul>
+            </div>
+
+            <!-- Legal Section -->
+            <div class="menu-section">
+                <h4 class="menu-label"><i class="fas fa-gavel"></i> Legal</h4>
+                <ul>
+                    <li><a href="/terms/index.html"><i class="fas fa-file-contract"></i> Terms</a></li>
+                    <li><a href="/terms/privacy.html"><i class="fas fa-shield-alt"></i> Privacy</a></li>
+                    <li><a href="/terms/index.html#payment-refunds-heading"><i class="fas fa-credit-card"></i> Refunds</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="menu-overlay"></div>
+
+
         <form><input type="search" placeholder="Search templates" id="topSch" required><button><i class="fas fa-search"></i></button></form>
          <a href="/home.html"><button class="top-btn home"><i class="fas fa-home"></i></button></a>
     </section>
@@ -650,67 +703,85 @@ themeToggle.addEventListener('click', function() {
 const td = decodeURIComponent(cor+corAp+"%2F%2Ffgglquyepbbzrdzmkpfd."+te+"base.co");
 </script>
 
+
     <!-- Footer -->
+
 <footer class="footer">
     <div class="container">
-        <section class="footer-about">
-            <strong><i class="fas fa-code"></i> Developers Temple</strong>
-        </section>
-        
-        <section class="side">
-            <nav>
-                <ul>
-                    <strong><i class="fas fa-th-large"></i> Templates</strong>
-                    <a href="/home.html#search?q=best"><li><i class="fas fa-tag"></i> Best Deals</li></a>
-                    <a href="/home.html"><li><i class="fas fa-percent"></i> Available Offers</li></a>
-                </ul>
-                <ul>
-                    <strong><i class="fas fa-home"></i> DevTemple</strong>
-                    <a href="/"><li><i class="fas fa-house"></i> Home</li></a>
-                    <a href="/home.html"><li><i class="fas fa-th-large"></i> Templates</li></a>
-                    <a href="/dashboard.html"><li><i class="fas fa-tachometer-alt"></i> Dashboard</li></a>
-                    <a href="/terms/index.html"><li><i class="fas fa-file-contract"></i> Terms</li></a>
-                    <a href="/terms/privacy.html"><li><i class="fas fa-shield-alt"></i> Privacy Policy</li></a>
-                    <a href="/terms/index.html#payment-refunds-heading"><li><i class="fas fa-credit-card"></i> Payment/refunds</li></a>
-                    <a href="/faq.html"><li><i class="fas fa-question-circle"></i> FAQ</li></a>
-                    <a href="/#about"><li><i class="fas fa-info-circle"></i> About</li></a>
-                    <a href="/#contact"><li><i class="fas fa-envelope"></i> Contact</li></a>
-                </ul>
-                <ul>
-                    <strong><i class="fas fa-box-open"></i> Team Products</strong>
-                    <a href="/home.html"><li><i class="fas fa-th-large"></i> Templates</li></a>
-                    <a href="//fscss.onrender.com"><li><i class="fas fa-palette"></i> FSCSS</li></a>
-                </ul>
-                <ul>
-                    <strong><i class="fas fa-share-alt"></i> Reach us</strong>
-                    <a href="https://www.facebook.com/share/1FB4GtT81U/"><li><i class="fab fa-facebook"></i> Facebook</li></a>
-                    <a href="https://x.com/fscss_ttr"><li><i class="fab fa-twitter"></i> X-Twitter</li></a>
-                    <a href="https://github.com/fscss-ttr/"><li><i class="fab fa-github"></i> GitHub</li></a>
-                    <a href="https://codepen.io/David-Hux/"><li><i class="fab fa-codepen"></i> CodePen</li></a>
-                </ul>
-            </nav>
-        </section>
-                           <div class="f-us">
-                <a href="https://www.facebook.com/profile.php?id=61582984827911"><i class="fab fa-facebook"></i> </a>
-                <a href="https://x.com/fscss_ttr"><i class="fab fa-twitter"></i> </a>
-                <a href="https://github.com/fscss-ttr/"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/creative-web-engineer-b82776376?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:safetyunion5550@gmail.com"><i class="fab fa-google"></i></a>
+        <!-- Main Footer Content -->
+        <div class="footer-grid">
+            <!-- Brand Section -->
+            <div class="footer-section brand-section">
+                <h3><i class="fas fa-code"></i> DevTemple</h3>
+                <p>Your trusted marketplace for high-quality templates, UI components, and code snippets. Empowering creators and developers worldwide.</p>
+                <div class="footer-social">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=61582984827911" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/fscss_ttr" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://github.com/fscss-ttr/" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/creative-web-engineer-b82776376" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
             </div>
             
-        <section class="conclusion">
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="/home.html">Home</a></li>
+                    <li><a href="/index.html#about">About</a></li>
+                    <li><a href="/home.html">Browse Templates</a></li>
+                    <li><a href="#">Payment</a></li>
 
-            <a><sup><i class="fas fa-copyright"></i> 2025 DevTemple </sup></a> 
-            <a href="/terms/index.html"><sup>Terms</sup></a> 
-            <a href="/terms/privacy.html"><sup>Privacy Policy</sup></a> 
-            <a href="/faq.html"><sup>FAQ</sup></a>
-            <a href="/index.html#about"><sup>About</sup></a>
-            <a href="/index.html#contact"><sup>Contact</sup></a>
-        </section>
+                </ul>
+            </div>
+            
+            <!-- Support -->
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul class="footer-links">
+                    <li><a href="/faq.html">FAQ</a></li>
+                    <li><a href="/index.html#contact">Contact Us</a></li>
+                    <li><a href="/terms/index.html">Terms of Service</a></li>
+                    <li><a href="/terms/privacy.html">Privacy Policy</a></li>
+                    <li><a href="/terms/index.html#payment-refunds-heading">Refund Policy</a></li>
+                </ul>
+            </div>
+            
+            <!-- Contact Info -->
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <ul class="footer-contact">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:safetyunion5550@gmail.com">office@devtem.org</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-globe"></i>
+                        <span>www.devtem.org</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>24/7 Support Available</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
         
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p>&copy; 2025 DevTemple. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="/terms/index.html">Terms</a>
+                <span>•</span>
+                <a href="/terms/privacy.html">Privacy</a>
+                <span>•</span>
+                <a href="/home.html">Home</a>
+            </div>
+        </div>
     </div>
 </footer>
-    
      
      <style>
  :root {
