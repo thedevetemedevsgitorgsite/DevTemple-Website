@@ -1,4 +1,3 @@
-
 :root.dark-theme {
   --black: #000000;
   --dark-blue: #0B1E5B;
@@ -351,7 +350,6 @@ color: var(--text-light);
   color: var(--text-light);
   margin: 0 0 50px;
   line-height: 1.2;
-  letter-spacing: -1px;
   animation: slideDown 1.2s ease-out;
   font-weight: 600;
 }
@@ -372,7 +370,7 @@ color: var(--text-light);
 }
 
 .hero-search:hover {
-  box-shadow: 0 15px 50px rgba(229, 9, 20, 0.4);
+  box-shadow: 0 0 6px #aaa, 0 0 8px #777;
   transform: translateY(-2px);
 }
 
@@ -553,7 +551,7 @@ color: var(--text-light);
   }
 
   .hero-search {
-    flex-direction: column;
+    flex-direction: row;
     border-radius: 20px;
   }
 
@@ -564,6 +562,7 @@ color: var(--text-light);
 
   .dropdown-btn {
     padding: 15px 20px;
+    display: none;
   }
 
   #heroSearch {
@@ -574,7 +573,6 @@ color: var(--text-light);
   .search-btn {
     padding: 18px 0;
     width: 100%;
-    border-radius: 0 0 20px 20px;
   }
 
   .trending {
@@ -1809,7 +1807,7 @@ button.primary:hover {
 .search-header h2 {
   font-size: 32px;
   font-weight: 800;
-  color: var(--text-dark, #000);
+  color: var(--text-light, #000);
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -1921,7 +1919,7 @@ button.primary:hover {
 .search-card-content h3 {
   font-size: 20px;
   font-weight: 700;
-  color: var(--text-dark, #000);
+  color: var(--text-light, #000);
   margin: 0;
   line-height: 1.3;
   transition: color 0.3s;
