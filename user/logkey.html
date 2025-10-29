@@ -77,9 +77,9 @@ window.location.href = "/";
                 <a href="https://www.facebook.com/profile.php?id=61582984827911" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                 <a href="https://x.com/fscss_ttr" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                 <a href="https://github.com/fscss-ttr/" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/creative-web-engineer-b82776376" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-              </div>
-            </div>
+                                <a href="https://www.youtube.com/@devtem_org" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+
+                  </div>
           </div>
           
           <!-- Quick Links -->
@@ -168,13 +168,7 @@ themeToggle.addEventListener('click', function() {
 <script type="module" defer>
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const { url, key } = {url: "https://fgglquyepbbzrdzmkpfd.supabase.co", 
-key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnZ2xxdXllcGJienJkem1rcGZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkwOTkyMjksImV4cCI6MjA3NDY3NTIyOX0.mT03kocvd2gMLu6y4VeYXQqcBKUPD5DKtku6HrRO7cA"};
-
-
-export const supabase = createClient(url, key);
-
-
+const res=await fetch("/.netlify/functions/fcnfig");const{url,key}=await res.json();export const supabase=createClient(url,key);
   document.getElementById("resetForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   const email = document.querySelector('#resetEmail').value;
