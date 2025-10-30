@@ -1776,14 +1776,14 @@ button.primary:hover {
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .side-menu {
-    width: 85vw;
+    width: 60vw;
     max-width: 340px;
   }
 }
 
 @media (max-width: 480px) {
   .side-menu {
-    width: 90vw;
+    width: 70vw;
   }
   
 }
