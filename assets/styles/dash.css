@@ -1227,7 +1227,7 @@ button.primary:hover {
          #user-section {
              max-width: 97vw;
             margin: 5px auto;
-            padding: 0 1em;
+            padding: 0 0.3em;
             overflow: auto;
             height: auto;
         }
@@ -1236,7 +1236,7 @@ button.primary:hover {
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 1.5em;
-            max-width: 97%;
+            max-width: 95%;
         }
 
         @media (max-width: 768px) {
@@ -1354,11 +1354,13 @@ button.primary:hover {
         }
 
         @media (max-width: 600px) {
+         .profile-header{
+           flex-direction: column;
+         }
             .form-row {
                 grid-template-columns: 1fr;
             }
         }
-
         .view.public label {
             display: block;
             margin-bottom: 0.5em;
