@@ -1,10 +1,13 @@
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevTemple creators Dashboard</title>
+    <title>Dashboard</title>
 
     <link rel="stylesheet" href="/assets/styles/dash.css">
     
@@ -14,9 +17,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
- <link rel="icon" href="https://devtem.netlify.app/assets/images/20250918_223801.png" type="image/png">
+ <link rel="icon" href="/assets/images/20250918_223801.png" type="image/png">
  <meta name="description" content="Your one-stop hub for web templates, code snippets, and professional development services.">
- <meta property="og:image" content="https://devtem.netlify.app/assets/images/20250918_223801.png">
+ <meta property="og:image" content="/assets/images/20250918_223801.png">
  <meta property="og:image:height" content="1200">
  <meta property="og:image:width" content="400">
     <script src="" defer></script>
@@ -332,17 +335,31 @@
                 <input type="checkbox" hidden id="settings">
                 
                 <div class="settings-drop">
-                    <!-- Withdraw Section -->
-                    <div class="settings-section">
-                        <h3><i class="fas fa-wallet"></i> Withdraw Request</h3>
-                        <form id="withdrawForm">
-                            <label for="requestAmt">Amount (₦)</label>
-                            <input type="number" id="requestAmt" name="amount" min="13000" max="250000" required placeholder="Enter amount">
-                            <label for="bankDetails">Bank Details</label>
-                            <textarea name="" id="bankDetails" required maxlength="200" minlength="13"></textarea>
-                            <button type="submit">Send Request</button>
-                        </form>
-                    </div>
+<!-- Withdraw Section -->
+<div class="settings-section">
+  <h3><i class="fas fa-wallet"></i> Withdraw Funds</h3>
+  <button class="toggle-btn" id="toggleWithdraw">Request Withdraw</button>
+
+  <form id="withdrawForm" class="hidden">
+    <label for="requestAmt">Amount (₦)</label>
+    <input type="number" id="requestAmt" name="amount" min="18000" max="250000" required placeholder="Enter amount">
+
+    <label for="bankName">Bank Name</label>
+    <input type="text" id="bankName" required placeholder="e.g. Access Bank">
+
+    <label for="accountName">Account Name</label>
+    <input type="text" id="accountName" required placeholder="e.g. John Doe">
+
+    <label for="accountNumber">Account Number</label>
+    <input type="text" id="accountNumber" maxlength="10" minlength="10" required placeholder="10-digit account number">
+
+    <label for="extraNote">Extra Note (Optional)</label>
+    <textarea id="extraNote" maxlength="200" placeholder="Any extra information..."></textarea>
+
+    <button type="submit">Send Request</button>
+  </form>
+</div>
+
                     
                     <!-- Notification Settings -->
                     <div class="settings-section">
@@ -1113,7 +1130,7 @@ const td = decodeURIComponent(cor+corAp+"%2F%2Ffgglquyepbbzrdzmkpfd."+te+"base.c
       
     const loader = document.querySelector(".loader");
     loader.classList.add("hidden")
-    setTimeout(()=>document.querySelector(".search-loader").style.display='none', 300);
+    setTimeout(()=>document.querySelector(".search-loader").style.display='none', 200);
   });
      </script>
 
