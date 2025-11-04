@@ -520,83 +520,7 @@
         </div>
     </div>
 </footer>
-    <script>
-        document.getElementById("contactForm").addEventListener("submit",async function(e){
-    e.preventDefault();
-    const f = e.target;
-    const data = new FormData(f);try{
-    const r=await fetch("https://formspree.io/f/xqadrken",{method:"POST",body:data,headers:{ "Accept": "application/json" }});
-    if(r.ok){
-    document.getElementById("msg").innerText="Thanks for reaching out! We’ll get back to you shortly.";
-    f.reset();
-    }else{document.getElementById("msg").innerText="Sorry, we couldn’t send your message. Please try again in a moment.";
-    }
-    }catch(err){document.getElementById("msg").innerText="⚠️ Network error.";
-     }
-    
-   });
-   
-const schForm = document.querySelector(".navbar form");
-const schInput = schForm.querySelector("input");
-schInput.style.display = "none";
-schForm.querySelector("button").onclick = () => {
-    
-    schInput.style.display = schInput.style.display === "none" ? "inline-block" : "none";
-    
-}
-document.querySelector(".navbar form").addEventListener("submit", (e) => {
-    e.preventDefault()
-    window.location.href=(`/home.html#search?q=${encodeURIComponent(document.querySelector(".navbar form input").value)}`);
-})
-const bcards = document.querySelector(".bottom-cards");
-let scrollInterval;
-
-function startAutoScroll() {
-    if (scrollInterval) return; // avoid multiple intervals
-    scrollInterval = setInterval(() => {
-        if (bcards) {
-            if (bcards.scrollLeft + bcards.clientWidth < bcards.scrollWidth - 1) {
-                bcards.scrollBy({ left: 250, behavior: "auto" }); // small steps, no smooth
-            } else {
-                bcards.scrollTo({ left: 0, behavior: "smooth" }); // reset smoothly
-            }
-        }
-    }, 2000);
-}
-
-function stopAutoScroll() {
-    clearInterval(scrollInterval);
-    scrollInterval = null;
-}
-
-// start scrolling on load
-startAutoScroll();
-
-// stop on hover/touch
-bcards.addEventListener("mouseover", stopAutoScroll);
-bcards.addEventListener("touchstart", stopAutoScroll);
-
-// restart when mouse/touch leaves
-bcards.addEventListener("mouseout", startAutoScroll);
-bcards.addEventListener("touchend", startAutoScroll);
-
-document.getElementById("sideSearch").addEventListener("keyup", e=>{
-  if(e.key === "Enter"){
-    window.location.href="/home.html#search?q="+encodeURIComponent(e.target.value);
-  }
-})
-const toggle = document.querySelector("#toggle");
-const toggleBtn = document.querySelector("[for='toggle']");
-toggle.addEventListener("input", (e)=>{
-  if(e.target.checked){
-    toggleBtn.innerHTML="<I class='fas fa-times'></i>";
-    
-  }
-  else {
-    toggleBtn.textContent="☰"; 
-  }
-})
-    </script>
+    <script src="/assets/scripts/hero.js" async></script>
    <section class="search-loader"><img src="/assets/images/logo.png" width="40" height="40" style="margin-top: 10px;animation:spin-bor 2s ease-in-out infinite;border-radius: 50%;border: 1px solid var(--primary-color);border-right: 0;"></section>
     <section class="loader">
   <img src="/assets/images/logo.png" alt="Loading...">
@@ -657,59 +581,7 @@ toggle.addEventListener("input", (e)=>{
 }
     </style>
      <script>
-     document.querySelector(".search-loader").style.display='flex';
-  window.addEventListener("load", () => {
-      
-    const loader = document.querySelector(".loader");
-    loader.classList.add("hidden")
-    setTimeout(()=>document.querySelector(".search-loader").style.display='none', 100);
-  });
-  document.getElementById("topSch").addEventListener("invalid", function(){
-          this.setCustomValidity("Enter to search");
-  })
-  document.getElementById("topSch").addEventListener("input", function(){
-      this.setCustomValidity("");
-  })
-// Enhanced theme detection with system preferences
-function initializeTheme() {
-  const storedTheme = localStorage.getItem('theme');
-  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  
-  // Priority: stored theme > system preference > light
-  const theme = storedTheme || (systemPrefersDark ? 'dark' : 'light');
-  
-  if (theme === 'dark') {
-    document.documentElement.classList.add('dark-theme');
-  } else {
-    document.documentElement.classList.remove('dark-theme');
-  }
-}
-
-// Listen for system theme changes
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-  if (!localStorage.getItem('theme')) {
-    initializeTheme();
-  }
-});
-const themeToggle = document.getElementById('theme-toggle');
-
-// Load saved theme on page load
-if (localStorage.getItem('theme') === 'dark') {
-    document.documentElement.classList.add('dark-theme');
-}
-
-// Add a single click event listener
-themeToggle.addEventListener('click', function() {
-    document.documentElement.classList.toggle('dark-theme');
-    if (document.documentElement.classList.contains('dark-theme')) {
-        localStorage.setItem('theme', 'dark');
-    } else {
-        localStorage.setItem('theme', 'light');
-    }
-});
-
-
-
+     
      </script>
        <button class="scroll-btn"><i class="fas fa-arrow-up"></i></button>
   <style>
@@ -751,42 +623,7 @@ themeToggle.addEventListener('click', function() {
    }
   </style>
   <script>
-  const scrollBack=document.querySelector(".scroll-btn");
-  
-  window.addEventListener("scroll", function(){
-    if(window.pageYOffset>=300){
-      scrollBack.classList.add("show");
-    }
-    else{
-      scrollBack.classList.remove("show");
-    }
-  })
-    scrollBack.addEventListener("click", (e)=>{
-      
-        window.scrollTo({
-          top:0,
-          behavior: 'smooth' 
-        }) 
-      
-    })
-    
-    const sections = document.querySelectorAll('.section-contain section');
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('animate');
-    }
-  });
-}, { threshold: 0.2 });
-
-sections.forEach(section => observer.observe(section));
-
-document.documentElement.addEventListener("mousedown", ()=>{
-    document.getElementById("toggle").checked=false;
-    document.querySelector("[for='toggle']").textContent="☰"; 
-  })
-  
   </script>
 </body>
 </html>
