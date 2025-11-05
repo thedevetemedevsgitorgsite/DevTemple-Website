@@ -639,26 +639,7 @@
      }
    }
   </style>
-  <script>
-  const scrollBack=document.querySelector(".scroll-btn");
-  
-  window.addEventListener("scroll", function(){
-    if(window.pageYOffset>=300){
-      scrollBack.classList.add("show");
-    }
-    else{
-      scrollBack.classList.remove("show");
-    }
-  })
-    scrollBack.addEventListener("click", (e)=>{
-      
-        window.scrollTo({
-          top:0,
-          behavior: 'smooth' 
-        }) 
-      
-    })
-  </script>
+  <script src="/assets/scripts/shortdash.js" async></script>
   </main>
   <section class="alert-container">
   <div class="alert">
@@ -668,72 +649,10 @@
   </section>
   
   <script>
-      const te="supa",zipInput = document.getElementById("zipInput"),cor="ht",filename = document.querySelector(".file-name"),corAp="tps:";
-      zipInput.onchange = function(){
-          filename.textContent=zipInput.value;
-      }
       
- 
   </script>
   <script>
-const sections = {
-  user: document.getElementById("user-section"),
-  pen: document.getElementById("pen-section"),
-  sales: document.getElementById("sales-section"),
-  chart: document.getElementById("chart-section"),
-  posts: document.getElementById("posts-section"), 
-  notify: document.getElementById("notify-section")
-};
 
-function showSection(name) {
-  Object.values(sections).forEach(sec => sec.classList.add("hidden"));
-  if (sections[name]) {
-    sections[name].classList.remove("hidden");
-  }
-}
-
-// Attach menu events
-document.querySelector(".top-btn.user").onclick = () => showSection("user");
-document.querySelector(".top-btn.pen").onclick = () => showSection("pen");
-document.querySelector(".top-btn.sales").onclick = () => showSection("sales");
-document.querySelector(".top-btn.chart").onclick = () => showSection("chart");
-document.querySelector(".top-btn.notify").onclick = () => showSection("notify");
-
-if(!document.getElementById('theme-toggle')){
-  themeEle = document.createElement("div");
-  themeEle.id="theme-toggle";
-  themeEle.hidden=true;
-  themeEle.style.display="none";
-  document.body.appendChild(themeEle);
-}
-
-function sendAlert(massage, color="#ddd"){
-    const alertCont = document.querySelector(".alert-container");
-    if(alertCont){
-        alertCont.style.display="flex";
-        alertCont.querySelector(".alert p").textContent=massage;
-        alertCont.querySelector(".alert p").style.color=color;
-    }
-}
-const ta="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";const tb=".eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnZ2xxdXllcGJienJkem1rcGZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkwOTkyMjksImV4cCI6MjA3NDY3NTIyOX0.mT03kocvd2gMLu6y4VeYXQqcBKUPD5DKtku6HrRO7cA";
-
-let themeToggle = document.getElementById('theme-toggle');
-const tc=ta+tb;
-// Load saved theme on page load
-if (localStorage.getItem('theme') === 'dark') {
-    document.documentElement.classList.add('dark-theme');
-}
-
-// Add a single click event listener
-themeToggle.addEventListener('click', function() {
-    document.documentElement.classList.toggle('dark-theme');
-    if (document.documentElement.classList.contains('dark-theme')) {
-        localStorage.setItem('theme', 'dark');
-    } else {
-        localStorage.setItem('theme', 'light');
-    }
-});
-const td = decodeURIComponent(cor+corAp+"%2F%2Ffgglquyepbbzrdzmkpfd."+te+"base.co");
 </script>
 
 
@@ -788,7 +707,7 @@ const td = decodeURIComponent(cor+corAp+"%2F%2Ffgglquyepbbzrdzmkpfd."+te+"base.c
                 <ul class="footer-contact">
                     <li>
                         <i class="fas fa-envelope"></i>
-                        <a href="mailto:safetyunion5550@gmail.com">office@devtem.org</a>
+                        <a href="mailto:office@devtem.org">office@devtem.org</a>
                     </li>
                     <li>
                         <i class="fas fa-globe"></i>
@@ -817,207 +736,7 @@ const td = decodeURIComponent(cor+corAp+"%2F%2Ffgglquyepbbzrdzmkpfd."+te+"base.c
 </footer>
      
      <style>
- :root {
-      --danger-color: #dc2626;
-      --success-color: #16a34a;
-      --warning-color: #ea580c;
-    }
-      .alert-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(2px);
-      z-index: 2499;
-      display: none;
-      animation: fadeIn 0.2s ease;
-    }
-    
-    .alert-overlay.active {
-      display: block;
-    }
-    
-    .custom-alert {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.9);
-      max-width: 400px;
-      width: calc(100% - 40px);
-      padding: 0;
-      border-radius: 12px;
-      background: white;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
-                  0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      z-index: 2500;
-      display: none;
-      flex-direction: column;
-      opacity: 0;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .custom-alert.active {
-      display: flex;
-      animation: alertAppear 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-    
-    @keyframes alertAppear {
-      0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.9);
-      }
-      100% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-      }
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    .alert-icon-wrapper {
-      display: flex;
-      justify-content: center;
-      padding: 24px 24px 16px;
-    }
-    
-    .alert-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      animation: iconBounce 0.5s ease;
-    }
-    
-    @keyframes iconBounce {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-    
-    .alert-icon.info {
-      background: #dbeafe;
-      color: var(--primary-color);
-    }
-    
-    .alert-icon.success {
-      background: #dcfce7;
-      color: var(--success-color);
-    }
-    
-    .alert-icon.warning {
-      background: #ffedd5;
-      color: var(--warning-color);
-    }
-    
-    .alert-icon.error {
-      background: #fee2e2;
-      color: var(--danger-color);
-    }
-    
-    .alert-content {
-      padding: 0 24px 24px;
-      text-align: center;
-    }
-    
-    .alert-heading {
-      margin: 0 0 8px 0;
-      font-size: 20px;
-      font-weight: 600;
-      color: #111827;
-      line-height: 1.3;
-    }
-    
-    .alert-msg {
-      margin: 0;
-      font-size: 15px;
-      color: #6b7280;
-      line-height: 1.5;
-    }
-    
-    .alert-actions {
-      padding: 16px 24px 24px;
-      display: flex;
-      gap: 12px;
-      justify-content: flex-end;
-    }
-    
-    .alert-btn {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      min-width: 80px;
-    }
-    
-    .alert-btn:hover {
-      transform: translateY(-1px);
-    }
-    
-    .alert-btn:active {
-      transform: translateY(0);
-    }
-    
-    .alert-btn.primary {
-      background: var(--primary-color);
-      color: white;
-      box-shadow: 0 1px 3px rgba(37, 99, 235, 0.3);
-    }
-    
-    .alert-btn.primary:hover {
-      background: #1d4ed8;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
-    }
-    
-    .alert-btn.success {
-      background: var(--success-color);
-      color: white;
-      box-shadow: 0 1px 3px rgba(22, 163, 74, 0.3);
-    }
-    
-    .alert-btn.success:hover {
-      background: #15803d;
-      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
-    }
-    
-    .alert-btn.danger {
-      background: var(--danger-color);
-      color: white;
-      box-shadow: 0 1px 3px rgba(220, 38, 38, 0.3);
-    }
-    
-    .alert-btn.danger:hover {
-      background: #b91c1c;
-      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
-    }
-    
-    .alert-btn.secondary {
-      background: #f3f4f6;
-      color: #374151;
-    }
-    
-    .alert-btn.secondary:hover {
-      background: #e5e7eb;
-    }
-    
-    @media (max-width: 480px) {
-      .alert-actions {
-        flex-direction: column-reverse;
-      }
-      
-      .alert-btn {
-        width: 100%;
-      }
-    }
+
 </style>
   <div class="alert-overlay" id="alertOverlay"></div>
   
@@ -1035,53 +754,7 @@ const td = decodeURIComponent(cor+corAp+"%2F%2Ffgglquyepbbzrdzmkpfd."+te+"base.c
     </div>
   </section>
     <script>
-    const alertEl = document.getElementById('customAlert');
-    const overlayEl = document.getElementById('alertOverlay');
-    const alertIcon = document.getElementById('alertIcon');
-    const alertHeading = document.getElementById('alertHeading');
-    const alertMsg = document.getElementById('alertMsg');
-    const alertOk = document.getElementById('alertOk');
-    const alertCancel = document.getElementById('alertCancel');
     
-    const iconMap = {
-      info: { emoji: 'ℹ️', class: 'info' },
-      success: { emoji: '✅', class: 'success' },
-      warning: { emoji: '⚠️', class: 'warning' },
-      error: { emoji: '❌', class: 'error' }
-    };
-    
-    function cAlert(message, type = 'info', title = 'Notification', showCancel = false) {
-      const icon = iconMap[type] || iconMap.info;
-      
-      alertMsg.textContent = message;
-      alertHeading.textContent = title;
-      alertIcon.textContent = icon.emoji;
-      
-      alertIcon.className = 'alert-icon ' + icon.class;
-      
-      alertOk.className = 'alert-btn ' + (type === 'error' ? 'danger' : type === 'success' ? 'success' : 'primary');
-      alertOk.textContent = type === 'error' && showCancel ? 'Delete' : 'OK';
-      
-      alertCancel.style.display = showCancel ? 'block' : 'none';
-      
-      overlayEl.classList.add('active');
-      alertEl.classList.add('active');
-    }
-    
-    function closeAlert() {
-      alertEl.classList.remove('active');
-      overlayEl.classList.remove('active');
-    }
-    
-    alertOk.addEventListener('click', closeAlert);
-    alertCancel.addEventListener('click', closeAlert);
-    overlayEl.addEventListener('click', closeAlert);
-    
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && alertEl.classList.contains('active')) {
-        closeAlert();
-      }
-    });
   </script>
     
     <section class="search-loader"><img src="/assets/images/logo.png" width="40" height="40" style="margin-top: 10px;animation:spin-bor 2s ease-in-out infinite;border-radius: 50%;border: 1px solid var(--primary-color);border-right: 0;"></section>
@@ -1089,214 +762,23 @@ const td = decodeURIComponent(cor+corAp+"%2F%2Ffgglquyepbbzrdzmkpfd."+te+"base.c
   <img src="/assets/images/logo.png" alt="Loading...">
 </section>
     <style>
-        .loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #112;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
-}
-
-.loader img {
-  width: 120px;
-  height: auto;
-  animation: pulse 1.5s infinite;
-  border-radius: 50%;
-  box-shadow: 0 0 15px #06f;
-}
-
-
-.loader.hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
-@keyframes pulse {
-  0%   { transform: scale(1);   opacity: 0.8; }
-  50%  { transform: scale(1.1); opacity: 1; }
-  100% { transform: scale(1);   opacity: 0.8; }
-}
-.search-loader{
-  position: fixed;
-  display: flex;
-  background: rgba(255 , 255, 255, 0.2);
-  z-index: 10000;
-  width: 99vw;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: none;
-}
-@keyframes spin-bor{
-  0%{ transform: rotateX(0);}
-  25%{transform: rotateX(360deg);}
-  50%{transform: rotateY(360deg);}
-  100%{transform: rotateY(0) rotateX(360deg);}
-}
+        
     </style>
      <script>
-     document.querySelector(".search-loader").style.display='flex';
-  window.addEventListener("load", () => {
-      
-    const loader = document.querySelector(".loader");
-    loader.classList.add("hidden")
-    setTimeout(()=>document.querySelector(".search-loader").style.display='none', 200);
-  });
+     
      </script>
 
 
     <script>
-        var API_KEY=API_KEY||{};
-        const fileName = document.getElementById("fileName");
-        const fileUploadArea = document.getElementById("fileUploadArea");
-        const fileUploadBtn = document.querySelector(".file-upload-btn");
-        const cardCover = document.getElementById("cardCover");
-        const cardView = document.getElementById("cardView");
-        const coverPreview = document.getElementById("coverPreview");
-        const mediaPreview = document.getElementById("mediaPreview");
-        const charCount = document.getElementById("charCount");
-        const cardDes = document.getElementById("cardDes");
-        const draftBtn = document.getElementById("draftBtn");
-        const pushCard = document.getElementById("pushCard");
-        const sending = document.querySelector(".sending");
-
         
-        fileUploadBtn.addEventListener("click", () => {
-            zipInput.click();
-        });
-
-        zipInput.addEventListener("change", function() {
-            if (this.files.length > 0) {
-                fileName.textContent = this.files[0].name;
-            } else {
-                fileName.textContent = "No file selected";
-            }
-        });
-
-        
-        fileUploadArea.addEventListener("dragover", (e) => {
-            e.preventDefault();
-            fileUploadArea.classList.add("dragover");
-        });
-
-        fileUploadArea.addEventListener("dragleave", () => {
-            fileUploadArea.classList.remove("dragover");
-        });
-
-        fileUploadArea.addEventListener("drop", (e) => {
-            e.preventDefault();
-            fileUploadArea.classList.remove("dragover");
-            
-            if (e.dataTransfer.files.length > 0) {
-                zipInput.files = e.dataTransfer.files;
-                fileName.textContent = e.dataTransfer.files[0].name;
-            }
-        });
-
-        
-        cardCover.addEventListener("input", function() {
-            if (this.value) {
-                coverPreview.style.backgroundImage = `url(${this.value})`;
-            } else {
-                coverPreview.style.backgroundImage = "none";
-                coverPreview.style.backgroundColor = "var(--gray)";
-            }
-        });
-
-        cardView.addEventListener("input", function() {
-            if (this.value) {
-                mediaPreview.style.backgroundImage = `url(${this.value})`;
-            } else {
-                mediaPreview.style.backgroundImage = "none";
-                mediaPreview.style.backgroundColor = "var(--gray)";
-            }
-        });
-
-        
-        cardDes.addEventListener("input", function() {
-            charCount.textContent = this.value.length;
-        });
-
-        
-        
-        
-        draftBtn.addEventListener("click", function() {
-            
-            cAlert("Draft saved successfully!", "success", "Success");
-        });
-        
-        const toggle = document.querySelector("#toggle");
-const toggleBtn = document.querySelector("[for='toggle']");
-toggle.addEventListener("input", (e) => {
-    if (e.target.checked) {
-        toggleBtn.innerHTML = "<I class='fas fa-times'></i>";
-        
-    }
-    else {
-        toggleBtn.textContent = "☰";
-    }
-})
-const schForm = document.querySelector(".top-menu.main form");
-const schInput = schForm.querySelector("input");
-schInput.style.display = "none";
-schForm.querySelector("button").onclick = () => {
-    
-    schInput.style.display = schInput.style.display === "none" ? "inline-block" : "none";
-    
-}
-document.querySelector(".top-menu.main form").addEventListener("submit", (e) => {
-    e.preventDefault()
-    window.location.href = (`/home.html#search?q=${encodeURIComponent(document.querySelector(".top-menu.main form input").value)}`);
-})
-document.getElementById("topSch").addEventListener("invalid", function() {
-    this.setCustomValidity("Enter to search");
-})
-document.getElementById("topSch").addEventListener("input", function() {
-    this.setCustomValidity("");
-})
-document.getElementById("sideSearch").addEventListener("keyup", e=>{
-  if(e.key === "Enter"){
-    window.location.href="/home.html#search?q="+encodeURIComponent(e.target.value);
-  }
-})
     </script>
     
     <script type="module" defer src="assets/scripts/devdash.js"></script>
     <style>
-.top-menu.dash .top-btn{
-  background: transparent;
-}
- .top-menu.dash .top-btn.blue{
-    background: #06f;
-    background: var(--primary-color) !important;
-    color: #ddd;
-  }
+
 </style>
 <script>
-  const preBtn = document.querySelectorAll(".top-menu.dash .top-btn");
-  preBtn.forEach(b=>{
-    
-    b.addEventListener("click", (e=>{
-            preBtn.forEach(bn=>bn.classList.remove("blue")) 
-      e.target.classList.add("blue");
-    }))
-  })
-  
-  document.documentElement.addEventListener("mousedown", ()=>{
-    document.getElementById("toggle").checked=false;
-    document.querySelector("[for='toggle']").textContent="☰"; 
-  })
   
 </script>
 </body>
             </html> 
-
