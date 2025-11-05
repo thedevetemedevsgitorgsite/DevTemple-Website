@@ -3,5 +3,5 @@ Disallow: /admin/
 Disallow: /private/
 Disallow: /assets/
 Disallow: /netlify/
-Allow: /public/
+Allow: /
 Sitemap: https://devtem.org/sitemap.xml
