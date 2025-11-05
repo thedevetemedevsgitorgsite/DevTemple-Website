@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /assets/
+Disallow: /netlify/
+Allow: /public/
+Sitemap: https://devtem.org/sitemap.xml
