@@ -15,9 +15,9 @@
 
 :root {
   --bg-img: #9db8c8;
-  --primary-color: #0af;         /* Bright aqua */
+  --primary-color: #0af;         /* Bright aqua  */
   --secondary-color: #06c;       /* Deep blue */
-  --accent-color: #9900aa;       /* Teal highlight */
+  --accent-color: #9900aa;       /* Teal color highlight */
   --danger-color: #f55;
   --text-light: #1a2a4f;
   --text-dim: rgba(20, 40, 70, 0.85);
@@ -2050,7 +2050,7 @@ height: 2em;
        bottom: 8em;
      }
    }
-        .loading-post button{
+.loading-post button{
        width: 50px;
        height: 50px;
        border-radius: 50%;
