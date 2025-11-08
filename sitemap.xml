@@ -32,9 +32,19 @@
   <lastmod>2025-11-05T08:07:45+00:00</lastmod>
   <priority>0.80</priority>
 </url>
+      <url>
+  <loc>https://devtem.org/convert-images</loc>
+  <lastmod>2025-11-05T08:08:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>  
 <url>
   <loc>https://devtem.org/terms/privacy</loc>
   <lastmod>2025-11-05T08:07:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://devtem.org/color-picker</loc>
+  <lastmod>2025-11-05T08:08:45+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
@@ -52,5 +62,5 @@
   <lastmod>2025-11-05T08:07:45+00:00</lastmod>
   <priority>0.64</priority>
 </url>
-
 </urlset>
+
