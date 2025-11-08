@@ -46,9 +46,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ADLaM Display">
+<script src="https://www.google.com/recaptcha/api.js" async></script>
 
-  
-  <script src="" defer></script>
   <script src="https://kit.fontawesome.com/a076d05399" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -84,6 +83,7 @@ window.location.href = "/";
   <form id="logForm">
     <input type="email" placeholder="Email" id="logEmail" required>
     <input type="password" placeholder="password" id="logPsw" required>
+    <div class="g-recaptcha" data-sitekey="6LekkQYsAAAAANwQ7sWdkrfmpQmZVuex1oLQARwW"></div>
     <button type="submit">Login</button>
   </form>
   <p>
@@ -191,6 +191,7 @@ window.location.href = "/";
         <p><b>Full Name:</b> <span id="previewFullName"></span></p>
         <p><b>Email:</b> <span id="previewEmail"></span></p>
         <img id="previewImg" alt="Profile Image">
+        <div class="g-recaptcha" data-sitekey="6LekkQYsAAAAANwQ7sWdkrfmpQmZVuex1oLQARwW"></div>
       </div>
       <div class="step-actions">
         <button type="button" class="prev-btn">Back</button>
