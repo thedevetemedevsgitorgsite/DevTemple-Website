@@ -260,10 +260,18 @@ checkoutBtn.onclick = async function() {
     const data = await res.json();
     console.log("Checkout response:", data);
 
+    
     if (!res.ok || data.error) {
-      let errorMessage = data.error || "Payment initialization failed";
-      throw new Error(errorMessage);
-    }
+  let errorMessage = data.error || "Payment initialization failed";
+  
+  // Show more details if available
+  if (data.paystack_error?.message) {
+    errorMessage += `: ${data.paystack_error.message}`;
+  }
+  
+  console.error("Detailed error:", data); // Log full error
+  throw new Error(errorMessage);
+}
 
     if (!data.authorization_url) {
       throw new Error("No payment URL received from server");
