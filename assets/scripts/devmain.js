@@ -533,6 +533,7 @@ async function loadPosts(orderCl="id", orderAc=false){
       div.dataset.filePath = post.file_path;
       div.dataset.sellerId = post.user_id;
       div.dataset.profileId = post.user_id; // Store for profile click handler
+      div.dataset.sales = post.sales||0;
       
       div.innerHTML = `
   <div class="product-img" style="background-image: url(${post.cover || "/assets/images/index.png"});">
@@ -630,8 +631,8 @@ async function loadPosts(orderCl="id", orderAc=false){
           const title = card.querySelector(".product-describe strong").textContent;
           const price = parseFloat(card.querySelector(".amount").dataset.price);
           const filePath = card.dataset.filePath;
-          
-          cart.push({ id, title, price, filePath });
+          const sales = card.dataset.sales;
+          cart.push({ id, title, price, filePath, sales});
           updateCartUI();
           document.querySelector(".search-loader").style.display = "none";
           cartBox.classList.remove("collapsed");
