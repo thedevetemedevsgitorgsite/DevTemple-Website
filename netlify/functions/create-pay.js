@@ -1,4 +1,3 @@
-
 import fetch from "node-fetch";
 import { createClient } from "@supabase/supabase-js";
 
@@ -19,14 +18,16 @@ export async function handler(event) {
     // Validate required fields
     if (!email) {
       return { 
-        statusCode: 400, 
+        statusCode: 400,
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ error: "Email is required" }) 
       };
     }
 
     if (!cart || !Array.isArray(cart) || cart.length === 0) {
       return { 
-        statusCode: 400, 
+        statusCode: 400,
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ error: "Cart is empty or invalid" }) 
       };
     }
@@ -36,7 +37,8 @@ export async function handler(event) {
 
     if (total <= 0) {
       return { 
-        statusCode: 400, 
+        statusCode: 400,
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ error: "Invalid total amount" }) 
       };
     }
@@ -57,14 +59,25 @@ export async function handler(event) {
 
     if (txError) {
       console.error("Supabase Transaction Error:", txError);
-      throw new Error(`Database error: ${txError.message}`);
+      return {
+        statusCode: 500,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          error: `Database error: ${txError.message}`,
+          details: txError
+        })
+      };
     }
 
     console.log("Transaction created:", transaction.id);
 
     // Check if Paystack key is available
     if (!process.env.PAYSTACK_SEC_KEY) {
-      throw new Error("Paystack secret key is missing");
+      return {
+        statusCode: 500,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ error: "Paystack configuration error" })
+      };
     }
 
     const paystackBody = {
@@ -90,8 +103,22 @@ export async function handler(event) {
 
     const responseText = await payRes.text();
     console.log("Paystack Raw Response:", responseText);
+    console.log("Paystack Status Code:", payRes.status);
 
-    const data = JSON.parse(responseText);
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (parseError) {
+      console.error("Failed to parse Paystack response:", parseError);
+      return {
+        statusCode: 500,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          error: "Invalid response from payment gateway",
+          raw_response: responseText.substring(0, 200) // First 200 chars
+        })
+      };
+    }
 
     if (!data.status) {
       console.error("Paystack API Error:", data);
@@ -99,14 +126,18 @@ export async function handler(event) {
       // Update transaction status to failed
       await supabase
         .from("transactions_b")
-        .update({ status: "failed", error_message: data.message })
+        .update({ 
+          status: "failed", 
+          error_message: data.message || "Unknown Paystack error"
+        })
         .eq("id", transaction.id);
 
       return { 
-        statusCode: 400, 
+        statusCode: 400,
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
-          error: data.message || "Paystack initialization failed",
-          details: data 
+          error: data.message || "Payment initialization failed",
+          paystack_error: data
         }) 
       };
     }
@@ -124,6 +155,7 @@ export async function handler(event) {
 
     return {
       statusCode: 200,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         authorization_url: data.data.authorization_url,
         reference: data.data.reference,
@@ -133,10 +165,12 @@ export async function handler(event) {
   } catch (err) {
     console.error("Unhandled Error:", err);
     return { 
-      statusCode: 500, 
+      statusCode: 500,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ 
         error: "Internal server error",
-        message: err.message 
+        message: err.message,
+        stack: err.stack
       }) 
     };
   }
