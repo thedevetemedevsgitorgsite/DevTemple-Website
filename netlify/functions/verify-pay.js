@@ -17,11 +17,7 @@ export async function handler(event) {
     const paystackData = await paystackRes.json();
 
     if (!paystackData.status || paystackData.data.status !== "success") {
-      return { 
-        statusCode: 400, 
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ error: "Payment verification failed" }) 
-      };
+      return { statusCode: 400, body: JSON.stringify({ error: "Payment verification failed" }) };
     }
 
     const payment = paystackData.data;
@@ -34,16 +30,12 @@ export async function handler(event) {
       .single();
 
     if (txError || !transaction) {
-      return { 
-        statusCode: 404, 
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ error: "Transaction not found" }) 
-      };
+      return { statusCode: 404, body: JSON.stringify({ error: "Transaction not found" }) };
     }
 
-    // Update transaction status - FIXED: Use transactions_b
+    // Update transaction status
     await supabase
-      .from("transactions_b")  // ✅ Fixed from "transactions"
+      .from("transactions")
       .update({ status: "success" })
       .eq("reference", reference);
 
@@ -56,9 +48,10 @@ export async function handler(event) {
     // Process each item in cart
     for (const item of cart) {
       try {
+        // First, get the current post data to ensure it exists and get user_id (seller)
         const { data: post, error: postError } = await supabase
           .from("posts")
-          .select("sales, user_id")
+          .select("sales, user_id")  // Only get user_id since that's the seller
           .eq("id", item.id)
           .single();
 
@@ -67,7 +60,7 @@ export async function handler(event) {
           continue;
         }
 
-        const sellerId = post.user_id;
+        const sellerId = post.user_id;  // user_id is the seller
         
         if (!sellerId) {
           console.error(`No user_id (seller) found for post ${item.id}`);
@@ -76,7 +69,7 @@ export async function handler(event) {
 
         console.log(`Processing item ${item.id} for seller (user_id): ${sellerId}`);
 
-        // Update sales count
+        // Update sales count - increment by 1
         const newSales = (post.sales || 0) + 1;
         const { error: updateError } = await supabase
           .from("posts")
@@ -89,11 +82,11 @@ export async function handler(event) {
           console.log(`Updated sales for post ${item.id} to ${newSales}`);
         }
 
-        // Insert earnings record
+        // Insert earnings record - using user_id as seller_id
         const { error: earningsError } = await supabase
           .from("earnings")
           .insert({
-            seller_id: sellerId,
+            seller_id: sellerId,  // This is the user_id from posts table
             post_id: item.id,
             amount: item.price,
             buyer: buyerEmail,
@@ -102,6 +95,7 @@ export async function handler(event) {
 
         if (earningsError) {
           console.error(`Error creating earnings record for post ${item.id}:`, earningsError);
+          console.error("Earnings error details:", earningsError);
         } else {
           console.log(`✅ Created earnings record for post ${item.id}, seller ${sellerId}, amount ${item.price}`);
         }
@@ -132,7 +126,6 @@ export async function handler(event) {
 
     return {
       statusCode: 200,
-      headers: { "Content-Type": "application/json" },  // ✅ Added explicit header
       body: JSON.stringify({ 
         success: true, 
         downloadLinks,
@@ -144,10 +137,6 @@ export async function handler(event) {
 
   } catch (err) {
     console.error("Verify-pay overall error:", err);
-    return { 
-      statusCode: 500, 
-      headers: { "Content-Type": "application/json" },  // ✅ Added explicit header
-      body: JSON.stringify({ error: err.message }) 
-    };
+    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
   }
 }
