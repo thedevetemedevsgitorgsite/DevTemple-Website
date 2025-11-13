@@ -214,16 +214,16 @@ checkoutBtn.onclick = async function() {
     cAlert("Cart is empty");
     return;
   }
-
+  
   // Show loading state
   const originalText = checkoutBtn.textContent;
   checkoutBtn.disabled = true;
   checkoutBtn.textContent = "Processing...";
-
+  
   try {
     const user = await getUser();
     let email = user?.email;
-
+    
     if (!email) {
       email = prompt("Enter your email to continue:");
       if (!email) {
@@ -238,14 +238,15 @@ checkoutBtn.onclick = async function() {
         return;
       }
     }
-
+    
     console.log("Sending checkout request:", { email, cart });
     
+    // Make request
     const res = await fetch("/.netlify/functions/create-pay", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ 
-        email, 
+      body: JSON.stringify({
+        email,
         cart: cart.map(item => ({
           id: item.id,
           title: item.title,
@@ -256,59 +257,64 @@ checkoutBtn.onclick = async function() {
         }))
       })
     });
-
-    const data = await res.json();
     
-    console.log("Checkout response:", data);
-
-    if (!res.ok || data.error) {
-      let errorMessage = data.error || "Payment initialization failed";
-      throw new Error(errorMessage);
+    // Get raw response text (to debug even if it’s not valid JSON)
+    const raw = await res.text();
+    console.log("DEBUG raw server response:", raw);
+    
+    // Try parsing it as JSON
+    let data;
+    try {
+      data = JSON.parse(raw);
+    } catch (err) {
+      throw new Error("Invalid server response: not JSON");
     }
-
+    
+    console.log("Parsed checkout response:", data);
+    
+    if (!res.ok || data.error) {
+      throw new Error(data.error || "Payment initialization failed");
+    }
+    
     if (!data.authorization_url) {
       throw new Error("No payment URL received from server");
     }
-
+    
     // Calculate total amount
     const totalAmount = cart.reduce((sum, item) => sum + item.price, 0) * 100;
-
-    // Define callback functions first
+    
+    // Define Paystack callbacks
     const paymentCallback = function(response) {
       console.log("Paystack callback triggered:", response);
-      
-      // Reset button immediately
       resetCheckoutButton(checkoutBtn, originalText);
-      
       handlePaymentVerification(response.reference);
     };
-
+    
     const onCloseCallback = function() {
       console.log("Payment window closed");
       resetCheckoutButton(checkoutBtn, originalText);
       cAlert("Payment window closed. You can complete the payment later.");
     };
-
-    // Setup Paystack with the defined functions
+    
+    // Initialize Paystack
     const handler = PaystackPop.setup({
       key: "pk_live_0b0770be1e29f5e7a159b39d2d9bdc2c41785306",
       email: email,
       amount: totalAmount,
       currency: "NGN",
       ref: data.reference,
-      callback: paymentCallback,  // Use the predefined function
-      onClose: onCloseCallback    // Use the predefined function
+      callback: paymentCallback,
+      onClose: onCloseCallback
     });
-
+    
     handler.openIframe();
-
+    
   } catch (error) {
     console.error("Checkout error:", error);
-    cAlert("❌ Checkout failed: " + error.message, "warning", "Initial error");
+    cAlert("❌ Checkout failed: " + error.message, "warning");
     resetCheckoutButton(checkoutBtn, originalText);
   }
 };
-
 // Helper function to reset button state
 function resetCheckoutButton(button, originalText) {
   button.disabled = false;
