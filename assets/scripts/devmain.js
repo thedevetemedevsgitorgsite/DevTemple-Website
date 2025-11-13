@@ -258,12 +258,10 @@ checkoutBtn.onclick = async function() {
     });
 
     const data = await res.json();
-    const dataText = await res.text();
     
     console.log("Checkout response:", data);
 
-    if (!res.ok || data.error|| dataText.error) {
-      console.log("response text:", dataText.error);
+    if (!res.ok || data.error) {
       let errorMessage = data.error || "Payment initialization failed";
       throw new Error(errorMessage);
     }
