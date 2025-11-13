@@ -260,18 +260,10 @@ checkoutBtn.onclick = async function() {
     const data = await res.json();
     console.log("Checkout response:", data);
 
-    
     if (!res.ok || data.error) {
-  let errorMessage = data.error || "Payment initialization failed";
-  
-  // Show more details if available
-  if (data.paystack_error?.message) {
-    errorMessage += `: ${data.paystack_error.message}`;
-  }
-  
-  console.error("Detailed error:", data); // Log full error
-  throw new Error(errorMessage);
-}
+      let errorMessage = data.error || "Payment initialization failed";
+      throw new Error(errorMessage);
+    }
 
     if (!data.authorization_url) {
       throw new Error("No payment URL received from server");
@@ -533,7 +525,6 @@ async function loadPosts(orderCl="id", orderAc=false){
       div.dataset.filePath = post.file_path;
       div.dataset.sellerId = post.user_id;
       div.dataset.profileId = post.user_id; // Store for profile click handler
-      div.dataset.sales = post.sales||0;
       
       div.innerHTML = `
   <div class="product-img" style="background-image: url(${post.cover || "/assets/images/index.png"});">
@@ -631,8 +622,8 @@ async function loadPosts(orderCl="id", orderAc=false){
           const title = card.querySelector(".product-describe strong").textContent;
           const price = parseFloat(card.querySelector(".amount").dataset.price);
           const filePath = card.dataset.filePath;
-          const sales = card.dataset.sales;
-          cart.push({ id, title, price, filePath, sales});
+          
+          cart.push({ id, title, price, filePath });
           updateCartUI();
           document.querySelector(".search-loader").style.display = "none";
           cartBox.classList.remove("collapsed");
