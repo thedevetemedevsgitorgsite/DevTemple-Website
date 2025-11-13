@@ -35,7 +35,7 @@ export async function handler(event) {
 
     // Update transaction status
     await supabase
-      .from("transactions")
+      .from("transactions_b")
       .update({ status: "success" })
       .eq("reference", reference);
 
