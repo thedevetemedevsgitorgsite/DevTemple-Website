@@ -249,10 +249,10 @@ checkoutBtn.onclick = async function() {
         cart: cart.map(item => ({
           id: item.id,
           title: item.title,
-          price: item.price,
+          price: +item.price,
           sellerId: item.sellerId,
           filePath: item.filePath,
-          sales: item.sales || 0
+          sales: +item.sales || 0
         }))
       })
     });
