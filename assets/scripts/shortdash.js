@@ -5,3 +5,4 @@ document.querySelectorAll('.side-menu a').forEach(link => {
     link.classList.add('active');
   }
 });
+document.querySelector("footer .footer-bottom p:first-child").innerHTML=`&copy; ${new Date().getFullYear()} - DevTemple. All Rights Reserved.`;
