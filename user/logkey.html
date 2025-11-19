@@ -242,6 +242,7 @@ const res=await fetch("/.netlify/functions/fcnfig");const{url,key}=await res.jso
         }) 
       
     })
+      document.querySelector("footer .footer-bottom p:first-child").innerHTML=`&copy; ${new Date().getFullYear()} - DevTemple. All Rights Reserved.`;
   </script>
 </body>
 </html>
